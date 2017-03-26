@@ -16,14 +16,17 @@ import javax.swing.JTextArea;
  */
 public class Menu extends javax.swing.JFrame {
 
+    private UIConfig UIConfig;
+    
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
         
-        UIConfig currentUI = new UIConfig();
-        currentUI.initUI(this);
+        // Apply UI Settings
+        UIConfig = new UIConfig();
+        UIConfig.initUI(this);
         
         String[] listData = new String[3];
         listData[0] = "New Game";
@@ -83,8 +86,8 @@ public class Menu extends javax.swing.JFrame {
         switch(menuList.getSelectedValue()) {
                 case "New Game": {
                     this.setVisible(false);
-                    Game game = new Game();
-                    game.setVisible(true);
+                    NewGame NewGame = new NewGame();
+                    NewGame.setVisible(true);
                     break;
                 }
                 case "Load Game": {

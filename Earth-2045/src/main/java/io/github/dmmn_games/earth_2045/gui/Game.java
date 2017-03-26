@@ -5,6 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.gui;
 
+import gr.teicm.informatics.escape_dungeon.user.User;
 import io.github.dmmn_games.earth_2045.commands.*;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import java.awt.event.KeyEvent;
@@ -23,34 +24,31 @@ public class Game extends javax.swing.JFrame {
      * Creates new form Game
      */
     public Game() {
-        initComponents();
+        initGame();
+        this.GameController = new GameController();        
+    }
+    
+    public Game(String argUser) {
+        initGame();
+        this.GameController = new GameController();
         
-        // Apply UI Settings
-        UIConfig = new UIConfig();
-        UIConfig.initUI(this);
-        
-        // Init Game Controller
-        GameController = new GameController();
-        
-        // Init Commands Controller
-        CommandsController = new CommandsController();
-        
-        // Init History Logger
-        initHistory();
+        // ToDo : Set Username
+        System.err.print(argUser);
         
     }
     
     public Game(GameController LoadedGame) {
+        initGame();
         this.GameController = LoadedGame;
-        
+    }
+    
+    private void initGame() {
+        // Init Components
         initComponents();
         
         // Apply UI Settings
         UIConfig = new UIConfig();
         UIConfig.initUI(this);
-        
-        // Init Game Controller
-        GameController = new GameController();
         
         // Init Commands Controller
         CommandsController = new CommandsController();
