@@ -22,7 +22,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         
-        UI currentUI = new UI();
+        UIConfig currentUI = new UIConfig();
         currentUI.initUI(this);
         
         String[] listData = new String[3];

@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
  */
 public class Game extends javax.swing.JFrame {
 
-    private UI UIConfig;
+    private UIConfig UIConfig;
     private GameController GameController;
     private CommandsController CommandsController;
     
@@ -26,7 +26,7 @@ public class Game extends javax.swing.JFrame {
         initComponents();
         
         // Apply UI Settings
-        UIConfig = new UI();
+        UIConfig = new UIConfig();
         UIConfig.initUI(this);
         
         // Init Game Controller
@@ -46,7 +46,7 @@ public class Game extends javax.swing.JFrame {
         initComponents();
         
         // Apply UI Settings
-        UIConfig = new UI();
+        UIConfig = new UIConfig();
         UIConfig.initUI(this);
         
         // Init Game Controller

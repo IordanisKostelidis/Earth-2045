@@ -11,14 +11,14 @@ import io.github.dmmn_games.earth_2045.global.Info;
  *
  * @author iordkost
  */
-public class UI {
+public class UIConfig {
     private final int Width;
     private final int Height;
     
     private final int PosX;
     private final int PosY;
 
-    public UI() {
+    public UIConfig() {
         this.Width = 640;
         this.Height = 480;
         
