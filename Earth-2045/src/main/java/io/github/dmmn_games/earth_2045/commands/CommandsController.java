@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.game.GameController;
+import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
 import java.util.ArrayList;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -26,8 +27,14 @@ public class CommandsController {
         Commands.add(new Clear());
         Commands.add(new Help());
         Commands.add(new Exit());
+        
         Commands.add(new Save());
         Commands.add(new Load());
+        
+        Commands.add(new Go());
+        Commands.add(new Pick());
+        Commands.add(new Use());
+        Commands.add(new Kill());
     }
     
     private String removeSpaces(JTextField Command) {
@@ -43,7 +50,11 @@ public class CommandsController {
     public void runCommand(JTextField Command, JTextArea History, GameController Game) {
         
         String CleanedCommand = removeSpaces(Command);
-        String[] listCommands = separateCommand(CleanedCommand);
+        
+        JTextAreaCustom currentHistory = new JTextAreaCustom(History);
+        currentHistory.addLine("User: " + CleanedCommand);
+        
+        String[] listCommands = separateCommand(CleanedCommand.toLowerCase());
         
         boolean commandFound = false;
         

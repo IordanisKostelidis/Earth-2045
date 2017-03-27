@@ -7,49 +7,36 @@ package io.github.dmmn_games.earth_2045.music;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
  * @author iordkost
  */
 public class Music {
+
     public Music() {
-        
+        // Do Nothing
     }
-    
+
     public void Play() {
-        AudioPlayer MGP = AudioPlayer.player;
-        AudioStream BGM;
-        AudioData MD;
 
-        ContinuousAudioDataStream loop = null;
-System.out.println("Working Directory = " +
-              System.getProperty("user.dir"));
-        try
-        {
-            InputStream test = new FileInputStream("Loop.wav");
-            BGM = new AudioStream(test);
-            AudioPlayer.player.start(BGM);
-            //MD = BGM.getData();
-            //loop = new ContinuousAudioDataStream(MD);
-
-        }
-        catch(FileNotFoundException e){
-            System.out.print(e.toString());
-        } catch (IOException ex) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("Loop.wav"));
+            clip.open(inputStream);
+            clip.loop(1000);
+            clip.start();
+            
+        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException ex) {
             Logger.getLogger(Music.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MGP.start(loop);
     }
 }
