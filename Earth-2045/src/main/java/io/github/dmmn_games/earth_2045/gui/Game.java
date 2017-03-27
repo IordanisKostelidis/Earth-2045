@@ -5,10 +5,21 @@
  */
 package io.github.dmmn_games.earth_2045.gui;
 
-import io.github.dmmn_games.earth_2045.user.User;
 import io.github.dmmn_games.earth_2045.commands.*;
 import io.github.dmmn_games.earth_2045.game.GameController;
+import io.github.dmmn_games.earth_2045.music.Music;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
+
 
 /**
  *
@@ -43,18 +54,24 @@ public class Game extends javax.swing.JFrame {
     }
     
     private void initGame() {
-        // Init Components
-        initComponents();
-        
-        // Apply UI Settings
-        UIConfig = new UIConfig();
-        UIConfig.initUI(this);
-        
-        // Init Commands Controller
-        CommandsController = new CommandsController();
-        
-        // Init History Logger
-        initHistory();
+
+            // Init Components
+            initComponents();
+            
+            // Apply UI Settings
+            UIConfig = new UIConfig();
+            UIConfig.initUI(this);
+            
+            // Init Commands Controller
+            CommandsController = new CommandsController();
+            
+            // Init History Logger
+            initHistory();
+            
+            // Play Music
+            Music currentMusic = new Music();
+            currentMusic.Play();
+
     }
 
     /**
@@ -120,8 +137,10 @@ public class Game extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initHistory() {
+    private void initHistory()  {
         commandHistory.setText("Ready...." + "\n");
+        
+        
     }
     
     private void execCommand() {
