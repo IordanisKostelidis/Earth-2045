@@ -5,7 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.gui;
 
-import gr.teicm.informatics.escape_dungeon.user.User;
+import io.github.dmmn_games.earth_2045.user.User;
 import io.github.dmmn_games.earth_2045.commands.*;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import java.awt.event.KeyEvent;
