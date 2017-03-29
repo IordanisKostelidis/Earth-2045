@@ -15,17 +15,15 @@ import java.util.ArrayList;
 public class User {
 
     private final String username;
-    public int room;
+    private int room;
     private int pos;
     private int health;
-    private int score;
     private int floor;
-    
-private ArrayList<ITool> inventory;
+    private ArrayList<ITool> inventory;
+
     public User(String username) {
         this.username = username;
     }
-
 
     public void setRoom(int room) {
         this.room = room;
@@ -37,10 +35,6 @@ private ArrayList<ITool> inventory;
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public void setFloor(int floor) {
@@ -63,10 +57,6 @@ private ArrayList<ITool> inventory;
         return health;
     }
 
-    public int getScore() {
-        return score;
-    }
-
     public int getFloor() {
         return floor;
     }
@@ -74,6 +64,5 @@ private ArrayList<ITool> inventory;
     public ArrayList<ITool> getInventory() {
         return inventory;
     }
-    
-    
+
 }
