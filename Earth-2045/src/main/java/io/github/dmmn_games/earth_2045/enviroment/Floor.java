@@ -17,6 +17,17 @@ public class Floor {
     
     private ArrayList<Door> Doors = new ArrayList<Door>();
     
+    public void addRoom(Room newRoom){
+        Rooms.add(newRoom);
+    }
+    
+    public Room getRoom (int intex){
+        return Rooms.get(intex);
+    }
+    
+    public void addDoor (Door newDoor){
+        Doors.add(newDoor);
+    }
    /**ArrayList<ITool> toolList = new ArrayList<ITool>();
        
      *  toolList.add(new Key(1,1,100,false));
