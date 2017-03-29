@@ -26,6 +26,8 @@ public class CommandsController {
     private void initCommands() {
         Commands.add(new Clear());
         Commands.add(new Help());
+        Commands.add(new Status());
+        Commands.add(new WhoAmI());
         Commands.add(new Exit());
         
         Commands.add(new Save());
