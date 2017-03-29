@@ -16,7 +16,6 @@ public class User {
 
     private final String username;
     private int room;
-    private int pos;
     private int health;
     private int floor;
     private ArrayList<ITool> inventory;
@@ -29,9 +28,7 @@ public class User {
         this.room = room;
     }
 
-    public void setPos(int pos) {
-        this.pos = pos;
-    }
+
 
     public void setHealth(int health) {
         this.health = health;
@@ -49,9 +46,7 @@ public class User {
         return room;
     }
 
-    public int getPos() {
-        return pos;
-    }
+  
 
     public int getHealth() {
         return health;
