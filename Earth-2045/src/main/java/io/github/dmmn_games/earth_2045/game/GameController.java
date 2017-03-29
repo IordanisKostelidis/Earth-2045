@@ -8,6 +8,7 @@ package io.github.dmmn_games.earth_2045.game;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.*;
 import io.github.dmmn_games.earth_2045.global.Navigation;
+import io.github.dmmn_games.earth_2045.tools.Key;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.util.ArrayList;
 
@@ -26,17 +27,22 @@ public class GameController implements java.io.Serializable {
     }
 
     private void initFloors() {
-         Floors.add(new Floor());
+         Floors.add(new Floor()); // added the underground
+         Floors.add(new Floor()); // added 1st floor
+         Floors.add(new Floor()); // added 2nd Floor
+         Floors.add(new Floor()); // added 3rd floor
+         Floors.add(new Floor()); // added 4th floor
          
-         Floors.get(0).addRoom(new Room()); // add room0
-         Floors.get(0).addRoom(new Room()); // add room1
-         Floors.get(0).addRoom(new Room()); // add room2
-         Floors.get(0).addRoom(new Room()); // add room3
+         Floors.get(1).addRoom(new Room()); // added room0 in 1st floor
+         Floors.get(1).addRoom(new Room()); // added room1 in 1st floor
+         Floors.get(1).addRoom(new Room()); // added room2 in 1st floor
+         Floors.get(1).addRoom(new Room()); // added room3 in 1st floor
          
-         Floors.get(0).addDoor(new Door("door0to1",0,1,new Navigation().getNorth(),100,true)); // add door0to1
-         Floors.get(0).addDoor(new Door("door0to3",0,3,new Navigation().getWest(),200,true)); // add door3to1
-         Floors.get(0).addDoor(new Door("door1to2",1,2,new Navigation().getWest(),300,true)); // add door1to2
+         Floors.get(1).addDoor(new Door("door0to1",0,1,new Navigation().getNorth(),100,true)); // add door0to1 in 1st floor
+         Floors.get(1).addDoor(new Door("door0to3",0,3,new Navigation().getWest(),200,true)); // add door3to1 in 1st floor
+         Floors.get(1).addDoor(new Door("door1to2",1,2,new Navigation().getWest(),300,true)); // add door1to2 in 1st floor
         
+         Floors.get(1).getRoom(3).addKey(new Key("sdsdsd",100)); 
         /*
             Floors.add(new Floor());
             Floors.get(0).addRoom(new Room());
