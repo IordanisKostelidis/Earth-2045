@@ -5,16 +5,38 @@
  */
 package io.github.dmmn_games.earth_2045.game;
 
+import io.github.dmmn_games.earth_2045.enviroment.Floor;
+import io.github.dmmn_games.earth_2045.user.User;
+import java.util.ArrayList;
+
 /**
  *
  * @author iordkost
  */
 public class GameController implements java.io.Serializable {
-    
-    // private User;
-    // private ArrayList<Room> Rooms;
-    // private ArrayList<IItem> Items;
-    // private ArrayList<ITool> Tools;
-    // private ArrayList<IBots> Bots;
+
+    private User User;
+    private ArrayList<Floor> Floors;
+
+    public GameController() {
+        Floors = new ArrayList<Floor>();
+        initFloors();
+    }
+
+    private void initFloors() {
+        /*
+            Floors.add(new Floor());
+            Floors.get(0).addRoom(new Room());
+            Floors.get(0).getRoom(0).addDoor(new Door(....));
+        */
+    }
+
+    public void setUser(User User) {
+        this.User = User;
+    }
+
+    public User getUser() {
+        return User;
+    }
 
 }
