@@ -22,6 +22,10 @@ public class User {
 
     public User(String username) {
         this.username = username;
+        this.room=0;
+        this.floor=1;
+        this.health=100;
+        this.inventory=new ArrayList<>();
     }
 
     public void setRoom(int room) {
