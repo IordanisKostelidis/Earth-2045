@@ -12,7 +12,7 @@ import java.util.*;
  * @author makis
  */
 public class Floor {
-    private ArrayList<Room> floors = new ArrayList<Room>();
+    private ArrayList<Room> Rooms = new ArrayList<Room>();
     
     
 }
