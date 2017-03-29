@@ -5,6 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.enviroment;
 
+import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.items.*;
 import io.github.dmmn_games.earth_2045.tools.*;
 import java.util.*;
@@ -17,6 +18,13 @@ public class Room {
     
     private ArrayList<ITool> tools= new ArrayList<ITool>();
     private ArrayList<IItem> items= new ArrayList<IItem>();
+
+    /**ArrayList<ITool> toolList = new ArrayList<ITool>();
+     *  toolList.add(new Key(1,1,100,false));
+     * toolList.add(new PassCard(2,1,100,false));
+     *
+     * Rooms.add(new Room(
+     */
     
     
     

@@ -14,8 +14,8 @@ import java.util.*;
  */
 public class Floor {
     private ArrayList<Room> Rooms = new ArrayList<Room>();
-    
     private ArrayList<Door> Doors = new ArrayList<Door>();
+    
     
     public void addRoom(Room newRoom){
         Rooms.add(newRoom);
@@ -24,10 +24,17 @@ public class Floor {
     public Room getRoom (int intex){
         return Rooms.get(intex);
     }
-    
-    public void addDoor (Door newDoor){
+
+    public void addDoor(Door newDoor) {
         Doors.add(newDoor);
     }
+    /**ArrayList<ITool> toolList = new ArrayList<ITool>();
+     *  toolList.add(new Key(1,1,100,false));
+     * toolList.add(new PassCard(2,1,100,false));
+     *
+     * Rooms.add(new Room(
+     */
+    
    /**ArrayList<ITool> toolList = new ArrayList<ITool>();
        
      *  toolList.add(new Key(1,1,100,false));
