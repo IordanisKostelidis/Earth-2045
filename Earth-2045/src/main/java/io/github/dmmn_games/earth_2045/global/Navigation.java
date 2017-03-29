@@ -80,5 +80,21 @@ public class Navigation {
         }
     }
     
+    public int getNegativeLocation(int Location) {
+        
+        if(Location == this.North) {
+            return this.South;
+        } else if(Location == this.East) {
+            return this.West;
+        } else if(Location == this.South) {
+            return this.North;
+        } else if(Location == this.West) {
+            return this.East;
+        } else {
+            return -1;
+        }
+        
+    }
+    
     
 }
