@@ -19,6 +19,9 @@ public class Room {
     private ArrayList<ITool> tools= new ArrayList<ITool>();
     private ArrayList<IItem> items= new ArrayList<IItem>();
 
+    public void addKey(Key newKey){
+        tools.add(newKey);
+    }
     /**ArrayList<ITool> toolList = new ArrayList<ITool>();
      *  toolList.add(new Key(1,1,100,false));
      * toolList.add(new PassCard(2,1,100,false));
