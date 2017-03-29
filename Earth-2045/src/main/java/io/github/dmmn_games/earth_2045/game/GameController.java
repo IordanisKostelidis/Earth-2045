@@ -27,10 +27,12 @@ public class GameController implements java.io.Serializable {
 
     private void initFloors() {
          Floors.add(new Floor());
+         
          Floors.get(0).addRoom(new Room()); // add room0
          Floors.get(0).addRoom(new Room()); // add room1
          Floors.get(0).addRoom(new Room()); // add room2
          Floors.get(0).addRoom(new Room()); // add room3
+         
          Floors.get(0).addDoor(new Door("door0to1",0,1,new Navigation().getNorth(),100,true)); // add door0to1
          Floors.get(0).addDoor(new Door("door0to3",0,3,new Navigation().getWest(),200,true)); // add door3to1
          Floors.get(0).addDoor(new Door("door1to2",1,2,new Navigation().getWest(),300,true)); // add door1to2
@@ -40,6 +42,7 @@ public class GameController implements java.io.Serializable {
             Floors.get(0).addRoom(new Room());
             Floors.get(0).getRoom(0).addDoor(new Door(....));
         */
+        
     }
 
     public void setUser(User User) {
@@ -49,7 +52,8 @@ public class GameController implements java.io.Serializable {
     public User getUser() {
         return User;
     }
-    
-    //
 
+    public Floor getFloor(int Floor) {
+        return Floors.get(Floor);
+    }
 }

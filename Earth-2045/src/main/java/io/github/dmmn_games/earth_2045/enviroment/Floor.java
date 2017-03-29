@@ -28,6 +28,10 @@ public class Floor {
     public void addDoor(Door newDoor) {
         Doors.add(newDoor);
     }
+
+    public ArrayList<Door> getDoors() {
+        return Doors;
+    }
     /**ArrayList<ITool> toolList = new ArrayList<ITool>();
      *  toolList.add(new Key(1,1,100,false));
      * toolList.add(new PassCard(2,1,100,false));

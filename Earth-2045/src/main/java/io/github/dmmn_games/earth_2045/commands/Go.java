@@ -5,8 +5,11 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
+import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
+import io.github.dmmn_games.earth_2045.global.Navigation;
 import javax.swing.JTextArea;
 
 /**
@@ -29,32 +32,38 @@ public class Go implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
         JTextAreaCustom currentHistory = new JTextAreaCustom(History);
-        
+        boolean isFound = false;
         if (Arguments.length == 1) {
             currentHistory.addLine("Go where ?");
         } else {
-            switch (Arguments[1]) {
-                case "north": {
-                    currentHistory.addLine("You go North !");
-                    break;
-                }
-                case "east": {
-                    currentHistory.addLine("You go East !");
-                    break;
-                }
-                case "south": {
-                    currentHistory.addLine("You go South !");
-                    break;
-                }
-                case "west": {
-                    currentHistory.addLine("You go West !");
-                    break;
-                }
-                default: {
-                    currentHistory.addLine("You can't go " + Arguments[1] + " !!!");
-                }
+            
+            int locationToGo = new Navigation().getLocation(Arguments[1]);
+            
+            int currentUserFloor = 0;
+            int currentUserRoom = Game.getUser().getRoom();
+            
+            Floor currentFloor = Game.getFloor(currentUserFloor);
+            
+            Door tempDoor;
+            for(int i = 0; i<currentFloor.getDoors().size();i++) {
+               tempDoor = currentFloor.getDoors().get(i);
+               
+               if(tempDoor.getRoomA() == currentUserRoom && tempDoor.getPosA() == locationToGo) {
+                   Game.getUser().setRoom(tempDoor.getRoomB());
+                   isFound = true;
+                   break;
+               } else if(tempDoor.getRoomB() == currentUserRoom && tempDoor.getPosB() == locationToGo) {
+                   Game.getUser().setRoom(tempDoor.getRoomA());
+                   isFound = true;
+                   break;
+               }
+            }
+            
+            if(!isFound) {
+                currentHistory.addLine("You can't go here !");
+            } else {
+                currentHistory.addLine("You go " + Arguments[1] + "!!!!");
             }
         }
-
     }
 }
