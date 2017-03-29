@@ -12,28 +12,28 @@ import io.github.dmmn_games.earth_2045.global.Navigation;
  * @author iordkost
  */
 public class Door {
-    private String doorId;
+    private String doorID;
     private int roomA;
     private int roomB;
     private int posA;
     private int posB;
-    private int IdPass;
+    private int passID;
     private boolean isOpen;
 
     public Door(String doorId, int roomA, int roomB, int posA, int IdPass, boolean isOpen) {
-        this.doorId = doorId;
+        this.doorID = doorId;
         this.roomA = roomA;
         this.roomB = roomB;
         this.posA = posA;
         this.posB = new Navigation().getNegativeLocation(posA);
-        this.IdPass = IdPass;
+        this.passID = IdPass;
         this.isOpen = isOpen;
         
       
     }
 
     public String getDoorId() {
-        return doorId;
+        return doorID;
     }
 
     public int getRoomA() {
@@ -53,7 +53,7 @@ public class Door {
     }
 
     public int getIdPass() {
-        return IdPass;
+        return passID;
     }
 
     public boolean isIsOpen() {
