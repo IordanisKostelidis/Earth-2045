@@ -8,17 +8,8 @@ package io.github.dmmn_games.earth_2045.gui;
 import io.github.dmmn_games.earth_2045.commands.*;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.music.Music;
+import io.github.dmmn_games.earth_2045.user.User;
 import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 
 
 /**
@@ -42,9 +33,7 @@ public class Game extends javax.swing.JFrame {
     public Game(String argUser) {
         initGame();
         this.GameController = new GameController();
-        
-        // ToDo : Set Username
-        System.err.print(argUser);
+        GameController.setUser(new User(argUser));
         
     }
     
