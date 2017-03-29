@@ -5,35 +5,51 @@
  */
 package io.github.dmmn_games.earth_2045.doors;
 
+import io.github.dmmn_games.earth_2045.global.Navigation;
+
 /**
  *
  * @author iordkost
  */
 public class Door {
-    String doorId;
-    int sideA;
-    int sideB;
-    int IdPass;
-    boolean isOpen;
+    private String doorId;
+    private int roomA;
+    private int roomB;
+    private int posA;
+    private int posB;
+    private int IdPass;
+    private boolean isOpen;
 
-    public Door(String doorId, int sideA, int sideB, int IdPass, boolean isOpen) {
+    public Door(String doorId, int roomA, int roomB, int posA, int IdPass, boolean isOpen) {
         this.doorId = doorId;
-        this.sideA = sideA;
-        this.sideB = sideB;
+        this.roomA = roomA;
+        this.roomB = roomB;
+        this.posA = posA;
+        this.posB = new Navigation().getNegativeLocation(posA);
         this.IdPass = IdPass;
         this.isOpen = isOpen;
+        
+      
     }
 
     public String getDoorId() {
         return doorId;
     }
 
-    public int getSideA() {
-        return sideA;
+    public int getRoomA() {
+        return roomA;
     }
 
-    public int getSideB() {
-        return sideB;
+    public int getRoomB() {
+        return roomB;
+    }
+
+    public int getPosA() {
+        return posA;
+    }
+
+    public int getPosB() {
+        return posB;
     }
 
     public int getIdPass() {
@@ -47,7 +63,9 @@ public class Door {
     public void setIsOpen(boolean isOpen) {
         this.isOpen = isOpen;
     }
+    
 
+    
    
     
     
