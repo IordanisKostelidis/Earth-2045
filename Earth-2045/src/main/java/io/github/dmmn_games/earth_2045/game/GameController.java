@@ -5,7 +5,8 @@
  */
 package io.github.dmmn_games.earth_2045.game;
 
-import io.github.dmmn_games.earth_2045.enviroment.Floor;
+import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.enviroment.*;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.util.ArrayList;
 
@@ -24,6 +25,15 @@ public class GameController implements java.io.Serializable {
     }
 
     private void initFloors() {
+         Floors.add(new Floor());
+         Floors.get(0).addRoom(new Room()); // add room0
+         Floors.get(0).addRoom(new Room()); // add room1
+         Floors.get(0).addRoom(new Room()); // add room1
+         Floors.get(0).addRoom(new Room()); // add room1
+         Floors.get(0).addDoor(new Door("door0to1",0,1,100,true)); // add door0to1
+         Floors.get(0).addDoor(new Door("door0to3",0,3,200,true)); // add door3to1
+         Floors.get(0).addDoor(new Door("door1to2",1,2,300,true)); // add door0to1
+        
         /*
             Floors.add(new Floor());
             Floors.get(0).addRoom(new Room());
