@@ -10,24 +10,30 @@ package io.github.dmmn_games.earth_2045.doors;
  * @author iordkost
  */
 public class Door {
-    int currentDoor;
-    int nextDoor;
+    String doorId;
+    int sideA;
+    int sideB;
     int IdPass;
     boolean isOpen;
 
-    public Door(int currentDoor, int nextDoor, int IdPass, boolean isOpen) {
-        this.currentDoor = currentDoor;
-        this.nextDoor = nextDoor;
+    public Door(String doorId, int sideA, int sideB, int IdPass, boolean isOpen) {
+        this.doorId = doorId;
+        this.sideA = sideA;
+        this.sideB = sideB;
         this.IdPass = IdPass;
         this.isOpen = isOpen;
     }
 
-    public int getCurrentDoor() {
-        return currentDoor;
+    public String getDoorId() {
+        return doorId;
     }
 
-    public int getNextDoor() {
-        return nextDoor;
+    public int getSideA() {
+        return sideA;
+    }
+
+    public int getSideB() {
+        return sideB;
     }
 
     public int getIdPass() {
@@ -37,6 +43,12 @@ public class Door {
     public boolean isIsOpen() {
         return isOpen;
     }
+
+    public void setIsOpen(boolean isOpen) {
+        this.isOpen = isOpen;
+    }
+
+   
     
     
 }
