@@ -5,10 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.bots;
 
-/**
- *
- * @author iordkost
- */
+
 public interface IBot {
-    
+       
 }
