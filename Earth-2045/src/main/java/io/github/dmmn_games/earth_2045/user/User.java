@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.tools.ITool;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,44 +14,66 @@ import io.github.dmmn_games.earth_2045.tools.ITool;
  */
 public class User {
 
-    private String username;
+    private final String username;
     public int room;
     private int pos;
     private int health;
     private int score;
-
+    private int floor;
+    
+private ArrayList<ITool> inventory;
     public User(String username) {
         this.username = username;
     }
 
-    public void pick_up(ITool tool) {
 
+    public void setRoom(int room) {
+        this.room = room;
     }
 
-    public void leave(ITool tool) {
+    public void setPos(int pos) {
+        this.pos = pos;
     }
-    //mallon klasi domatiou giauto kai sxolio 
 
-    /* public void changeRoom(/*klasi domatiou){
-    int numbRoom;
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
+    }
+
+    public void setInventory(ArrayList<ITool> inventory) {
+        this.inventory = inventory;
+    }
+
+    public int getRoom() {
+        return room;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public ArrayList<ITool> getInventory() {
+        return inventory;
+    }
     
-}*/
-
-    public void go(//kateuthinsi klasis 
-            ) {
-        int position;
-        position = 0;
-        String direction;
-
-    }
-
-    public void healthBar() {
-        int lifes = 5;
-        for (int i = 0; i <= lifes; i++) {
-            //if(){life-=life;}
-
-        }
-    }
-    public void score()
-    {}
+    
 }
