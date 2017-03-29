@@ -9,6 +9,22 @@ package io.github.dmmn_games.earth_2045.tools;
  *
  * @author makis
  */
-public class Key {
+public class Key implements ITool{
+    String KeyID;
+    int ID;
+
+    public Key(String KeyID, int ID) {
+        this.KeyID = KeyID;
+        this.ID = ID;
+    }
+
+    public String getKeyID() {
+        return KeyID;
+    }
+    @Override
+    public int getID() {
+        return ID;
+    }
+    
     
 }

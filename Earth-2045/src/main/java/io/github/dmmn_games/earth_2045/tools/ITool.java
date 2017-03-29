@@ -10,5 +10,6 @@ package io.github.dmmn_games.earth_2045.tools;
  * @author iordkost
  */
 public interface ITool {
+    public int getID();
     
 }
