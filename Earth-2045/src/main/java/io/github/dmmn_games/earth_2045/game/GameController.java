@@ -38,5 +38,7 @@ public class GameController implements java.io.Serializable {
     public User getUser() {
         return User;
     }
+    
+    //
 
 }
