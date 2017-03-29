@@ -60,4 +60,8 @@ public class User {
         return inventory;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
 }
