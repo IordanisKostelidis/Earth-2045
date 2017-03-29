@@ -10,6 +10,9 @@ import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.music.Music;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.awt.event.KeyEvent;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -49,7 +52,11 @@ public class Game extends javax.swing.JFrame {
             
             // Apply UI Settings
             UIConfig = new UIConfig();
+        try {
             UIConfig.initUI(this);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
             // Init Commands Controller
             CommandsController = new CommandsController();

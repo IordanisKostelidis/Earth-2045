@@ -38,11 +38,11 @@ public class GameController implements java.io.Serializable {
          Floors.get(1).addRoom(new Room()); // added room2 in 1st floor
          Floors.get(1).addRoom(new Room()); // added room3 in 1st floor
          
-         Floors.get(1).addDoor(new Door("door0to1",0,1,new Navigation().getNorth(),100,true)); // add door0to1 in 1st floor
+         Floors.get(1).addDoor(new Door("door0to1",0,1,new Navigation().getNorth(),100,false)); // add door0to1 in 1st floor
          Floors.get(1).addDoor(new Door("door0to3",0,3,new Navigation().getWest(),200,true)); // add door3to1 in 1st floor
          Floors.get(1).addDoor(new Door("door1to2",1,2,new Navigation().getWest(),300,true)); // add door1to2 in 1st floor
         
-         Floors.get(1).getRoom(3).addKey(new Key("sdsdsd",100)); 
+         Floors.get(1).getRoom(3).addKey(new Key("keya",100)); 
         /*
             Floors.add(new Floor());
             Floors.get(0).addRoom(new Room());

@@ -8,6 +8,7 @@ package io.github.dmmn_games.earth_2045.commands;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.global.Info;
 import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
+import io.github.dmmn_games.earth_2045.tools.ITool;
 import javax.swing.JTextArea;
 
 /**
@@ -35,6 +36,13 @@ public class Status implements ICommand {
         newHistory.addLine("Health : " + Game.getUser().getHealth());
         newHistory.addLine("Floor : " + Game.getUser().getFloor());
         newHistory.addLine("Room : " + Game.getUser().getRoom());
+        
+        ITool tempTool;
+        newHistory.addLine("=== Inventory ===");
+        for(int i=0;i<Game.getUser().getInventory().size();i++) {
+            tempTool = Game.getUser().getInventory().get(i);
+            newHistory.addLine(tempTool.getKeyID());
+        }
 
     }
 }

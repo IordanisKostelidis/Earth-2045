@@ -8,6 +8,9 @@ package io.github.dmmn_games.earth_2045.gui;
 import io.github.dmmn_games.earth_2045.commands.Exit;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import java.awt.event.KeyEvent;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
 
 /**
@@ -26,7 +29,11 @@ public class Menu extends javax.swing.JFrame {
         
         // Apply UI Settings
         UIConfig = new UIConfig();
-        UIConfig.initUI(this);
+        try {
+            UIConfig.initUI(this);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         String[] listData = new String[3];
         listData[0] = "New Game";

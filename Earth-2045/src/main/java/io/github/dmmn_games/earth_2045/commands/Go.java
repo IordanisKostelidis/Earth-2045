@@ -39,7 +39,7 @@ public class Go implements ICommand {
             
             int locationToGo = new Navigation().getLocation(Arguments[1]);
             
-            int currentUserFloor = 0;
+            int currentUserFloor = Game.getUser().getFloor();
             int currentUserRoom = Game.getUser().getRoom();
             
             Floor currentFloor = Game.getFloor(currentUserFloor);
@@ -49,13 +49,21 @@ public class Go implements ICommand {
                tempDoor = currentFloor.getDoors().get(i);
                
                if(tempDoor.getRoomA() == currentUserRoom && tempDoor.getPosA() == locationToGo) {
-                   Game.getUser().setRoom(tempDoor.getRoomB());
-                   isFound = true;
-                   break;
+                   if(tempDoor.isIsOpen()) {
+                       Game.getUser().setRoom(tempDoor.getRoomB());
+                        isFound = true;
+                        break;
+                   } else {
+                       currentHistory.addLine("This door is locked");
+                   }
                } else if(tempDoor.getRoomB() == currentUserRoom && tempDoor.getPosB() == locationToGo) {
-                   Game.getUser().setRoom(tempDoor.getRoomA());
-                   isFound = true;
-                   break;
+                   if(tempDoor.isIsOpen()) {
+                       Game.getUser().setRoom(tempDoor.getRoomA());
+                        isFound = true;
+                        break;
+                   } else {
+                       currentHistory.addLine("This door is locked");
+                   }
                }
             }
             

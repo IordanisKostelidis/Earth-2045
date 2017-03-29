@@ -5,8 +5,10 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
+import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
+import io.github.dmmn_games.earth_2045.tools.ITool;
 import javax.swing.JTextArea;
 
 /**
@@ -33,15 +35,31 @@ public class Pick implements ICommand {
         if (Arguments.length == 1) {
             currentHistory.addLine("Pick what ???");
         } else {
-            switch (Arguments[1]) {
-                case "key": {
-                    currentHistory.addLine("You pick a key !!!");
+            int currentUserFloor = Game.getUser().getFloor();
+            int currentUserRoom = Game.getUser().getRoom();
+            
+            Room currentRoom = Game.getFloor(currentUserFloor).getRoom(currentUserRoom);
+            
+            ITool currentTool;
+            boolean found = false;
+            
+            for(int i=0;i<currentRoom.getTools().size();i++) {
+                currentTool = currentRoom.getTools().get(i);
+                
+                if(currentTool.getKeyID().equals(Arguments[1])) {
+                    found = true;
+                    Game.getUser().getInventory().add(currentTool);
+                    currentRoom.getTools().remove(i);
                     break;
                 }
-                default: {
-                    currentHistory.addLine("You can't pick " + Arguments[1] + " !!!");
-                }
             }
+            
+            if(!found) {
+                currentHistory.addLine("ERRROR");
+            } else {
+                currentHistory.addLine("You have picked up " + Arguments[1]);
+            }
+            
         }
 
     }

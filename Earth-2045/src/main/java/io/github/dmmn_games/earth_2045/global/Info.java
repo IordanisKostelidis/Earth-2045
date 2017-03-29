@@ -23,7 +23,7 @@ public class Info {
         this.Dev = "DMMN Games";
         this.Copyright = "© 2017";
         this.Website = "https://DMMNGames.GitHUB.IO";
-        this.Version = "0.0.0.1 Pre-Alpha";
+        this.Version = "0.0.1.0 Pre-Alpha";
     }
 
     public String getName() {

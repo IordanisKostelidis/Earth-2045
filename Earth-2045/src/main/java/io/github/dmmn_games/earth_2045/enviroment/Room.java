@@ -19,15 +19,33 @@ public class Room {
     private ArrayList<ITool> tools= new ArrayList<ITool>();
     private ArrayList<IItem> items= new ArrayList<IItem>();
 
+
+    public Room() {
+        this.tools = new ArrayList<>();
+        this.items = new ArrayList<>();
+    }
+    
+    
     public void addKey(Key newKey){
         tools.add(newKey);
     }
-    /**ArrayList<ITool> toolList = new ArrayList<ITool>();
-     *  toolList.add(new Key(1,1,100,false));
-     * toolList.add(new PassCard(2,1,100,false));
-     *
-     * Rooms.add(new Room(
-     */
+
+    public ArrayList<ITool> getTools() {
+        return tools;
+    }
+
+    public void setTools(ArrayList<ITool> tools) {
+        this.tools = tools;
+    }
+
+    public ArrayList<IItem> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<IItem> items) {
+        this.items = items;
+    }
+    
     
     
     

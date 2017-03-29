@@ -30,7 +30,7 @@ public class Music {
 
         try {
             Clip clip = AudioSystem.getClip();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("Loop.wav"));
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/files/Loop.wav"));
             clip.open(inputStream);
             clip.loop(1000);
             clip.start();

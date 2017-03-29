@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.gui;
 
 import io.github.dmmn_games.earth_2045.global.Info;
+import java.net.MalformedURLException;
 
 /**
  *
@@ -26,7 +27,7 @@ public class UIConfig {
         PosY=(java.awt.Toolkit.getDefaultToolkit().getScreenSize().height-this.Height)/2;
     }
 
-    public void initUI(javax.swing.JFrame currentFrame) {
+    public void initUI(javax.swing.JFrame currentFrame) throws MalformedURLException {
         // Disable Resizing Feature
         currentFrame.setResizable(
                 false
@@ -40,12 +41,11 @@ public class UIConfig {
         
         // Set Window on Center of Screen
         currentFrame.setLocation(this.PosX, this.PosY);
-        
-        
-        
+
         // Set Window's Title
         currentFrame.setTitle(
                 new Info().getName() + " | " + new Info().getVersion()
         );
+        
     }
 }

@@ -5,6 +5,10 @@
  */
 package io.github.dmmn_games.earth_2045.gui;
 
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author iordkost
@@ -21,7 +25,11 @@ public class LoadGame extends javax.swing.JFrame {
         
         // Apply UI Settings
         UIConfig = new UIConfig();
-        UIConfig.initUI(this);
+        try {
+            UIConfig.initUI(this);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(LoadGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -9,7 +9,7 @@ package io.github.dmmn_games.earth_2045.tools;
  *
  * @author makis
  */
-public class Key implements ITool{
+public class Key implements ITool {
     String KeyID;
     int ID;
 
@@ -17,7 +17,8 @@ public class Key implements ITool{
         this.KeyID = KeyID;
         this.ID = ID;
     }
-
+    
+    @Override
     public String getKeyID() {
         return KeyID;
     }
