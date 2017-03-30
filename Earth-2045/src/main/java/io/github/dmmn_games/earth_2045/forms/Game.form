@@ -26,9 +26,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollPanel" pref="388" max="32767" attributes="0"/>
+                  <Component id="scrollPanel" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="currentCommand" max="32767" attributes="0"/>
+                      <Component id="currentCommand" pref="303" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="submitCommand" min="-2" max="-2" attributes="0"/>
                   </Group>

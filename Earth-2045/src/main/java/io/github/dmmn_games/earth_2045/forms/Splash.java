@@ -3,33 +3,67 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.gui;
+package io.github.dmmn_games.earth_2045.forms;
 
+import io.github.dmmn_games.earth_2045.global.CurrentPath;
+import io.github.dmmn_games.earth_2045.global.Delayer;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 
 /**
  *
  * @author iordkost
  */
-public class LoadGame extends javax.swing.JFrame {
+public class Splash extends javax.swing.JFrame {
 
-    private UIConfig UIConfig;
-    
     /**
-     * Creates new form LoadGame
+     * Creates new form Splash
      */
-    public LoadGame() {
-        initComponents();
+    public Splash() {
+
+        /* important Statement */
+        setUndecorated(true);
         
+        setBackground(new Color(1.0f,1.0f,1.0f,0.0f));
+
+        initComponents();
+
         // Apply UI Settings
-        UIConfig = new UIConfig();
+        UIConfig UIConfig = new UIConfig();
         try {
             UIConfig.initUI(this);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(LoadGame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        try {
+
+            Image backgroundImage = javax.imageio.ImageIO.read(new File(new CurrentPath().getDir() + "/Data/Media/Images/Logo.dat"));
+            Image backgroundImage2 = backgroundImage.getScaledInstance(500, 500, Image.SCALE_FAST);
+            
+            
+            
+            setContentPane(new JPanel(new BorderLayout()) {
+                @Override
+                public void paintComponent(Graphics g) {
+                    g.drawImage(backgroundImage2, 0, 0, null);
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Timer cur = new Timer();
+        cur.schedule(new Delayer(this), 5000);
     }
 
     /**
@@ -74,21 +108,19 @@ public class LoadGame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoadGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoadGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoadGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoadGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Splash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoadGame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Splash().setVisible(true);
         });
     }
 

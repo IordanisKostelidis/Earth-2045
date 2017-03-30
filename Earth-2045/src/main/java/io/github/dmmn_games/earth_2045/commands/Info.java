@@ -13,12 +13,12 @@ import javax.swing.JTextArea;
  *
  * @author iordkost
  */
-public class Clear implements ICommand {
+public class Info implements ICommand {
 
     private final String Command;
 
-    public Clear() {
-        this.Command = "clear";
+    public Info() {
+        this.Command = "info";
     }
 
     @Override
@@ -29,6 +29,19 @@ public class Clear implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
         History currentHistory = new History(History);
-        currentHistory.clear();
+        currentHistory.addLine(
+                new io.github.dmmn_games.earth_2045.global.Info().getName()
+                + " " + new io.github.dmmn_games.earth_2045.global.Info().getVersion()
+        );
+        currentHistory.addLine(
+                new io.github.dmmn_games.earth_2045.global.Info().getDesc()
+        );
+        currentHistory.addLine(
+                "Developed by " + new io.github.dmmn_games.earth_2045.global.Info().getDev()
+        );
+        currentHistory.addLine(
+                new io.github.dmmn_games.earth_2045.global.Info().getWebsite()
+        );
     }
+
 }

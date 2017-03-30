@@ -22,8 +22,8 @@ public class Info {
         this.Desc = "Earth 2045 : The End Of Free-Will";
         this.Dev = "DMMN Games";
         this.Copyright = "© 2017";
-        this.Website = "https://DMMNGames.GitHUB.IO";
-        this.Version = "0.0.1.0 Pre-Alpha";
+        this.Website = "https://DMMN-Games.GitHUB.IO";
+        this.Version = "0.2.0.0 Pre-Alpha";
     }
 
     public String getName() {

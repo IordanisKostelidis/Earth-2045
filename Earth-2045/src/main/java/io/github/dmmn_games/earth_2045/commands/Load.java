@@ -6,11 +6,12 @@
 package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.game.GameController;
+import io.github.dmmn_games.earth_2045.global.CurrentPath;
+import io.github.dmmn_games.earth_2045.global.History;
+import io.github.dmmn_games.earth_2045.user.User;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTextArea;
 
 /**
@@ -32,16 +33,51 @@ public class Load implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        try {
-            FileInputStream myGame = new FileInputStream("SavedGame.ser");
-            ObjectInputStream reader = new ObjectInputStream(myGame);
-            GameController x = new GameController();
-            x = (GameController)reader.readObject();
-        } catch (IOException ex) {
-            Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, ex);
+
+        History currentHistory = new History(History);
+        if (Arguments.length == 1) {
+            currentHistory.addLine("You must define the load slot !");
+        } else {
+            switch (Arguments[1]) {
+                case "a": {
+                    Game = loadProcess("a");
+                    currentHistory.addLine("Your game is loaded from slot a !");
+                    break;
+                }
+                case "b": {
+                    Game = loadProcess("a");
+                    currentHistory.addLine("Your game is loaded from slot b !");
+                    break;
+                }
+                case "c": {
+                    Game = loadProcess("a");
+                    currentHistory.addLine("Your game is loaded from slot c !");
+                    break;
+                }
+                default: {
+                    currentHistory.addLine("This is not a valid slot !");
+                }
+            }
         }
-        
+
+    }
+
+    public GameController loadProcess(String NameOfFile) {
+        GameController x = new GameController();
+
+        x.setUser(new User("Empty"));
+
+        try {
+            FileInputStream myGame = new FileInputStream(
+                    new CurrentPath().getDir() + "/Data/Save/" + NameOfFile + ".sav"
+            );
+            ObjectInputStream reader = new ObjectInputStream(myGame);
+            x = new GameController();
+            x = (GameController) reader.readObject();
+
+        } catch (IOException | ClassNotFoundException ex) {
+            //
+        }
+        return x;
     }
 }

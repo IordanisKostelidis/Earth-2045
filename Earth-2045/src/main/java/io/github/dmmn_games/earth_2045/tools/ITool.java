@@ -5,11 +5,13 @@
  */
 package io.github.dmmn_games.earth_2045.tools;
 
+import java.io.Serializable;
+
 /**
  *
  * @author iordkost
  */
-public interface ITool {
+public interface ITool extends Serializable {
     public String getKeyID();
     public int getID();
 }

@@ -5,9 +5,8 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
+import io.github.dmmn_games.earth_2045.global.History;
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.Info;
-import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import javax.swing.JTextArea;
 
@@ -31,7 +30,9 @@ public class Status implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
 
-        JTextAreaCustom newHistory = new JTextAreaCustom(History);
+        History newHistory = new History(History);
+        
+        newHistory.addLine("=== User's Status ===");
         newHistory.addLine("Username : " + Game.getUser().getUsername());
         newHistory.addLine("Health : " + Game.getUser().getHealth());
         newHistory.addLine("Floor : " + Game.getUser().getFloor());
@@ -43,6 +44,7 @@ public class Status implements ICommand {
             tempTool = Game.getUser().getInventory().get(i);
             newHistory.addLine(tempTool.getKeyID());
         }
+        newHistory.addLine("Total Tools : " + Game.getUser().getInventory().size());
 
     }
 }

@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath io.github.dmmn_games.earth_2045.gui.Menu</exec.args>
+                <exec.args>-classpath %classpath io.github.dmmn_games.earth_2045.forms.Splash</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>

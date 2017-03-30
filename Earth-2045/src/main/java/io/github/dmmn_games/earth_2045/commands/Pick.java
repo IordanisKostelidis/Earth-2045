@@ -5,9 +5,9 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
+import io.github.dmmn_games.earth_2045.global.History;
 import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import javax.swing.JTextArea;
 
@@ -30,7 +30,7 @@ public class Pick implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        JTextAreaCustom currentHistory = new JTextAreaCustom(History);
+        History currentHistory = new History(History);
         
         if (Arguments.length == 1) {
             currentHistory.addLine("Pick what ???");
@@ -55,7 +55,7 @@ public class Pick implements ICommand {
             }
             
             if(!found) {
-                currentHistory.addLine("ERRROR");
+                currentHistory.addLine("What ??");
             } else {
                 currentHistory.addLine("You have picked up " + Arguments[1]);
             }

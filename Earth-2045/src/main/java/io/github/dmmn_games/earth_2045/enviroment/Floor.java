@@ -6,47 +6,45 @@
 package io.github.dmmn_games.earth_2045.enviroment;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author makis
  */
-public class Floor {
+public class Floor implements Serializable {
+
     private ArrayList<Room> Rooms = new ArrayList<Room>();
     private ArrayList<Door> Doors = new ArrayList<Door>();
-    
-    
-    public void addRoom(Room newRoom){
+
+    public Floor() {
+        this.Rooms = new ArrayList<>();
+        this.Doors = new ArrayList<>();
+    }
+
+    public void addRoom(Room newRoom) {
         Rooms.add(newRoom);
     }
-    
-    public Room getRoom (int intex){
-        return Rooms.get(intex);
+
+    public Room getRoom(int index) {
+        return Rooms.get(index);
+    }
+
+    public ArrayList<Room> getRooms() {
+        return this.Rooms;
     }
 
     public void addDoor(Door newDoor) {
         Doors.add(newDoor);
     }
+    
+    public Door getDoor(int index) {
+        return Doors.get(index);
+    }
 
     public ArrayList<Door> getDoors() {
         return Doors;
     }
-    /**ArrayList<ITool> toolList = new ArrayList<ITool>();
-     *  toolList.add(new Key(1,1,100,false));
-     * toolList.add(new PassCard(2,1,100,false));
-     *
-     * Rooms.add(new Room(
-     */
-    
-   /**ArrayList<ITool> toolList = new ArrayList<ITool>();
-       
-     *  toolList.add(new Key(1,1,100,false));
-      * toolList.add(new PassCard(2,1,100,false));
-      * 
-      * Rooms.add(new Room(
-       */
-      
-    
-    
+
 }

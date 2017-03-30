@@ -11,10 +11,10 @@ import javax.swing.JTextArea;
  *
  * @author iordkost
  */
-public class JTextAreaCustom {
-    private JTextArea CurrentJTextArea;
+public class History {
+    private  JTextArea CurrentJTextArea;
 
-    public JTextAreaCustom(JTextArea CurrentJTextArea) {
+    public History(JTextArea CurrentJTextArea) {
         this.CurrentJTextArea = CurrentJTextArea;
     }
     
@@ -22,5 +22,9 @@ public class JTextAreaCustom {
         this.CurrentJTextArea.setText(
                 this.CurrentJTextArea.getText() + Line + "\n"
         );
+    }
+    
+    public void clear() {
+        this.CurrentJTextArea.setText("");
     }
 }

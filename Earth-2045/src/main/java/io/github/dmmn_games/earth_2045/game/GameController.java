@@ -22,7 +22,7 @@ public class GameController implements java.io.Serializable {
     private ArrayList<Floor> Floors;
 
     public GameController() {
-        Floors = new ArrayList<Floor>();
+        Floors = new ArrayList<>();
         initFloors();
     }
 
@@ -38,28 +38,33 @@ public class GameController implements java.io.Serializable {
          Floors.get(1).addRoom(new Room()); // added room2 in 1st floor
          Floors.get(1).addRoom(new Room()); // added room3 in 1st floor
          
-         Floors.get(1).addDoor(new Door("door0to1",0,1,new Navigation().getNorth(),100,false)); // add door0to1 in 1st floor
-         Floors.get(1).addDoor(new Door("door0to3",0,3,new Navigation().getWest(),200,true)); // add door3to1 in 1st floor
-         Floors.get(1).addDoor(new Door("door1to2",1,2,new Navigation().getWest(),300,true)); // add door1to2 in 1st floor
+         Floors.get(1).addDoor(new Door("North Door",0,1,new Navigation().getNorth(),100,false)); // add door0to1 in 1st floor
+         Floors.get(1).addDoor(new Door("West Door",0,3,new Navigation().getWest(),200,true)); // add door3to1 in 1st floor
+         Floors.get(1).addDoor(new Door("West Door",1,2,new Navigation().getWest(),300,true)); // add door1to2 in 1st floor
+         Floors.get(1).addDoor(new Door("North Door",2,-1,new Navigation().getNorth(),0,true)); // ending door - demo
         
-         Floors.get(1).getRoom(3).addKey(new Key("keya",100)); 
-        /*
-            Floors.add(new Floor());
-            Floors.get(0).addRoom(new Room());
-            Floors.get(0).getRoom(0).addDoor(new Door(....));
-        */
+         Floors.get(1).getRoom(3).addKey(new Key("akey",100)); 
         
-    }
-
-    public void setUser(User User) {
-        this.User = User;
     }
 
     public User getUser() {
         return User;
     }
 
-    public Floor getFloor(int Floor) {
-        return Floors.get(Floor);
+    public void setUser(User User) {
+        this.User = User;
     }
+
+    public ArrayList<Floor> getFloors() {
+        return Floors;
+    }
+
+    public void setFloors(ArrayList<Floor> Floors) {
+        this.Floors = Floors;
+    }
+    
+    public Floor getFloor(int Index) {
+        return Floors.get(Index);
+    }
+
 }

@@ -5,8 +5,8 @@
  */
 package io.github.dmmn_games.earth_2045.music;
 
+import io.github.dmmn_games.earth_2045.global.CurrentPath;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,11 +30,15 @@ public class Music {
 
         try {
             Clip clip = AudioSystem.getClip();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/files/Loop.wav"));
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                    new File(
+                            new CurrentPath().getDir() + "/Data/Media/Music/BG-Music.dat"
+                    )
+            );
             clip.open(inputStream);
             clip.loop(1000);
             clip.start();
-            
+
         } catch (LineUnavailableException | IOException | UnsupportedAudioFileException ex) {
             Logger.getLogger(Music.class.getName()).log(Level.SEVERE, null, ex);
         }

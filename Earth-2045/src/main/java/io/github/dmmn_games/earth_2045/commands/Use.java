@@ -5,9 +5,9 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
+import io.github.dmmn_games.earth_2045.global.History;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import javax.swing.JTextArea;
 
@@ -30,12 +30,11 @@ public class Use implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        JTextAreaCustom currentHistory = new JTextAreaCustom(History);
+        History currentHistory = new History(History);
         
         if (Arguments.length == 1) {
             currentHistory.addLine("Use what ???");
         } else {
-            // use keya
             
             int currentUserFloor = Game.getUser().getFloor();
             int currentUserRoom = Game.getUser().getRoom();

@@ -6,66 +6,68 @@
 package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.tools.ITool;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author iordkost
  */
-public class User {
+public class User implements Serializable {
 
     private final String username;
-    private int room;
     private int health;
-    private int floor;
+
     private ArrayList<ITool> inventory;
+
+    private int floor;
+    private int room;
 
     public User(String username) {
         this.username = username;
-        this.room=0;
-        this.floor=1;
-        this.health=100;
-        this.inventory=new ArrayList<>();
+        this.health = 100;
+
+        this.inventory = new ArrayList<>();
+
+        this.floor = 1;
+        this.room = 0;
+
     }
 
-    public void setRoom(int room) {
-        this.room = room;
+    public String getUsername() {
+        return username;
     }
-
-
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
-
-    public void setInventory(ArrayList<ITool> inventory) {
-        this.inventory = inventory;
-    }
-
-    public int getRoom() {
-        return room;
-    }
-
-  
 
     public int getHealth() {
         return health;
     }
 
-    public int getFloor() {
-        return floor;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public ArrayList<ITool> getInventory() {
         return inventory;
     }
 
-    public String getUsername() {
-        return username;
+    public void setInventory(ArrayList<ITool> inventory) {
+        this.inventory = inventory;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
+    }
+
+    public int getRoom() {
+        return room;
+    }
+
+    public void setRoom(int room) {
+        this.room = room;
     }
 
 }

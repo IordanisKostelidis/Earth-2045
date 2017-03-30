@@ -5,9 +5,8 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
+import io.github.dmmn_games.earth_2045.global.History;
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.Info;
-import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
 import javax.swing.JTextArea;
 
 /**
@@ -29,7 +28,7 @@ public class WhoAmI implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        JTextAreaCustom newHistory = new JTextAreaCustom(History);
-        newHistory.addLine("You name is " + Game.getUser().getUsername());
+        History newHistory = new History(History);
+        newHistory.addLine("You are a user, and your name is " + Game.getUser().getUsername());
     }
 }

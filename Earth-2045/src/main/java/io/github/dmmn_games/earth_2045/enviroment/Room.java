@@ -8,25 +8,24 @@ package io.github.dmmn_games.earth_2045.enviroment;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.items.*;
 import io.github.dmmn_games.earth_2045.tools.*;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author makis
  */
-public class Room {
-    
-    private ArrayList<ITool> tools= new ArrayList<ITool>();
-    private ArrayList<IItem> items= new ArrayList<IItem>();
+public class Room implements Serializable {
 
+    private ArrayList<ITool> tools = new ArrayList<ITool>();
+    private ArrayList<IItem> items = new ArrayList<IItem>();
 
     public Room() {
         this.tools = new ArrayList<>();
         this.items = new ArrayList<>();
     }
-    
-    
-    public void addKey(Key newKey){
+
+    public void addKey(Key newKey) {
         tools.add(newKey);
     }
 
@@ -45,8 +44,5 @@ public class Room {
     public void setItems(ArrayList<IItem> items) {
         this.items = items;
     }
-    
-    
-    
-    
+
 }

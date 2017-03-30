@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.bots;
+package io.github.dmmn_games.earth_2045.npcs;
 
 /**
  *
  * @author elgreko
  */
-public class enemyFighter
+public class Bot
 {
 
     private boolean alive;
     
-    public enemyFighter()
+    public Bot()
     {
         alive = true;
     }

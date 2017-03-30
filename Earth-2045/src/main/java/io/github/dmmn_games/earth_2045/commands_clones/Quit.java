@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.commands;
+package io.github.dmmn_games.earth_2045.commands_clones;
 
+import io.github.dmmn_games.earth_2045.commands.*;
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.History;
 import javax.swing.JTextArea;
 
 /**
  *
  * @author iordkost
  */
-public class Clear implements ICommand {
+public class Quit implements ICommand {
 
     private final String Command;
 
-    public Clear() {
-        this.Command = "clear";
+    public Quit() {
+        this.Command = "quit";
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Clear implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        History currentHistory = new History(History);
-        currentHistory.clear();
+        Exit runCommand = new Exit();
+        runCommand.run(Arguments, History, Game);
     }
 }

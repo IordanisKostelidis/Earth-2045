@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.gui;
+package io.github.dmmn_games.earth_2045.forms;
 
-import io.github.dmmn_games.earth_2045.user.User;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.event.MenuDragMouseEvent;
 
 /**
  *
@@ -27,7 +25,7 @@ public class NewGame extends javax.swing.JFrame {
         initComponents();
 
         // Apply UI Settings
-        UIConfig = new UIConfig();
+        UIConfig = new UIConfig(500,50);
         try {
             UIConfig.initUI(this);
         } catch (MalformedURLException ex) {
@@ -139,10 +137,8 @@ public class NewGame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewGame().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NewGame().setVisible(true);
         });
     }
 

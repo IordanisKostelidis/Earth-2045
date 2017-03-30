@@ -5,20 +5,20 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.global.History;
+import io.github.dmmn_games.earth_2045.game.GameController;
 import javax.swing.JTextArea;
 
 /**
  *
  * @author iordkost
  */
-public class Clear implements ICommand {
+public class WhereAmI implements ICommand {
 
     private final String Command;
 
-    public Clear() {
-        this.Command = "clear";
+    public WhereAmI() {
+        this.Command = "whereami";
     }
 
     @Override
@@ -28,7 +28,8 @@ public class Clear implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        History currentHistory = new History(History);
-        currentHistory.clear();
+        History newHistory = new History(History);
+        newHistory.addLine("Floor = " + Game.getUser().getFloor());
+        newHistory.addLine("Room = " + Game.getUser().getRoom());
     }
 }

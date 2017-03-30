@@ -6,18 +6,20 @@
 package io.github.dmmn_games.earth_2045.doors;
 
 import io.github.dmmn_games.earth_2045.global.Navigation;
+import java.io.Serializable;
 
 /**
  *
  * @author iordkost
  */
-public class Door {
-    private String doorID;
-    private int roomA;
-    private int roomB;
-    private int posA;
-    private int posB;
-    private int passID;
+public class Door implements Serializable {
+
+    private final String doorID;
+    private final int roomA;
+    private final int roomB;
+    private final int posA;
+    private final int posB;
+    private final int passID;
     private boolean isOpen;
 
     public Door(String doorId, int roomA, int roomB, int posA, int IdPass, boolean isOpen) {
@@ -28,8 +30,7 @@ public class Door {
         this.posB = new Navigation().getNegativeLocation(posA);
         this.passID = IdPass;
         this.isOpen = isOpen;
-        
-      
+
     }
 
     public String getDoorId() {
@@ -63,10 +64,5 @@ public class Door {
     public void setIsOpen(boolean isOpen) {
         this.isOpen = isOpen;
     }
-    
 
-    
-   
-    
-    
 }

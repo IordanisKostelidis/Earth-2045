@@ -5,10 +5,12 @@
  */
 package io.github.dmmn_games.earth_2045.items;
 
+import java.io.Serializable;
+
 /**
  *
  * @author iordkost
  */
-public interface IItem {
-    
+public interface IItem extends Serializable {
+    public String getItemID();
 }

@@ -6,7 +6,7 @@
 package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.Info;
+import io.github.dmmn_games.earth_2045.global.History;
 import javax.swing.JTextArea;
 
 /**
@@ -28,23 +28,9 @@ public class Help implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-
+        History currentHistory = new History(History);
         if (Arguments.length == 1) {
-            History.setText(
-                    History.getText()
-                    + new Info().getName() + "\n"
-                    + "Developed by " + new Info().getDev() + "\n"
-            );
-        } else {
-            switch (Arguments[1]) {
-                case "ver": {
-                    History.setText(
-                            History.getText()
-                            + new Info().getVersion() + "\n"
-                    );
-                    break;
-                }
-            }
+            currentHistory.addLine("ToDO: Add Help File");
         }
 
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.gui;
+package io.github.dmmn_games.earth_2045.forms;
 
 import io.github.dmmn_games.earth_2045.commands.*;
 import io.github.dmmn_games.earth_2045.game.GameController;
@@ -11,9 +11,9 @@ import io.github.dmmn_games.earth_2045.music.Music;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  *
@@ -24,49 +24,55 @@ public class Game extends javax.swing.JFrame {
     private UIConfig UIConfig;
     private GameController GameController;
     private CommandsController CommandsController;
-    
+    private ArrayList<String> CommandHistory;
+
     /**
      * Creates new form Game
      */
     public Game() {
         initGame();
-        this.GameController = new GameController();        
-    }
-    
-    public Game(String argUser) {
-        initGame();
+
         this.GameController = new GameController();
-        GameController.setUser(new User(argUser));
-        
     }
-    
+
+    public Game(String Username) {
+        initGame();
+
+        this.GameController = new GameController();
+        GameController.setUser(new User(Username));
+
+    }
+
     public Game(GameController LoadedGame) {
         initGame();
+
         this.GameController = LoadedGame;
     }
-    
+
     private void initGame() {
 
-            // Init Components
-            initComponents();
-            
-            // Apply UI Settings
-            UIConfig = new UIConfig();
+        // Init Components
+        initComponents();
+
+        // Apply UI Settings
+        UIConfig = new UIConfig();
         try {
             UIConfig.initUI(this);
         } catch (MalformedURLException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-            // Init Commands Controller
-            CommandsController = new CommandsController();
-            
-            // Init History Logger
-            initHistory();
-            
-            // Play Music
-            Music currentMusic = new Music();
-            currentMusic.Play();
+
+        // Init Commands Controller
+        CommandsController = new CommandsController();
+
+        // Init History Logger
+        initHistory();
+
+        // Play Music
+        Music currentMusic = new Music();
+        currentMusic.Play();
+        
+        CommandHistory = new ArrayList<>();
 
     }
 
@@ -111,9 +117,9 @@ public class Game extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addComponent(scrollPanel)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(currentCommand)
+                        .addComponent(currentCommand, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(submitCommand)))
                 .addContainerGap())
@@ -133,23 +139,25 @@ public class Game extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initHistory()  {
+    private void initHistory() {
         commandHistory.setText("Ready...." + "\n");
-        
-        
+
     }
-    
+
     private void execCommand() {
         CommandsController.runCommand(currentCommand, commandHistory, GameController);
+        CommandHistory.add(currentCommand.getText());
     }
-    
+
     private void submitCommandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitCommandMouseClicked
         execCommand();
     }//GEN-LAST:event_submitCommandMouseClicked
 
     private void currentCommandKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_currentCommandKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             execCommand();
+        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
+            
         }
     }//GEN-LAST:event_currentCommandKeyPressed
 
@@ -181,10 +189,8 @@ public class Game extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Game().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Game().setVisible(true);
         });
     }
 

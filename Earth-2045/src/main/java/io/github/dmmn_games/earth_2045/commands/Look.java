@@ -5,11 +5,11 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
+import io.github.dmmn_games.earth_2045.global.History;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.JTextAreaCustom;
 import io.github.dmmn_games.earth_2045.global.Navigation;
 import javax.swing.JTextArea;
 
@@ -32,8 +32,8 @@ public class Look implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        JTextAreaCustom currentHistory = new JTextAreaCustom(History);
-        boolean isFound = false;
+        History currentHistory = new History(History);
+
         if (Arguments.length == 1) {
             currentHistory.addLine("Look where ?");
         } else {
@@ -48,6 +48,13 @@ public class Look implements ICommand {
                     currentHistory.addLine(
                             "Tool Found : "
                             + currentRoom.getTools().get(i).getKeyID()
+                    );
+                }
+                
+                for (int i = 0; i < currentRoom.getItems().size(); i++) {
+                    currentHistory.addLine(
+                            "Item Found : "
+                            + currentRoom.getItems().get(i).getItemID()
                     );
                 }
 
@@ -75,8 +82,6 @@ public class Look implements ICommand {
                         );
                     }
                 }
-
-            } else {
 
             }
         }

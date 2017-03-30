@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.dmmn-games</groupId>
     <artifactId>Earth-2045</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>ALPHA</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
           <configuration>
               <archive>
                   <manifest>
-                      <mainClass>io.github.dmmn_games.earth_2045.gui.Menu</mainClass>
+                      <mainClass>io.github.dmmn_games.earth_2045.forms.Splash</mainClass>
                   </manifest>
               </archive>
           </configuration>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.gui;
+package io.github.dmmn_games.earth_2045.forms;
 
 import io.github.dmmn_games.earth_2045.commands.Exit;
 import io.github.dmmn_games.earth_2045.game.GameController;
@@ -41,6 +41,7 @@ public class Menu extends javax.swing.JFrame {
         listData[2] = "Exit";
         
         menuList.setListData(listData);
+        
     }
 
     /**
@@ -56,6 +57,7 @@ public class Menu extends javax.swing.JFrame {
         menuList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImages(null);
 
         menuList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -77,7 +79,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
@@ -98,7 +100,9 @@ public class Menu extends javax.swing.JFrame {
                     break;
                 }
                 case "Load Game": {
-                    // ToDo : Load The Game
+                    this.setVisible(false);
+                    LoadGame LoadGame = new LoadGame();
+                    LoadGame.setVisible(true);
                     break;
                 }
                 case "Exit": {
@@ -137,10 +141,8 @@ public class Menu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Menu().setVisible(true);
         });
     }
 
