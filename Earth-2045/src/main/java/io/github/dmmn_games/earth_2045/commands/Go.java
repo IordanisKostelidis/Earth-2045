@@ -87,6 +87,7 @@ public class Go implements ICommand {
                             + "For more info check our website\n"
                             + "https://DMMN-Games.GitHUB.IO"
                     );
+                    Game.stopTime();
                 } else {
 
                     currentHistory.addLine("You can't go here !");

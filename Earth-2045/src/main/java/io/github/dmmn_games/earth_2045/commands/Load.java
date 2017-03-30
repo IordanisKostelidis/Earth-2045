@@ -76,7 +76,7 @@ public class Load implements ICommand {
             x = (GameController) reader.readObject();
 
         } catch (IOException | ClassNotFoundException ex) {
-            //
+            //System.err.print(ex.getMessage());
         }
         return x;
     }
