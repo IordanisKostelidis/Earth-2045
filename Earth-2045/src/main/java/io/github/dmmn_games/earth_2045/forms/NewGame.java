@@ -25,7 +25,7 @@ public class NewGame extends javax.swing.JFrame {
         initComponents();
 
         // Apply UI Settings
-        UIConfig = new UIConfig(500,50);
+        UIConfig = new UIConfig(500,80);
         try {
             UIConfig.initUI(this);
         } catch (MalformedURLException ex) {
@@ -84,7 +84,7 @@ public class NewGame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(usernameField)
-                    .addComponent(createGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(createGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
