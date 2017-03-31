@@ -5,14 +5,15 @@
  */
 package io.github.dmmn_games.earth_2045.game;
 
+import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.*;
-import io.github.dmmn_games.earth_2045.global.MyListener;
-import io.github.dmmn_games.earth_2045.global.Navigation;
 import io.github.dmmn_games.earth_2045.tools.Key;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 /**
@@ -21,18 +22,32 @@ import javax.swing.Timer;
  */
 public class GameController implements java.io.Serializable {
 
+    private CommandsController CommandsController;
+    private ArrayList<String> CommandHistory;
+
+    private JLabel GameTimeField;
+    private Timer GameTimer;
+    private TimeLimiter Listener;
+
     private User User;
     private ArrayList<Floor> Floors;
-    private JLabel Time;
-    private Timer timer;
 
     public GameController() {
+        CommandsController = new CommandsController();
+
+        this.CommandHistory = new ArrayList<>();
+
+        GameTimeField = new JLabel();
+        GameTimer = new Timer(0, null);
+        Listener = new TimeLimiter(null, 0, null, null);
+
         Floors = new ArrayList<>();
-        Time = new JLabel();
-        initFloors();
+        GameTimeField = new JLabel();
+
+        initWorld();
     }
 
-    private void initFloors() {
+    private void initWorld() {
         Floors.add(new Floor()); // added the underground
         Floors.add(new Floor()); // added 1st floor
         Floors.add(new Floor()); // added 2nd Floor
@@ -44,13 +59,72 @@ public class GameController implements java.io.Serializable {
         Floors.get(1).addRoom(new Room()); // added room2 in 1st floor
         Floors.get(1).addRoom(new Room()); // added room3 in 1st floor
 
-        Floors.get(1).addDoor(new Door("North Door", 0, 1, new Navigation().getNorth(), 100, false)); // add door0to1 in 1st floor
-        Floors.get(1).addDoor(new Door("West Door", 0, 3, new Navigation().getWest(), 200, true)); // add door3to1 in 1st floor
-        Floors.get(1).addDoor(new Door("West Door", 1, 2, new Navigation().getWest(), 300, true)); // add door1to2 in 1st floor
-        Floors.get(1).addDoor(new Door("North Door", 2, -1, new Navigation().getNorth(), 0, true)); // ending door - demo
+        Floors.get(1).addDoor(new Door("Main - Conference", 0, 1, new Navigation().getNorth(), 100, false)); // add door0to1 in 1st floor
+        Floors.get(1).addDoor(new Door("Main - Security", 0, 3, new Navigation().getWest(), 200, true)); // add door3to1 in 1st floor
+        Floors.get(1).addDoor(new Door("Conference - Elevator", 1, 2, new Navigation().getWest(), 300, true)); // add door1to2 in 1st floor
+        Floors.get(1).addDoor(new Door("Elevator", 2, -1, new Navigation().getNorth(), 0, true)); // ending door - demo
 
-        Floors.get(1).getRoom(3).addKey(new Key("akey", 100));
+        Floors.get(1).getRoom(3).addKey(new Key("key", 100));
 
+    }
+
+    public CommandsController getCommandsController() {
+        return CommandsController;
+    }
+
+    public void setCommandsController(CommandsController CommandsController) {
+        this.CommandsController = CommandsController;
+    }
+
+    public ArrayList<String> getCommandHistory() {
+        return CommandHistory;
+    }
+
+    public void setCommandHistory(ArrayList<String> CommandHistory) {
+        this.CommandHistory = CommandHistory;
+    }
+
+    public JLabel getGameTimeField() {
+        return GameTimeField;
+    }
+
+    public void setGameTimeField(
+            JLabel GameTimeField,
+            int SecondsRemain,
+            JTextField Command,
+            JButton SubmitCommand
+    ) {
+        this.GameTimeField = GameTimeField;
+        Listener = new TimeLimiter(GameTimeField,
+                SecondsRemain,
+                Command,
+                SubmitCommand
+        );
+        GameTimer = new Timer(1000, Listener);
+    }
+
+    public Timer getGameTimer() {
+        return GameTimer;
+    }
+
+    public void setGameTimer(Timer GameTimer) {
+        this.GameTimer = GameTimer;
+    }
+
+    public void startTime() {
+        GameTimer.start();
+    }
+
+    public void stopTime() {
+        GameTimer.stop();
+    }
+
+    public TimeLimiter getListener() {
+        return Listener;
+    }
+
+    public void setListener(TimeLimiter Listener) {
+        this.Listener = Listener;
     }
 
     public User getUser() {
@@ -65,30 +139,12 @@ public class GameController implements java.io.Serializable {
         return Floors;
     }
 
+    public Floor getFloor(int Index) {
+        return this.Floors.get(Index);
+    }
+
     public void setFloors(ArrayList<Floor> Floors) {
         this.Floors = Floors;
-    }
-
-    public Floor getFloor(int Index) {
-        return Floors.get(Index);
-    }
-
-    public JLabel getTime() {
-        return Time;
-    }
-
-    public void setTime(JLabel TimeLabel) {
-        this.Time = TimeLabel;
-    }
-
-    public void startTime(int CountTime) {
-        MyListener list = new MyListener(Time, CountTime);
-        timer = new Timer(1000, list);
-        timer.start();
-    }
-
-    public void stopTime() {
-        timer.stop();
     }
 
 }

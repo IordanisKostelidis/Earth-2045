@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
  *
  * @author iordkost
  */
-public interface ICommand {
+public interface ICommand extends java.io.Serializable {
 
     String getCommand();
     void run(String[] Arguments, JTextArea History, GameController Game);

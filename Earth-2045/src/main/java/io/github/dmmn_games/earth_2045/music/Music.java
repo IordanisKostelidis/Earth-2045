@@ -20,16 +20,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author iordkost
  */
-public class Music {
+public class Music implements java.io.Serializable {
 
+    Clip clip;
+    
     public Music() {
         // Do Nothing
     }
 
     public void Play() {
-
         try {
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                     new File(
                             new CurrentPath().getDir() + "/Data/Media/Music/BG-Music.dat"
@@ -42,5 +43,9 @@ public class Music {
         } catch (LineUnavailableException | IOException | UnsupportedAudioFileException ex) {
             Logger.getLogger(Music.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void Pause() {
+        clip.stop();
     }
 }

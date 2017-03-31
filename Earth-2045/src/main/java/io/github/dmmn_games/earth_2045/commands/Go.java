@@ -5,11 +5,11 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.global.History;
+import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.Navigation;
+import io.github.dmmn_games.earth_2045.game.Navigation;
 import javax.swing.JTextArea;
 
 /**
@@ -31,7 +31,7 @@ public class Go implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        History currentHistory = new History(History);
+        CommandUI currentHistory = new CommandUI(History);
         boolean isFound = false;
         boolean isFinal = false;
         if (Arguments.length == 1) {

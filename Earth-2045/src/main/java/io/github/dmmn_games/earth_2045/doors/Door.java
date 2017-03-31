@@ -5,7 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.doors;
 
-import io.github.dmmn_games.earth_2045.global.Navigation;
+import io.github.dmmn_games.earth_2045.game.Navigation;
 import java.io.Serializable;
 
 /**

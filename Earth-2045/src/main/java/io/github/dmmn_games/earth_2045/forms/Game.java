@@ -5,13 +5,12 @@
  */
 package io.github.dmmn_games.earth_2045.forms;
 
-import io.github.dmmn_games.earth_2045.commands.*;
 import io.github.dmmn_games.earth_2045.game.GameController;
+import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.music.Music;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,34 +23,40 @@ public class Game extends javax.swing.JFrame {
 
     private UIConfig UIConfig;
     private GameController GameController;
-    private CommandsController CommandsController;
-    private ArrayList<String> CommandHistory;
+    private Music currentMusic;
 
     /**
      * Creates new form Game
      */
     public Game() {
         initGame();
-
-        this.GameController = new GameController();
+        GameController = new GameController();
     }
 
-    public Game(String Username) {
+    public Game(String Username, int Time) {
         initGame();
 
         this.GameController = new GameController();
         GameController.setUser(new User(Username));
-        GameController.setTime(secsRemLabelReal);
-        GameController.startTime(3600);
-
+        GameController.setGameTimeField(secsRemLabelReal,
+                Time,
+                currentCommand,
+                submitCommand
+        );
+        GameController.startTime();
     }
 
     public Game(GameController LoadedGame) {
         initGame();
 
         this.GameController = LoadedGame;
-        this.GameController.setTime(LoadedGame.getTime());
-
+        GameController.setGameTimeField(
+                secsRemLabelReal,
+                LoadedGame.getListener().getSeconds(),
+                currentCommand,
+                submitCommand
+        );
+        GameController.startTime();
     }
 
     private void initGame() {
@@ -67,18 +72,12 @@ public class Game extends javax.swing.JFrame {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Init Commands Controller
-        CommandsController = new CommandsController();
-
-        // Init History Logger
+        // Init CommandUI Logger
         initHistory();
 
         // Play Music
-        Music currentMusic = new Music();
+        currentMusic = new Music();
         currentMusic.Play();
-        
-        CommandHistory = new ArrayList<>();
-        
 
     }
 
@@ -118,7 +117,7 @@ public class Game extends javax.swing.JFrame {
             }
         });
 
-        secsRemLabel.setText("Secs Remaining");
+        secsRemLabel.setText("Time Remaining");
 
         secsRemLabelReal.setText("???");
 
@@ -166,8 +165,8 @@ public class Game extends javax.swing.JFrame {
     }
 
     private void execCommand() {
-        CommandsController.runCommand(currentCommand, commandHistory, GameController);
-        CommandHistory.add(currentCommand.getText());
+        GameController.getCommandsController().runCommand(currentCommand, commandHistory, GameController);
+        GameController.getCommandHistory().add(currentCommand.getText());
     }
 
     private void submitCommandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitCommandMouseClicked
@@ -178,7 +177,7 @@ public class Game extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             execCommand();
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            
+
         }
     }//GEN-LAST:event_currentCommandKeyPressed
 

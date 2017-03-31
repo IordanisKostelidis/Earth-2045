@@ -6,7 +6,6 @@
 package io.github.dmmn_games.earth_2045.forms;
 
 import io.github.dmmn_games.earth_2045.global.CurrentPath;
-import io.github.dmmn_games.earth_2045.global.Delayer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;

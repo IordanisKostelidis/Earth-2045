@@ -95,7 +95,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="secsRemLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Secs Remaining"/>
+        <Property name="text" type="java.lang.String" value="Time Remaining"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="secsRemLabelReal">

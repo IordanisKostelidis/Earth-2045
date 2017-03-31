@@ -6,7 +6,7 @@
 package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.commands_clones.*;
-import io.github.dmmn_games.earth_2045.global.History;
+import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import java.util.ArrayList;
 import javax.swing.JTextArea;
@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author iordkost
  */
-public class CommandsController {
+public class CommandsController implements java.io.Serializable {
 
     private final ArrayList<ICommand> Commands;
 
@@ -30,7 +30,9 @@ public class CommandsController {
         Commands.add(new Clear());
         Commands.add(new Info());
         Commands.add(new Help());
+        Commands.add(new Man());
         Commands.add(new Exit());
+        Commands.add(new Copyright());
 
         // User Info
         Commands.add(new Status());
@@ -68,7 +70,7 @@ public class CommandsController {
 
     public void runCommand(JTextField Command, JTextArea History, GameController Game) {
 
-        History currentHistory = new History(History);
+        CommandUI currentHistory = new CommandUI(History);
         String[] listCommands = separateCommand(Command);
 
         boolean commandFound = false;

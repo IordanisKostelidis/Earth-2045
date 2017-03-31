@@ -6,7 +6,7 @@
 package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.global.History;
+import io.github.dmmn_games.earth_2045.game.CommandUI;
 import javax.swing.JTextArea;
 
 /**
@@ -28,7 +28,7 @@ public class Info implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        History currentHistory = new History(History);
+        CommandUI currentHistory = new CommandUI(History);
         currentHistory.addLine(
                 new io.github.dmmn_games.earth_2045.global.Info().getName()
                 + " " + new io.github.dmmn_games.earth_2045.global.Info().getVersion()

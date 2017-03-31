@@ -7,18 +7,20 @@ package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
+import io.github.dmmn_games.earth_2045.global.CurrentPath;
+import io.github.dmmn_games.earth_2045.global.TXTReader;
 import javax.swing.JTextArea;
 
 /**
  *
  * @author iordkost
  */
-public class Clear implements ICommand {
+public class Copyright implements ICommand {
 
     private final String Command;
 
-    public Clear() {
-        this.Command = "clear";
+    public Copyright() {
+        this.Command = "copyright";
     }
 
     @Override
@@ -29,6 +31,19 @@ public class Clear implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
         CommandUI currentHistory = new CommandUI(History);
-        currentHistory.clear();
+        if (Arguments.length == 1) {
+            currentHistory.addLine(
+                    new TXTReader(
+                            new CurrentPath().getDir()
+                            + "/Data/Docs/"
+                            + this.Command
+                            + "/"
+                            + this.Command
+                            + ".dat",
+                            ""
+                    ).getReadedFile()
+            );
+        }
+
     }
 }

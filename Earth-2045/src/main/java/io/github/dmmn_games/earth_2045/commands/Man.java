@@ -15,12 +15,12 @@ import javax.swing.JTextArea;
  *
  * @author iordkost
  */
-public class Help implements ICommand {
+public class Man implements ICommand {
 
     private final String Command;
 
-    public Help() {
-        this.Command = "help";
+    public Man() {
+        this.Command = "man";
     }
 
     @Override
@@ -32,15 +32,17 @@ public class Help implements ICommand {
     public void run(String[] Arguments, JTextArea History, GameController Game) {
         CommandUI currentHistory = new CommandUI(History);
         if (Arguments.length == 1) {
+            currentHistory.addLine("You must define the command you want !");
+        } else {
             currentHistory.addLine(
                     new TXTReader(
                             new CurrentPath().getDir()
                             + "/Data/Docs/"
-                            + this.Command
+                            + Arguments[1]
                             + "/"
-                            + this.Command
+                            + Arguments[1]
                             + ".dat",
-                            ""
+                            "This is invalid command !"
                     ).getReadedFile()
             );
         }

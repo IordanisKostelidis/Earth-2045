@@ -7,12 +7,13 @@ package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.global.CurrentPath;
-import io.github.dmmn_games.earth_2045.global.History;
+import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -34,7 +35,7 @@ public class Load implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
 
-        History currentHistory = new History(History);
+        CommandUI currentHistory = new CommandUI(History);
         if (Arguments.length == 1) {
             currentHistory.addLine("You must define the load slot !");
         } else {
@@ -76,7 +77,7 @@ public class Load implements ICommand {
             x = (GameController) reader.readObject();
 
         } catch (IOException | ClassNotFoundException ex) {
-            //System.err.print(ex.getMessage());
+            System.err.print(ex.getMessage());
         }
         return x;
     }

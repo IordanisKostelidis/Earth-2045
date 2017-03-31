@@ -5,7 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.global.History;
+import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import javax.swing.JTextArea;
@@ -30,7 +30,7 @@ public class Status implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
 
-        History newHistory = new History(History);
+        CommandUI newHistory = new CommandUI(History);
         
         newHistory.addLine("=== User's Status ===");
         newHistory.addLine("Username : " + Game.getUser().getUsername());

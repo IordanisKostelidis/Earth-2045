@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.global;
+package io.github.dmmn_games.earth_2045.game;
 
 import javax.swing.JTextArea;
 
@@ -11,10 +11,10 @@ import javax.swing.JTextArea;
  *
  * @author iordkost
  */
-public class History {
+public class CommandUI implements java.io.Serializable {
     private  JTextArea CurrentJTextArea;
 
-    public History(JTextArea CurrentJTextArea) {
+    public CommandUI(JTextArea CurrentJTextArea) {
         this.CurrentJTextArea = CurrentJTextArea;
     }
     
