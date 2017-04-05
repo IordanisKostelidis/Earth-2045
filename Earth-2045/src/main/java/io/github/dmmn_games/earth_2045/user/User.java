@@ -93,7 +93,7 @@ public class User implements Serializable {
     }
 
     public void pick(List<Floor> floors, String toolName) throws Exception {
-        ITool result = floors.get(floor).getRoom(room).findtool(toolName);
+        ITool result = floors.get(floor).getRoom(room).findTool(toolName);
         if (result == null) {
             throw new Exception("tool not found");
         } else {
@@ -104,6 +104,6 @@ public class User implements Serializable {
     }
     public void use(List<Floor> floors,String toolName)
     {
-       inventory.contains(room)
+
     }
 }
