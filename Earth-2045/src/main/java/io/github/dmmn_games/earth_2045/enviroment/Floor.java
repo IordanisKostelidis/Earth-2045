@@ -7,6 +7,7 @@ package io.github.dmmn_games.earth_2045.enviroment;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.game.Location;
+import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.*;
 
@@ -48,7 +49,7 @@ public class Floor implements Serializable {
         return Doors;
     }
 
-    public Door findDoor(int userRoom, Location goLocation) {
+    public Door findDoorToGo(int userRoom, Location goLocation) {
         Door tempDoor;
         for (int i = 0; i < Doors.size(); i++) {
             tempDoor = Doors.get(i);
@@ -61,6 +62,25 @@ public class Floor implements Serializable {
 
         return null;
 
+    }
+
+    public boolean findDoorToUse(int userRoom, ITool Tool) {
+        Door tempDoor;
+        for (int i = 0; i < Doors.size(); i++) {
+            tempDoor = Doors.get(i);
+            if (tempDoor.getRoomA() == userRoom || tempDoor.getRoomB() == userRoom) {
+                if (tempDoor.isIsOpen()) {
+                    continue;
+                } else {
+                    if (Tool.getID() == tempDoor.getIdPass()) {
+                        tempDoor.setIsOpen(true);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
 }

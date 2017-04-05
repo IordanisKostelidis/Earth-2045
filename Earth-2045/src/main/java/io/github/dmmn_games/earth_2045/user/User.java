@@ -12,6 +12,8 @@ import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +24,7 @@ public class User implements Serializable {
     private final String username;
     private int health;
 
-    private List<ITool> inventory;
+    private Inventory inventory;
 
     private int floor;
     private int room;
@@ -31,7 +33,7 @@ public class User implements Serializable {
         this.username = username;
         this.health = 100;
 
-        this.inventory = new ArrayList<>();
+        this.inventory = new Inventory();
 
         this.floor = 1;
         this.room = 0;
@@ -50,11 +52,11 @@ public class User implements Serializable {
         this.health = health;
     }
 
-    public List<ITool> getInventory() {
+    public Inventory getInventory() {
         return inventory;
     }
 
-    public void setInventory(List<ITool> inventory) {
+    public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
 
@@ -75,7 +77,7 @@ public class User implements Serializable {
     }
 
     public void go(List<Floor> Floors, Location LocToGo) throws Exception {
-        Door result = Floors.get(floor).findDoor(room, LocToGo);
+        Door result = Floors.get(floor).findDoorToGo(room, LocToGo);
         if (result == null) {
             throw new Exception("Door not found !");
         } else {
@@ -98,12 +100,19 @@ public class User implements Serializable {
             throw new Exception("tool not found");
         } else {
             inventory.add(result);
+            floors.get(floor).getRoom(room).getTools().remove(result);
             throw new Exception("You have pick "+ toolName);
         }
 
     }
-    public void use(List<Floor> floors,String toolName)
+    public void use(List<Floor> floors,String toolName) throws Exception
     {
-
+        ITool tempTool = inventory.find(toolName);
+        if(floors.get(floor).findDoorToUse(room, tempTool)) {
+            inventory.remove(toolName);
+            throw new Exception("Door is unlocked now !");
+        } else {
+            throw new Exception("There is no a usable door to unlock !");
+        }
     }
 }
