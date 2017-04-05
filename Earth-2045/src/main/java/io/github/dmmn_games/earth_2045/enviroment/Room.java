@@ -44,5 +44,17 @@ public class Room implements Serializable {
     public void setItems(List<IItem> items) {
         this.items = items;
     }
-
+    
+    public ITool findTool(String toolName){
+        
+        for (int i=0;i<tools.size();i++)
+        {
+            if (tools.get(i).getKeyID().equals(toolName)){
+                return tools.get(i);
+            }
+        }
+       
+        return null;
+    
+    }
 }
