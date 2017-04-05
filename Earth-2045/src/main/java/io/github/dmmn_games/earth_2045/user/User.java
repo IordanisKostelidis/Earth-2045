@@ -22,7 +22,7 @@ public class User implements Serializable {
     private final String username;
     private int health;
 
-    private List <ITool> inventory;
+    private List<ITool> inventory;
 
     private int floor;
     private int room;
@@ -73,14 +73,14 @@ public class User implements Serializable {
     public void setRoom(int room) {
         this.room = room;
     }
-    
+
     public void go(List<Floor> Floors, Location LocToGo) throws Exception {
         Door result = Floors.get(floor).findDoor(room, LocToGo);
-        if(result == null) {
+        if (result == null) {
             throw new Exception("Door not found !");
         } else {
-            if(result.isIsOpen()) {
-                if(result.getRoomA() == room) {
+            if (result.isIsOpen()) {
+                if (result.getRoomA() == room) {
                     room = result.getRoomB();
                 } else {
                     room = result.getRoomA();
@@ -92,4 +92,18 @@ public class User implements Serializable {
         }
     }
 
+    public void pick(List<Floor> floors, String toolName) throws Exception {
+        ITool result = floors.get(floor).getRoom(room).findtool(toolName);
+        if (result == null) {
+            throw new Exception("tool not found");
+        } else {
+            inventory.add(result);
+            throw new Exception("You have pick "+ toolName);
+        }
+
+    }
+    public void use(List<Floor> floors,String toolName)
+    {
+       inventory.contains(room)
+    }
 }
