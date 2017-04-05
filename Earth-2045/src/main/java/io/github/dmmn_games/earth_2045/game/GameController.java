@@ -11,6 +11,7 @@ import io.github.dmmn_games.earth_2045.enviroment.*;
 import io.github.dmmn_games.earth_2045.tools.Key;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -23,14 +24,14 @@ import javax.swing.Timer;
 public class GameController implements java.io.Serializable {
 
     private CommandsController CommandsController;
-    private ArrayList<String> CommandHistory;
+    private List<String> CommandHistory;
 
     private JLabel GameTimeField;
     private Timer GameTimer;
     private TimeLimiter Listener;
 
     private User User;
-    private ArrayList<Floor> Floors;
+    private List<Floor> Floors;
 
     public GameController() {
         CommandsController = new CommandsController();
@@ -123,7 +124,7 @@ public class GameController implements java.io.Serializable {
         this.CommandsController = CommandsController;
     }
 
-    public ArrayList<String> getCommandHistory() {
+    public List<String> getCommandHistory() {
         return CommandHistory;
     }
 
@@ -182,7 +183,7 @@ public class GameController implements java.io.Serializable {
         this.User = User;
     }
 
-    public ArrayList<Floor> getFloors() {
+    public List<Floor> getFloors() {
         return Floors;
     }
 
@@ -190,7 +191,7 @@ public class GameController implements java.io.Serializable {
         return this.Floors.get(Index);
     }
 
-    public void setFloors(ArrayList<Floor> Floors) {
+    public void setFloors(List<Floor> Floors) {
         this.Floors = Floors;
     }
 

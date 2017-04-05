@@ -16,8 +16,8 @@ import java.util.*;
  */
 public class Floor implements Serializable {
 
-    private ArrayList<Room> Rooms = new ArrayList<Room>();
-    private ArrayList<Door> Doors = new ArrayList<Door>();
+    private List<Room> Rooms = new ArrayList<Room>();
+    private List<Door> Doors = new ArrayList<Door>();
 
     public Floor() {
         this.Rooms = new ArrayList<>();
@@ -32,7 +32,7 @@ public class Floor implements Serializable {
         return Rooms.get(index);
     }
 
-    public ArrayList<Room> getRooms() {
+    public List<Room> getRooms() {
         return this.Rooms;
     }
 
@@ -44,7 +44,7 @@ public class Floor implements Serializable {
         return Doors.get(index);
     }
 
-    public ArrayList<Door> getDoors() {
+    public List<Door> getDoors() {
         return Doors;
     }
 

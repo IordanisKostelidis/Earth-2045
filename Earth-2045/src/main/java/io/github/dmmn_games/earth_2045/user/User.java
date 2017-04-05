@@ -22,7 +22,7 @@ public class User implements Serializable {
     private final String username;
     private int health;
 
-    private ArrayList<ITool> inventory;
+    private List <ITool> inventory;
 
     private int floor;
     private int room;
@@ -50,11 +50,11 @@ public class User implements Serializable {
         this.health = health;
     }
 
-    public ArrayList<ITool> getInventory() {
+    public List<ITool> getInventory() {
         return inventory;
     }
 
-    public void setInventory(ArrayList<ITool> inventory) {
+    public void setInventory(List<ITool> inventory) {
         this.inventory = inventory;
     }
 
