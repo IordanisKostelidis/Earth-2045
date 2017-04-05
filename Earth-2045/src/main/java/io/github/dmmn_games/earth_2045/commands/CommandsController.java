@@ -9,6 +9,7 @@ import io.github.dmmn_games.earth_2045.commands_clones.*;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -18,7 +19,7 @@ import javax.swing.JTextField;
  */
 public class CommandsController implements java.io.Serializable {
 
-    private final ArrayList<ICommand> Commands;
+    private final List<ICommand> Commands;
 
     public CommandsController() {
         Commands = new ArrayList<>();
@@ -57,6 +58,7 @@ public class CommandsController implements java.io.Serializable {
         Commands.add(new Take());
         Commands.add(new WhereIAm());
         Commands.add(new WhoIAm());
+       
 
     }
 

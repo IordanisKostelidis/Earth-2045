@@ -69,7 +69,7 @@ public class Look implements ICommand {
                         );
                         currentHistory.addLine(
                                 "Door's Position : "
-                                + new Navigation().getLocation(tempDoor.getPosA())
+                                + tempDoor.getPosA()
                         );
                     } else if (tempDoor.getRoomB() == currentUserRoom) {
                         currentHistory.addLine(
@@ -78,7 +78,7 @@ public class Look implements ICommand {
                         );
                         currentHistory.addLine(
                                 "Door's Position : "
-                                + new Navigation().getLocation(tempDoor.getPosB())
+                                + tempDoor.getPosB()
                         );
                     }
                 }

@@ -5,9 +5,13 @@
  */
 package io.github.dmmn_games.earth_2045.user;
 
+import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.enviroment.Floor;
+import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -68,6 +72,24 @@ public class User implements Serializable {
 
     public void setRoom(int room) {
         this.room = room;
+    }
+    
+    public void go(List<Floor> Floors, Location LocToGo) throws Exception {
+        Door result = Floors.get(floor).findDoor(room, LocToGo);
+        if(result == null) {
+            throw new Exception("Door not found !");
+        } else {
+            if(result.isIsOpen()) {
+                if(result.getRoomA() == room) {
+                    room = result.getRoomB();
+                } else {
+                    room = result.getRoomA();
+                }
+                throw new Exception("You go " + LocToGo + "!");
+            } else {
+                throw new Exception("Door is locked !");
+            }
+        }
     }
 
 }

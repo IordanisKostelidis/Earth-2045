@@ -48,21 +48,68 @@ public class GameController implements java.io.Serializable {
     }
 
     private void initWorld() {
-        Floors.add(new Floor()); // added the underground
-        Floors.add(new Floor()); // added 1st floor
-        Floors.add(new Floor()); // added 2nd Floor
-        Floors.add(new Floor()); // added 3rd floor
-        Floors.add(new Floor()); // added 4th floor
+        Floors.add(
+                new Floor()
+        ); // added the underground
+        Floors.add(
+                new Floor()
+        ); // added 1st floor
+        Floors.add(
+                new Floor()
+        ); // added 2nd Floor
+        Floors.add(
+                new Floor()
+        ); // added 3rd floor
+        Floors.add(
+                new Floor()
+        ); // added 4th floor
 
-        Floors.get(1).addRoom(new Room()); // added room0 in 1st floor
-        Floors.get(1).addRoom(new Room()); // added room1 in 1st floor
-        Floors.get(1).addRoom(new Room()); // added room2 in 1st floor
-        Floors.get(1).addRoom(new Room()); // added room3 in 1st floor
+        Floors.get(1).addRoom(
+                new Room())
+                ; // added room0 in 1st floor
+        Floors.get(1).addRoom(
+                new Room()
+        ); // added room1 in 1st floor
+        Floors.get(1).addRoom(
+                new Room()
+        ); // added room2 in 1st floor
+        Floors.get(1).addRoom(
+                new Room()
+        ); // added room3 in 1st floor
 
-        Floors.get(1).addDoor(new Door("Main - Conference", 0, 1, new Navigation().getNorth(), 100, false)); // add door0to1 in 1st floor
-        Floors.get(1).addDoor(new Door("Main - Security", 0, 3, new Navigation().getWest(), 200, true)); // add door3to1 in 1st floor
-        Floors.get(1).addDoor(new Door("Conference - Elevator", 1, 2, new Navigation().getWest(), 300, true)); // add door1to2 in 1st floor
-        Floors.get(1).addDoor(new Door("Elevator", 2, -1, new Navigation().getNorth(), 0, true)); // ending door - demo
+        Floors.get(1).addDoor(
+                new Door("Main - Conference", 
+                        0, 
+                        1, 
+                        Location.NORTH, 
+                        100, 
+                        false)
+        ); // add door0to1 in 1st floor
+        Floors.get(1).addDoor(
+                new Door("Main - Security", 
+                        0, 
+                        3, 
+                        Location.WEST, 
+                        200, 
+                        true)
+        ); // add door3to1 in 1st floor
+        Floors.get(1).addDoor(
+                new Door("Conference - Elevator", 
+                        1, 
+                        2, 
+                        Location.WEST, 
+                        300, 
+                        true)
+        ); // add door1to2 in 1st floor
+        Floors.get(1).addDoor(
+                new Door("Elevator", 
+                        2, 
+                        -1, 
+                        Location.NORTH
+                        , 
+                        0, 
+                        true)
+        ); // ending door - demo
 
         Floors.get(1).getRoom(3).addKey(new Key("key", 100));
 

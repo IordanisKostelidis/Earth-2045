@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.enviroment;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.game.Location;
 import java.io.Serializable;
 import java.util.*;
 
@@ -38,13 +39,28 @@ public class Floor implements Serializable {
     public void addDoor(Door newDoor) {
         Doors.add(newDoor);
     }
-    
+
     public Door getDoor(int index) {
         return Doors.get(index);
     }
 
     public ArrayList<Door> getDoors() {
         return Doors;
+    }
+
+    public Door findDoor(int userRoom, Location goLocation) {
+        Door tempDoor;
+        for (int i = 0; i < Doors.size(); i++) {
+            tempDoor = Doors.get(i);
+            if (tempDoor.getRoomA() == userRoom && tempDoor.getPosA() == goLocation) {
+                return tempDoor;
+            } else if (tempDoor.getRoomB() == userRoom && tempDoor.getPosB() == goLocation) {
+                return tempDoor;
+            }
+        }
+
+        return null;
+
     }
 
 }
