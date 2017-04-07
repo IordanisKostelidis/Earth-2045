@@ -38,7 +38,7 @@ public class TimeLimiter implements Serializable, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (Seconds == 0) {
-            this.Command.setText("You Lose !!!");
+            this.Command.setText("Game Over !!!");
             this.Command.setEditable(false);
             this.SubmitCommand.setEnabled(false);
         } else {

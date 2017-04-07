@@ -43,6 +43,10 @@ public class Go implements ICommand {
                 try {
                     Game.getUser().go(Game.getFloors(), Location.valueOf(Arguments[1].toUpperCase()));
                 } catch (Exception ex) {
+                    if(ex.getMessage().equals("The End")) {
+                        Game.getCommandsController().setCanDoCommand(false);
+                        Game.stopTime();
+                    }
                     currentHistory.addLine(ex.getMessage());
                 }
             } else {

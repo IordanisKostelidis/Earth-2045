@@ -6,11 +6,12 @@
 package io.github.dmmn_games.earth_2045.forms;
 
 import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.music.Music;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,9 @@ public class Game extends javax.swing.JFrame {
 
     private UIConfig UIConfig;
     private GameController GameController;
-    private Music currentMusic;
+    private Music BGMusic;
+    private List<String> commandHistory;
+    private int HistoryIndex;
 
     /**
      * Creates new form Game
@@ -31,6 +34,7 @@ public class Game extends javax.swing.JFrame {
     public Game() {
         initGame();
         GameController = new GameController();
+        
     }
 
     public Game(String Username, int Time) {
@@ -76,8 +80,12 @@ public class Game extends javax.swing.JFrame {
         initHistory();
 
         // Play Music
-        currentMusic = new Music();
-        currentMusic.Play();
+        BGMusic = new Music();
+        BGMusic.Play();
+        
+        // Init Command History
+        this.commandHistory = new ArrayList<>();
+        this.HistoryIndex = 0;
 
     }
 
@@ -91,7 +99,7 @@ public class Game extends javax.swing.JFrame {
     private void initComponents() {
 
         scrollPanel = new javax.swing.JScrollPane();
-        commandHistory = new javax.swing.JTextArea();
+        commandLogger = new javax.swing.JTextArea();
         submitCommand = new javax.swing.JButton();
         currentCommand = new javax.swing.JTextField();
         secsRemLabel = new javax.swing.JLabel();
@@ -99,10 +107,10 @@ public class Game extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        commandHistory.setEditable(false);
-        commandHistory.setColumns(20);
-        commandHistory.setRows(5);
-        scrollPanel.setViewportView(commandHistory);
+        commandLogger.setEditable(false);
+        commandLogger.setColumns(20);
+        commandLogger.setRows(5);
+        scrollPanel.setViewportView(commandLogger);
 
         submitCommand.setText("Submit");
         submitCommand.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -160,13 +168,20 @@ public class Game extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initHistory() {
-        commandHistory.setText("Ready...." + "\n");
+        commandLogger.setText("Ready...." + "\n");
 
     }
 
     private void execCommand() {
-        GameController.getCommandsController().runCommand(currentCommand, commandHistory, GameController);
-        GameController.getCommandHistory().add(currentCommand.getText());
+        if (currentCommand.isEditable()) {
+            
+            commandHistory.add(currentCommand.getText());
+            HistoryIndex = commandHistory.size() - 1;
+            
+            GameController.getCommandsController().runCommand(currentCommand, commandLogger, GameController);
+            GameController.getCommandHistory().add(currentCommand.getText());
+            
+        }
     }
 
     private void submitCommandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitCommandMouseClicked
@@ -177,7 +192,24 @@ public class Game extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             execCommand();
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-
+           currentCommand.setText(commandHistory.get(HistoryIndex));
+           
+           if(HistoryIndex == 0) {
+               HistoryIndex = commandHistory.size() - 1;
+           } else {
+               HistoryIndex--;
+           }
+        } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+           
+           currentCommand.setText(commandHistory.get(HistoryIndex));
+           
+           if(HistoryIndex < commandHistory.size() - 1) {
+               HistoryIndex++;
+           } else {
+               HistoryIndex = 0;
+           }
+           
+           
         }
     }//GEN-LAST:event_currentCommandKeyPressed
 
@@ -215,7 +247,7 @@ public class Game extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea commandHistory;
+    private javax.swing.JTextArea commandLogger;
     private javax.swing.JTextField currentCommand;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JLabel secsRemLabel;

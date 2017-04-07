@@ -81,15 +81,19 @@ public class User implements Serializable {
         if (result == null) {
             throw new Exception("Door not found !");
         } else {
-            if (result.isIsOpen()) {
-                if (result.getRoomA() == room) {
-                    room = result.getRoomB();
-                } else {
-                    room = result.getRoomA();
-                }
-                throw new Exception("You go " + LocToGo + "!");
+            if (result.getRoomA() == -1 || result.getRoomB() == -1) {
+                throw new Exception("The End");
             } else {
-                throw new Exception("Door is locked !");
+                if (result.isIsOpen()) {
+                    if (result.getRoomA() == room) {
+                        room = result.getRoomB();
+                    } else {
+                        room = result.getRoomA();
+                    }
+                    throw new Exception("You go " + LocToGo + "!");
+                } else {
+                    throw new Exception("Door is locked !");
+                }
             }
         }
     }
@@ -101,14 +105,14 @@ public class User implements Serializable {
         } else {
             inventory.add(result);
             floors.get(floor).getRoom(room).getTools().remove(result);
-            throw new Exception("You have pick "+ toolName);
+            throw new Exception("You have pick " + toolName);
         }
 
     }
-    public void use(List<Floor> floors,String toolName) throws Exception
-    {
+
+    public void use(List<Floor> floors, String toolName) throws Exception {
         ITool tempTool = inventory.find(toolName);
-        if(floors.get(floor).findDoorToUse(room, tempTool)) {
+        if (floors.get(floor).findDoorToUse(room, tempTool)) {
             inventory.remove(toolName);
             throw new Exception("Door is unlocked now !");
         } else {

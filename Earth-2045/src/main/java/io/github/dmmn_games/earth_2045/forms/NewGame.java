@@ -66,7 +66,7 @@ public class NewGame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Easy", "Normal", "Hard" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Easy", "Normal", "Hard", "Debug" }));
 
         jLabel1.setText("Mode");
 
@@ -117,8 +117,10 @@ public class NewGame extends javax.swing.JFrame {
             Time = Time * 2;
         } else if (jComboBox1.getSelectedItem().equals("Normal")) {
             Time = Time;
-        } else {
+        } else if (jComboBox1.getSelectedItem().equals("Hard")) {
             Time = Time / 2;
+        } else {
+            Time = 30;
         }
         
         Game createdGame = new Game(
