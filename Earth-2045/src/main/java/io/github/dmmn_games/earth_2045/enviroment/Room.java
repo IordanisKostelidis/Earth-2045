@@ -17,8 +17,8 @@ import java.util.*;
  */
 public class Room implements Serializable {
 
-    private ArrayList<ITool> tools = new ArrayList<ITool>();
-    private ArrayList<IItem> items = new ArrayList<IItem>();
+    private List<ITool> tools = new ArrayList<ITool>();
+    private List<IItem> items = new ArrayList<IItem>();
 
     public Room() {
         this.tools = new ArrayList<>();
@@ -29,7 +29,7 @@ public class Room implements Serializable {
         tools.add(newKey);
     }
 
-    public ArrayList<ITool> getTools() {
+    public List<ITool> getTools() {
         return tools;
     }
 
@@ -37,12 +37,24 @@ public class Room implements Serializable {
         this.tools = tools;
     }
 
-    public ArrayList<IItem> getItems() {
+    public List<IItem> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<IItem> items) {
+    public void setItems(List<IItem> items) {
         this.items = items;
     }
-
+    
+    public ITool findTool(String toolName){
+        
+        for (int i=0;i<tools.size();i++)
+        {
+            if (tools.get(i).getKeyID().equals(toolName)){
+                return tools.get(i);
+            }
+        }
+       
+        return null;
+    
+    }
 }

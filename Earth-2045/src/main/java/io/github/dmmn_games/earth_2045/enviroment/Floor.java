@@ -6,6 +6,8 @@
 package io.github.dmmn_games.earth_2045.enviroment;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.game.Location;
+import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.*;
 
@@ -15,8 +17,8 @@ import java.util.*;
  */
 public class Floor implements Serializable {
 
-    private ArrayList<Room> Rooms = new ArrayList<Room>();
-    private ArrayList<Door> Doors = new ArrayList<Door>();
+    private List<Room> Rooms = new ArrayList<Room>();
+    private List<Door> Doors = new ArrayList<Door>();
 
     public Floor() {
         this.Rooms = new ArrayList<>();
@@ -31,20 +33,54 @@ public class Floor implements Serializable {
         return Rooms.get(index);
     }
 
-    public ArrayList<Room> getRooms() {
+    public List<Room> getRooms() {
         return this.Rooms;
     }
 
     public void addDoor(Door newDoor) {
         Doors.add(newDoor);
     }
-    
+
     public Door getDoor(int index) {
         return Doors.get(index);
     }
 
-    public ArrayList<Door> getDoors() {
+    public List<Door> getDoors() {
         return Doors;
+    }
+
+    public Door findDoorToGo(int userRoom, Location goLocation) {
+        Door tempDoor;
+        for (int i = 0; i < Doors.size(); i++) {
+            tempDoor = Doors.get(i);
+            if (tempDoor.getRoomA() == userRoom && tempDoor.getPosA() == goLocation) {
+                return tempDoor;
+            } else if (tempDoor.getRoomB() == userRoom && tempDoor.getPosB() == goLocation) {
+                return tempDoor;
+            }
+        }
+
+        return null;
+
+    }
+
+    public boolean findDoorToUse(int userRoom, ITool Tool) {
+        Door tempDoor;
+        for (int i = 0; i < Doors.size(); i++) {
+            tempDoor = Doors.get(i);
+            if (tempDoor.getRoomA() == userRoom || tempDoor.getRoomB() == userRoom) {
+                if (tempDoor.isIsOpen()) {
+                    continue;
+                } else {
+                    if (Tool.getID() == tempDoor.getIdPass()) {
+                        tempDoor.setIsOpen(true);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
 }

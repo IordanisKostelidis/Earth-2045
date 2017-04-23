@@ -31,19 +31,17 @@ public class Copyright implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
         CommandUI currentHistory = new CommandUI(History);
-        if (Arguments.length == 1) {
-            currentHistory.addLine(
-                    new TXTReader(
-                            new CurrentPath().getDir()
-                            + "/Data/Docs/"
-                            + this.Command
-                            + "/"
-                            + this.Command
-                            + ".dat",
-                            ""
-                    ).getReadedFile()
-            );
-        }
+        currentHistory.addLine(
+                new TXTReader(
+                        new CurrentPath().getDir()
+                        + "/Data/Docs/"
+                        + this.Command
+                        + "/"
+                        + this.Command
+                        + ".dat",
+                        ""
+                ).getReadedFile()
+        );
 
     }
 }

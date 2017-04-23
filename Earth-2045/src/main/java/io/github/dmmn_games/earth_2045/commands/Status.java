@@ -40,11 +40,11 @@ public class Status implements ICommand {
         
         ITool tempTool;
         newHistory.addLine("=== Inventory ===");
-        for(int i=0;i<Game.getUser().getInventory().size();i++) {
-            tempTool = Game.getUser().getInventory().get(i);
+        for(int i=0;i<Game.getUser().getInventory().getTools().size();i++) {
+            tempTool = Game.getUser().getInventory().getTools().get(i);
             newHistory.addLine(tempTool.getKeyID());
         }
-        newHistory.addLine("Total Tools : " + Game.getUser().getInventory().size());
+        newHistory.addLine("Total Tools : " + Game.getUser().getInventory().getTools().size());
 
     }
 }
