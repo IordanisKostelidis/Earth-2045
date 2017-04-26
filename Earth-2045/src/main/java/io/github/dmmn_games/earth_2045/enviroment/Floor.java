@@ -71,6 +71,7 @@ public class Floor implements Serializable {
         throw new Exception("The " + BotName + " not found!!");
     }
 
+   
     public Door findDoorToGo(int userRoom, Location goLocation) {
         Door tempDoor;
         for (int i = 0; i < Doors.size(); i++) {
