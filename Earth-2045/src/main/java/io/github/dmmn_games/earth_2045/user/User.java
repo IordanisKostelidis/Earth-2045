@@ -8,6 +8,7 @@ package io.github.dmmn_games.earth_2045.user;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.game.Location;
+import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -118,5 +119,22 @@ public class User implements Serializable {
         } else {
             throw new Exception("There is no a usable door to unlock !");
         }
+    }
+
+    public String talk(List<Floor> floors, String bot, String message) throws Exception {
+        Bot botTalk = floors.get(floor).findBot(bot);
+        return botTalk.talk(message);
+
+    }
+    public void recieveDamage(int damage) throws Exception
+    {
+        if(health>damage)
+            health=health-damage;
+        else
+        {
+            health=0;
+            throw new Exception("User Die!!!");
+            
+                    }
     }
 }
