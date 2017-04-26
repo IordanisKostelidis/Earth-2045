@@ -55,7 +55,16 @@ public class Floor implements Serializable {
     public void addBot(Bot newBot) {
         Bots.add(newBot);
     }
-
+    
+    public void getBot(int index) {
+        Bots.get(index);
+    }
+    
+    public List<Bot> getBots() {
+        return Bots;
+    }
+    
+    
     public Bot findBot(String BotName, int UserPos) throws Exception {
         Bot tempBot;
 
