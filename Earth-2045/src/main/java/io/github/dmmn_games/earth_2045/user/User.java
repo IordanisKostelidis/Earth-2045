@@ -9,6 +9,7 @@ import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.Location;
+import io.github.dmmn_games.earth_2045.items.IItem;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
@@ -139,20 +140,39 @@ public class User implements Serializable {
                     }
     }
     public void lookAround(List<Floor> floors,CommandUI info){
-        List<String> items=floors.get(floor).getRoom(floor).returnRoomItems();
+        List<IItem> items=floors.get(floor).getRoom(floor).getItems();
         
         info.addLine("Items");
-        for (String item : items) {
-            info.addLine(item);
+        for(int i=0;i<items.size();i++)
+        {
+            info.addLine(items.get(i).getItemID());
+        
         }
-        List<String> tools=floors.get(floor).getRoom(floor).returnRoomTools();
+        List<ITool> tools=floors.get(floor).getRoom(floor).getTools();
         
         info.addLine("Tools");
-        for (String tool : tools)
+        for(int i=0;i<tools.size();i++)
         {
-            info.addLine(tool);
-
+            info.addLine(tools.get(i).getKeyID());
+        
         }
+        List<Door> doors=floors.get(floor).getDoors();
+        
+        info.addLine("Doors");
+        for(int i=0;i<doors.size();i++)
+        {
+            info.addLine(doors.get(i).getDoorId());
+        
+        }
+        List<Bot>bots=floors.get(floor).getBots();
+        
+        info.addLine("Bots");
+        for(int i=0;i<bots.size();i++)
+        {
+            info.addLine(bots.get(i).getName());
+        
+        }
+
     
     }
     
