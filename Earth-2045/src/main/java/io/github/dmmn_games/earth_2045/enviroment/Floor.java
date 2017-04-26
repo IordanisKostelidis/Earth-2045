@@ -55,19 +55,19 @@ public class Floor implements Serializable {
         Bots.add(newBot);
     }
     
-    public Bot findBot(Bot Botname) {
-       
+    public Bot findBot(String BotName) throws Exception {
         Bot tempBot;
+        
         for (int i = 0; i < Bots.size(); i++){
         
             tempBot = Bots.get(i);
             
-            if (tempBot.getName().equals (Botname)){
+            if (tempBot.getName().equals(BotName)){
                 return tempBot;
             }
-                    
+                  
         }
-        
+        throw new Exception("The "+BotName+" not found!!");
     }
     
     public Door findDoorToGo(int userRoom, Location goLocation) {
