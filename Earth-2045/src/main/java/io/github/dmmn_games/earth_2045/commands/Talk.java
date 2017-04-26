@@ -32,13 +32,12 @@ public class Talk implements ICommand {
         CommandUI currentHistory = new CommandUI(History);
 
         System.out.println(new SuperString(Arguments).GetString(2));
-        
+
         if (Arguments.length == 1) {
             currentHistory.addLine("Talk to who ?");
         } else {
             try {
                 String Msg = new SuperString(Arguments).GetString(2);
-                
                 currentHistory.addLine(Game.getUser().talk(Game.getFloors(), Arguments[1], Msg));
             } catch (Exception ex) {
                 if (ex.getMessage().equals("The End")) {

@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.elevator.Elevator;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.Location;
@@ -13,10 +14,7 @@ import io.github.dmmn_games.earth_2045.items.IItem;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -139,41 +137,81 @@ public class User implements Serializable {
             
                     }
     }
-    public void lookAround(List<Floor> floors,CommandUI info){
-        List<IItem> items=floors.get(floor).getRoom(floor).getItems();
+    public void lookAround(List<Floor> floors,Elevator elevator,CommandUI info){
+        List<IItem> items=floors.get(floor).getRoom(room).getItems();
         
-        info.addLine("Items");
+        info.addLine("== Items ==");
         for(int i=0;i<items.size();i++)
         {
             info.addLine(items.get(i).getItemID());
         
         }
-        List<ITool> tools=floors.get(floor).getRoom(floor).getTools();
+        List<ITool> tools=floors.get(floor).getRoom(room).getTools();
         
-        info.addLine("Tools");
+        info.addLine("== Tools ==");
         for(int i=0;i<tools.size();i++)
         {
             info.addLine(tools.get(i).getKeyID());
         
         }
+        
+                
+        if(room == elevator.getRoom()) {
+            info.addLine("== Elevator ==");
+            info.addLine(elevator.getPos().name());
+        }
+        
         List<Door> doors=floors.get(floor).getDoors();
         
-        info.addLine("Doors");
+        info.addLine("== Doors ==");
         for(int i=0;i<doors.size();i++)
         {
-            info.addLine(doors.get(i).getDoorId());
+            Door tempDoor = doors.get(i);
+            if(tempDoor.getRoomA() == room || tempDoor.getRoomB() == room) {
+                if(room == tempDoor.getRoomA()) {
+                    info.addLine(
+                            tempDoor.getPosA().name()
+                    );
+                } else {
+                    info.addLine(
+                            tempDoor.getPosB().name()
+                    );
+                }
+            }
         
         }
         List<Bot>bots=floors.get(floor).getBots();
         
-        info.addLine("Bots");
+        info.addLine("== Bots ==");
         for(int i=0;i<bots.size();i++)
         {
-            info.addLine(bots.get(i).getName());
+           if(bots.get(i).getPosition() == room) {
+                info.addLine(bots.get(i).getName());
+           }
         
         }
 
     
     }
+
+    public void take(List<Floor> floors,Elevator Elevator, String Word, String FloorToGo) throws Exception {
+        if(Word.equals(Elevator.getElevatorID())) {
+            
+            if(room == Elevator.getRoom()) {
+               if(floors.size() >= Integer.parseInt(FloorToGo)) {
+                    floor = Integer.parseInt(FloorToGo);
+               } else {
+                   throw new Exception("Out of index");
+               }
+               
+            } else {
+                throw new Exception("NO ELEVATOR");
+            }
+            
+        } else {
+            throw new Exception("BUGGGGGGGG");
+        }
+    }
+    
     
 }

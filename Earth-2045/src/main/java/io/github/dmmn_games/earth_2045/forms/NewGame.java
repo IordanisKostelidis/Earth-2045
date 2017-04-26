@@ -25,7 +25,7 @@ public class NewGame extends javax.swing.JFrame {
         initComponents();
 
         // Apply UI Settings
-        UIConfig = new UIConfig(500,80);
+        UIConfig = new UIConfig(this.getWidth(),this.getHeight());
         try {
             UIConfig.initUI(this);
         } catch (MalformedURLException ex) {

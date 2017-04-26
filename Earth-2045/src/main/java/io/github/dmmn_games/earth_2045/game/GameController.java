@@ -7,6 +7,7 @@ package io.github.dmmn_games.earth_2045.game;
 
 import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.elevator.Elevator;
 import io.github.dmmn_games.earth_2045.enviroment.*;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.tools.Key;
@@ -33,6 +34,11 @@ public class GameController implements java.io.Serializable {
 
     private User User;
     private List<Floor> Floors;
+    private Elevator Elevator;
+
+    public Elevator getElevator() {
+        return Elevator;
+    }
 
     public GameController() {
         CommandsController = new CommandsController();
@@ -50,6 +56,9 @@ public class GameController implements java.io.Serializable {
     }
 
     private void initWorld() {
+        
+        Elevator = new Elevator("elevator", 2, Location.NORTH);
+        
         Floors.add(
                 new Floor()
         ); // added the underground

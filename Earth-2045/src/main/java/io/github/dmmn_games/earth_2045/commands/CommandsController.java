@@ -50,6 +50,7 @@ public class CommandsController implements java.io.Serializable {
         Commands.add(new Pick());
         Commands.add(new Use());
         Commands.add(new Talk());
+        Commands.add(new Take());
 
         // Save Load
         Commands.add(new Save());
@@ -60,9 +61,9 @@ public class CommandsController implements java.io.Serializable {
         Commands.add(new Cls());
         Commands.add(new Pickup());
         Commands.add(new Quit());
-        Commands.add(new Take());
         Commands.add(new WhereIAm());
         Commands.add(new WhoIAm());
+        Commands.add(new Speak());
 
     }
 

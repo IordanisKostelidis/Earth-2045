@@ -13,12 +13,12 @@ import javax.swing.JTextArea;
  *
  * @author iordkost
  */
-public class Pick implements ICommand {
+public class Take implements ICommand {
 
     private final String Command;
 
-    public Pick() {
-        this.Command = "pick";
+    public Take() {
+        this.Command = "take";
     }
 
     @Override
@@ -30,15 +30,19 @@ public class Pick implements ICommand {
     public void run(String[] Arguments, JTextArea History, GameController Game) {
         CommandUI currentHistory = new CommandUI(History);
 
-        if (Arguments.length == 1) {
-            currentHistory.addLine("Pick what ???");
-        } else {
-            try {
-                Game.getUser().pick(Game.getFloors(), Arguments[1]);
-            } catch (Exception ex) {
-                currentHistory.addLine(ex.getMessage());
-            }
-
+        switch (Arguments.length) {
+            case 1:
+                currentHistory.addLine("Take what ???");
+                break;
+            case 2:
+                currentHistory.addLine("ODKOSPKDOPAK");
+                break;
+            default:
+                try {
+                    Game.getUser().take(Game.getFloors(), Game.getElevator(), Arguments[1], Arguments[2]);
+                } catch (Exception ex) {
+                    currentHistory.addLine(ex.getMessage());
+                }   break;
         }
 
     }

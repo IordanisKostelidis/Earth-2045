@@ -5,8 +5,6 @@
  */
 package io.github.dmmn_games.earth_2045.forms;
 
-import io.github.dmmn_games.earth_2045.forms.Menu;
-import io.github.dmmn_games.earth_2045.forms.Splash;
 import java.util.TimerTask;
 
 /**
