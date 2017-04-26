@@ -39,7 +39,7 @@ public class Bot
             case "talk scientist" : botmsg = "fuck you DELI";
             break;
             
-            case "take prisoner" : botmsg = "Go on and watch my friend. May the odds be with you.";
+            case "talk prisoner" : botmsg = "Zaxaritsa kai lili sto stoma";
             break;
             
             default : botmsg = "Learn how to talk correctly pal";
