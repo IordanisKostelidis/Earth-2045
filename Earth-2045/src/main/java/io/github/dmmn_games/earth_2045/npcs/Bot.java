@@ -1,60 +1,48 @@
-
 package io.github.dmmn_games.earth_2045.npcs;
 
-
-
-public class Bot
-{
+public class Bot {
 
     String name;
-    
+
     int position;
 
-    
-
-    public Bot(String a)
-    {
+    public Bot(String a, int pos) {
         this.name = a;
-        
+        this.position = pos;
+
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
-        
+
     }
 
-    public void setPosition(int position)
-    {
+    public void setPosition(int position) {
         this.position = position;
     }
 
-    public int getPosition()
-    {
+    public int getPosition() {
         return position;
     }
-    
-    
-    
-    
-    public String talk(String msg)
-    {
+
+    public String talk(String msg) {
         String botmsg = "";
-        
-        switch (msg)
-        {
-            case "talk scientist" : botmsg = "fuck you DELI";
-            break;
-            
-            case "talk prisoner" : botmsg = "Zaxaritsa kai lili sto stoma";
-            break;
-            
-            default : botmsg = "Learn how to talk correctly pal";
-            break;
+
+        switch (msg) {
+            case "talk scientist":
+                botmsg = "fuck you DELI";
+                break;
+
+            case "talk prisoner":
+                botmsg = "Zaxaritsa kai lili sto stoma";
+                break;
+
+            default:
+                botmsg = "Learn how to talk correctly pal";
+                break;
         }
-        
+
         return botmsg;
     }
-    
-    
+
 }

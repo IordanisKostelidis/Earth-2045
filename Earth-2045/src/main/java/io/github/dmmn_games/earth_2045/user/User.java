@@ -122,7 +122,7 @@ public class User implements Serializable {
     }
 
     public String talk(List<Floor> floors, String bot, String message) throws Exception {
-        Bot botTalk = floors.get(floor).findBot(bot);
+        Bot botTalk = floors.get(floor).findBot(bot,room);
         return botTalk.talk(message);
 
     }

@@ -8,6 +8,7 @@ package io.github.dmmn_games.earth_2045.game;
 import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.*;
+import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.tools.Key;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.util.ArrayList;
@@ -113,6 +114,9 @@ public class GameController implements java.io.Serializable {
         ); // ending door - demo
 
         Floors.get(1).getRoom(3).addKey(new Key("key", 100));
+        
+        
+        Floors.get(1).addBot(new Bot("god", 0));
 
     }
 

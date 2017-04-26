@@ -20,7 +20,7 @@ public class Floor implements Serializable {
 
     private List<Room> Rooms = new ArrayList<Room>();
     private List<Door> Doors = new ArrayList<Door>();
-    private List<Bot> Bots= new ArrayList<Bot>();
+    private List<Bot> Bots = new ArrayList<Bot>();
 
     public Floor() {
         this.Rooms = new ArrayList<>();
@@ -51,25 +51,26 @@ public class Floor implements Serializable {
     public List<Door> getDoors() {
         return Doors;
     }
+
     public void addBot(Bot newBot) {
         Bots.add(newBot);
     }
-    
-    public Bot findBot(String BotName) throws Exception {
+
+    public Bot findBot(String BotName, int UserPos) throws Exception {
         Bot tempBot;
-        
-        for (int i = 0; i < Bots.size(); i++){
-        
+
+        for (int i = 0; i < Bots.size(); i++) {
+
             tempBot = Bots.get(i);
-            
-            if (tempBot.getName().equals(BotName)){
+
+            if (tempBot.getName().equals(BotName) && tempBot.getPosition() == UserPos) {
                 return tempBot;
             }
-                  
+
         }
-        throw new Exception("The "+BotName+" not found!!");
+        throw new Exception("The " + BotName + " not found!!");
     }
-    
+
     public Door findDoorToGo(int userRoom, Location goLocation) {
         Door tempDoor;
         for (int i = 0; i < Doors.size(); i++) {

@@ -49,6 +49,7 @@ public class CommandsController implements java.io.Serializable {
         Commands.add(new Look());
         Commands.add(new Pick());
         Commands.add(new Use());
+        Commands.add(new Talk());
 
         // Save Load
         Commands.add(new Save());
