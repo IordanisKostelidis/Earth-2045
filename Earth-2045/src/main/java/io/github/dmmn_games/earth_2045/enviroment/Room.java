@@ -44,7 +44,26 @@ public class Room implements Serializable {
     public void setItems(List<IItem> items) {
         this.items = items;
     }
+    public List<String> returnRoomItems(){
+        
+        List<String> RoomItems= new ArrayList<String>();
+        
+        for(int i=0;i<items.size();i++){
+           RoomItems.add(items.get(i).getItemID()); 
+        }
+        return RoomItems;
+    }
     
+     public List<String> returnRoomTools(){
+        
+        List<String> RoomTools= new ArrayList<String>();
+        
+        for(int i=0;i<tools.size();i++){
+           RoomTools.add(tools.get(i).getKeyID());
+        }
+        return RoomTools;
+    }
+     
     public ITool findTool(String toolName){
         
         for (int i=0;i<tools.size();i++)
