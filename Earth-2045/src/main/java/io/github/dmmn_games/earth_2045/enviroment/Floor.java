@@ -7,6 +7,7 @@ package io.github.dmmn_games.earth_2045.enviroment;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.game.Location;
+import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.*;
@@ -19,10 +20,12 @@ public class Floor implements Serializable {
 
     private List<Room> Rooms = new ArrayList<Room>();
     private List<Door> Doors = new ArrayList<Door>();
+    private List<Bot> Bots= new ArrayList<Bot>();
 
     public Floor() {
         this.Rooms = new ArrayList<>();
         this.Doors = new ArrayList<>();
+        this.Bots = new ArrayList<>();
     }
 
     public void addRoom(Room newRoom) {
@@ -48,7 +51,25 @@ public class Floor implements Serializable {
     public List<Door> getDoors() {
         return Doors;
     }
-
+    public void addBot(Bot newBot) {
+        Bots.add(newBot);
+    }
+    
+    public Bot findBot(Bot Botname) {
+       
+        Bot tempBot;
+        for (int i = 0; i < Bots.size(); i++){
+        
+            tempBot = Bots.get(i);
+            
+            if (tempBot.getName().equals (Botname)){
+                return tempBot;
+            }
+                    
+        }
+        
+    }
+    
     public Door findDoorToGo(int userRoom, Location goLocation) {
         Door tempDoor;
         for (int i = 0; i < Doors.size(); i++) {
