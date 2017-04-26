@@ -7,6 +7,10 @@ public class Bot
 {
 
     String name;
+    
+    int position;
+
+    
 
     public Bot(String a)
     {
@@ -18,6 +22,11 @@ public class Bot
     {
         return name;
     }
+
+    public void setPosition(int position)
+    {
+        this.position = position;
+    }
     
     
     
@@ -27,10 +36,13 @@ public class Bot
         
         switch (msg)
         {
-            case "talk bot" : botmsg = "fuck you DELI";
+            case "talk scientist" : botmsg = "fuck you DELI";
             break;
             
-            default : botmsg = "degempesoemta";
+            case "take prisoner" : botmsg = "Go on and watch my friend. May the odds be with you.";
+            break;
+            
+            default : botmsg = "Learn how to talk correctly pal";
             break;
         }
         
