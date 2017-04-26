@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Spiros
+ * @author Nikos
  */
 public class Inventory implements Serializable {
 

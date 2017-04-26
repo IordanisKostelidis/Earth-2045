@@ -7,6 +7,7 @@ package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
+import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.tools.ITool;
@@ -137,4 +138,22 @@ public class User implements Serializable {
             
                     }
     }
+    public void lookAround(List<Floor> floors,CommandUI info){
+        List<String> items=floors.get(floor).getRoom(floor).returnRoomItems();
+        
+        info.addLine("Items");
+        for (String item : items) {
+            info.addLine(item);
+        }
+        List<String> tools=floors.get(floor).getRoom(floor).returnRoomTools();
+        
+        info.addLine("Tools");
+        for (String tool : tools)
+        {
+            info.addLine(tool);
+
+        }
+    
+    }
+    
 }
