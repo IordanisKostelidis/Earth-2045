@@ -18,9 +18,9 @@ import java.util.*;
  */
 public class Floor implements Serializable {
 
-    private List<Room> Rooms = new ArrayList<Room>();
-    private List<Door> Doors = new ArrayList<Door>();
-    private List<Bot> Bots = new ArrayList<Bot>();
+    private List<Room> Rooms = new ArrayList<>();
+    private List<Door> Doors = new ArrayList<>();
+    private List<Bot> Bots = new ArrayList<>();
 
     public Floor() {
         this.Rooms = new ArrayList<>();
@@ -101,9 +101,7 @@ public class Floor implements Serializable {
         for (int i = 0; i < Doors.size(); i++) {
             tempDoor = Doors.get(i);
             if (tempDoor.getRoomA() == userRoom || tempDoor.getRoomB() == userRoom) {
-                if (tempDoor.isIsOpen()) {
-                    continue;
-                } else {
+                if (!tempDoor.isIsOpen()) {
                     if (Tool.getID() == tempDoor.getIdPass()) {
                         tempDoor.setIsOpen(true);
                         return true;

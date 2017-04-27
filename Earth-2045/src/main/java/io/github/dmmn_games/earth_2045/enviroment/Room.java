@@ -5,7 +5,6 @@
  */
 package io.github.dmmn_games.earth_2045.enviroment;
 
-import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.items.*;
 import io.github.dmmn_games.earth_2045.tools.*;
 import java.io.Serializable;
@@ -17,8 +16,8 @@ import java.util.*;
  */
 public class Room implements Serializable {
 
-    private List<ITool> tools = new ArrayList<ITool>();
-    private List<IItem> items = new ArrayList<IItem>();
+    private List<ITool> tools = new ArrayList<>();
+    private List<IItem> items = new ArrayList<>();
 
     public Room() {
         this.tools = new ArrayList<>();
@@ -45,7 +44,7 @@ public class Room implements Serializable {
         this.items = items;
     }
          
-    public ITool findTool(String toolName){
+    public ITool findTool(String toolName) throws Exception{
         
         for (int i=0;i<tools.size();i++)
         {
@@ -54,7 +53,7 @@ public class Room implements Serializable {
             }
         }
        
-        return null;
+        throw new Exception("Tool not found");
     
     }
 }

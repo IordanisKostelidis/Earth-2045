@@ -5,8 +5,6 @@
  */
 package io.github.dmmn_games.earth_2045.game;
 
-import java.util.IllegalFormatException;
-
 /**
  *
  * @author iordkost

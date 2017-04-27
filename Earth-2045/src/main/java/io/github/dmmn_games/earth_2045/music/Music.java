@@ -8,6 +8,7 @@ package io.github.dmmn_games.earth_2045.music;
 import io.github.dmmn_games.earth_2045.global.CurrentPath;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -20,7 +21,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author iordkost
  */
-public class Music implements java.io.Serializable {
+public class Music implements Serializable {
 
     Clip clip;
     

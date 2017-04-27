@@ -6,9 +6,6 @@
 package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.game.CommandUI;
-import io.github.dmmn_games.earth_2045.doors.Door;
-import io.github.dmmn_games.earth_2045.enviroment.Floor;
-import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import javax.swing.JTextArea;
 

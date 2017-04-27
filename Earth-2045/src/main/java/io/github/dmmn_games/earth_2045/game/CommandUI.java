@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
  * @author iordkost
  */
 public class CommandUI implements java.io.Serializable {
-    private  JTextArea CurrentJTextArea;
+    private final  JTextArea CurrentJTextArea;
 
     public CommandUI(JTextArea CurrentJTextArea) {
         this.CurrentJTextArea = CurrentJTextArea;

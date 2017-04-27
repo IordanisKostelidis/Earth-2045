@@ -1,6 +1,8 @@
 package io.github.dmmn_games.earth_2045.npcs;
 
-public class Bot {
+import java.io.Serializable;
+
+public class Bot implements  Serializable {
 
     String name;
 
