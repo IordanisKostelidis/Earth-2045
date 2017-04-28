@@ -80,10 +80,10 @@ public class User implements Serializable {
     public void go(List<Floor> Floors, Location LocToGo) throws Exception {
         Door result = Floors.get(floor).findDoorToGo(room, LocToGo);
         if (result == null) {
-            throw new Exception("Door not found !");
+            throw new Exception("What ? I can't pass through walls " + username + "!");
         } else {
             if (result.getRoomA() == -1 || result.getRoomB() == -1) {
-                throw new Exception("The End");
+                throw new Exception("The End Of Everything");
             } else {
                 if (result.isIsOpen()) {
                     if (result.getRoomA() == room) {
@@ -93,7 +93,7 @@ public class User implements Serializable {
                     }
                     throw new Exception("You go " + LocToGo + "!");
                 } else {
-                    throw new Exception("Door is locked !");
+                    throw new Exception("What ? The door is locked !");
                 }
             }
         }
@@ -102,11 +102,11 @@ public class User implements Serializable {
     public void pick(List<Floor> floors, String toolName) throws Exception {
         ITool result = floors.get(floor).getRoom(room).findTool(toolName);
         if (result == null) {
-            throw new Exception("tool not found");
+            throw new Exception("I don't have this tool " + username);
         } else {
             inventory.add(result);
             floors.get(floor).getRoom(room).getTools().remove(result);
-            throw new Exception("You have pick " + toolName);
+            throw new Exception("Nice, i have picked a " + toolName);
         }
 
     }
@@ -115,9 +115,9 @@ public class User implements Serializable {
         ITool tempTool = inventory.find(toolName);
         if (floors.get(floor).findDoorToUse(room, tempTool)) {
             inventory.remove(toolName);
-            throw new Exception("Door is unlocked now !");
+            throw new Exception("Whoa ! I have unlocked this door " + username);
         } else {
-            throw new Exception("There is no a usable door to unlock !");
+            throw new Exception("WHATT? I can't use this key on this door " + username);
         }
     }
 

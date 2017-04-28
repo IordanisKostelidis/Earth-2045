@@ -32,6 +32,7 @@ public class Music implements Serializable {
     public void Play() {
         try {
             clip = AudioSystem.getClip();
+            
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                     new File(
                             new CurrentPath().getDir() + "/Data/Media/Music/BG-Music.dat"
@@ -42,7 +43,7 @@ public class Music implements Serializable {
             clip.start();
 
         } catch (LineUnavailableException | IOException | UnsupportedAudioFileException ex) {
-            Logger.getLogger(Music.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Music file not found");
         }
     }
     

@@ -19,12 +19,16 @@ import java.util.logging.Logger;
 public class LoadGame extends javax.swing.JFrame {
 
     private UIConfig UIConfig;
-    private GameController[] Slots;
+    private Menu menuFrm;
+    private final GameController[] Slots;
     /**
      * Creates new form LoadGame
+     * @param menuFrm
      */
-    public LoadGame() {
+    public LoadGame(Menu menuFrm) {
         initComponents();
+        
+        this.menuFrm = menuFrm;
         
         // Apply UI Settings
         UIConfig = new UIConfig();
@@ -55,6 +59,10 @@ public class LoadGame extends javax.swing.JFrame {
         
         loadList.setListData(loadListItems);
         
+    }
+
+    private LoadGame() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -145,6 +153,7 @@ public class LoadGame extends javax.swing.JFrame {
             new LoadGame().setVisible(true);
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

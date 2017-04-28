@@ -28,12 +28,10 @@ public class Splash extends javax.swing.JFrame {
      * Creates new form Splash
      */
     public Splash() {
-
         /* important Statement */
         setUndecorated(true);
+        setBackground(new Color(1.0f, 1.0f, 1.0f, 0.0f));
         
-        setBackground(new Color(1.0f,1.0f,1.0f,0.0f));
-
         initComponents();
 
         // Apply UI Settings
@@ -48,9 +46,7 @@ public class Splash extends javax.swing.JFrame {
 
             Image backgroundImage = javax.imageio.ImageIO.read(new File(new CurrentPath().getDir() + "/Data/Media/Images/Logo.dat"));
             Image backgroundImage2 = backgroundImage.getScaledInstance(500, 500, Image.SCALE_FAST);
-            
-            
-            
+
             setContentPane(new JPanel(new BorderLayout()) {
                 @Override
                 public void paintComponent(Graphics g) {
@@ -58,7 +54,7 @@ public class Splash extends javax.swing.JFrame {
                 }
             });
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("Splash icon not found");
         }
 
         Timer cur = new Timer();

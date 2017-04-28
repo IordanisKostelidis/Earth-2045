@@ -78,7 +78,7 @@ public class Save implements ICommand {
             out.writeObject(CurrentGame);
             out.close();
         } catch (IOException e) {
-            Logger.getLogger(Load.class.getName()).log(Level.SEVERE, null, e);
+            System.err.println("Can't create the save file !");
         }
     }
 }

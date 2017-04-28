@@ -75,7 +75,7 @@ public class Load implements ICommand {
             x = (GameController) reader.readObject();
 
         } catch (IOException | ClassNotFoundException ex) {
-            System.err.print(ex.getMessage());
+            System.err.println("Can't load the save file !");
         }
         return x;
     }

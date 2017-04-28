@@ -14,22 +14,22 @@ import java.io.Serializable;
  */
 public class Elevator implements Serializable {
 
-    String ElevatorID;
-    int Room;
+    String elevatorID;
+    int room;
     Location Pos;
 
     public Elevator(String ElevatorID, int Room, Location Pos) {
-        this.ElevatorID = ElevatorID;
-        this.Room = Room;
+        this.elevatorID = ElevatorID;
+        this.room = Room;
         this.Pos = Pos;
     }
 
     public String getElevatorID() {
-        return ElevatorID;
+        return elevatorID;
     }
 
     public int getRoom() {
-        return Room;
+        return room;
     }
 
     public Location getPos() {

@@ -95,13 +95,13 @@ public class Menu extends javax.swing.JFrame {
         switch(menuList.getSelectedValue()) {
                 case "New Game": {
                     this.setVisible(false);
-                    NewGame NewGame = new NewGame();
+                    NewGame NewGame = new NewGame(this);
                     NewGame.setVisible(true);
                     break;
                 }
                 case "Load Game": {
                     this.setVisible(false);
-                    LoadGame LoadGame = new LoadGame();
+                    LoadGame LoadGame = new LoadGame(this);
                     LoadGame.setVisible(true);
                     break;
                 }
