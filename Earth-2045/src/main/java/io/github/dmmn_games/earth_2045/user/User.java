@@ -122,53 +122,49 @@ public class User implements Serializable {
     }
 
     public String talk(List<Floor> floors, String bot, String message) throws Exception {
-        Bot botTalk = floors.get(floor).findBot(bot,room);
-        return botTalk.talk(message);
+        Bot botTalk = floors.get(floor).findBot(bot, room);
+        return botTalk.talk(message, username);
 
     }
-    public void recieveDamage(int damage) throws Exception
-    {
-        if(health>damage)
-            health=health-damage;
-        else
-        {
-            health=0;
+
+    public void recieveDamage(int damage) throws Exception {
+        if (health > damage) {
+            health = health - damage;
+        } else {
+            health = 0;
             throw new Exception("User Die!!!");
-            
-                    }
+
+        }
     }
-    public void lookAround(List<Floor> floors,Elevator elevator,CommandUI info){
-        List<IItem> items=floors.get(floor).getRoom(room).getItems();
-        
+
+    public void lookAround(List<Floor> floors, Elevator elevator, CommandUI info) {
+        List<IItem> items = floors.get(floor).getRoom(room).getItems();
+
         info.addLine("== Items ==");
-        for(int i=0;i<items.size();i++)
-        {
+        for (int i = 0; i < items.size(); i++) {
             info.addLine(items.get(i).getItemID());
-        
+
         }
-        List<ITool> tools=floors.get(floor).getRoom(room).getTools();
-        
+        List<ITool> tools = floors.get(floor).getRoom(room).getTools();
+
         info.addLine("== Tools ==");
-        for(int i=0;i<tools.size();i++)
-        {
+        for (int i = 0; i < tools.size(); i++) {
             info.addLine(tools.get(i).getKeyID());
-        
+
         }
-        
-                
-        if(room == elevator.getRoom()) {
+
+        if (room == elevator.getRoom()) {
             info.addLine("== Elevator ==");
             info.addLine(elevator.getPos().name());
         }
-        
-        List<Door> doors=floors.get(floor).getDoors();
-        
+
+        List<Door> doors = floors.get(floor).getDoors();
+
         info.addLine("== Doors ==");
-        for(int i=0;i<doors.size();i++)
-        {
+        for (int i = 0; i < doors.size(); i++) {
             Door tempDoor = doors.get(i);
-            if(tempDoor.getRoomA() == room || tempDoor.getRoomB() == room) {
-                if(room == tempDoor.getRoomA()) {
+            if (tempDoor.getRoomA() == room || tempDoor.getRoomB() == room) {
+                if (room == tempDoor.getRoomA()) {
                     info.addLine(
                             tempDoor.getPosA().name()
                     );
@@ -178,40 +174,37 @@ public class User implements Serializable {
                     );
                 }
             }
-        
+
         }
-        List<Bot>bots=floors.get(floor).getBots();
-        
+        List<Bot> bots = floors.get(floor).getBots();
+
         info.addLine("== Bots ==");
-        for(int i=0;i<bots.size();i++)
-        {
-           if(bots.get(i).getPosition() == room) {
+        for (int i = 0; i < bots.size(); i++) {
+            if (bots.get(i).getPosition() == room) {
                 info.addLine(bots.get(i).getName());
-           }
-        
+            }
+
         }
 
-    
     }
 
-    public void take(List<Floor> floors,Elevator Elevator, String Word, String FloorToGo) throws Exception {
-        if(Word.equals(Elevator.getElevatorID())) {
-            
-            if(room == Elevator.getRoom()) {
-               if(floors.size() >= Integer.parseInt(FloorToGo)) {
+    public void take(List<Floor> floors, Elevator Elevator, String Word, String FloorToGo) throws Exception {
+        if (Word.equals(Elevator.getElevatorID())) {
+
+            if (room == Elevator.getRoom()) {
+                if (floors.size() >= Integer.parseInt(FloorToGo)) {
                     floor = Integer.parseInt(FloorToGo);
-               } else {
-                   throw new Exception("Out of index");
-               }
-               
+                } else {
+                    throw new Exception("Out of index");
+                }
+
             } else {
                 throw new Exception("NO ELEVATOR");
             }
-            
+
         } else {
             throw new Exception("BUGGGGGGGG");
         }
     }
-    
-    
+
 }

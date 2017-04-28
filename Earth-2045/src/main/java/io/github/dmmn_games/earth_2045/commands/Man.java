@@ -30,11 +30,10 @@ public class Man implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
         if (Arguments.length == 1) {
-            currentHistory.addLine("You must define the command you want !");
+            new CommandUI(History).addLine("You must define the command you want !");
         } else {
-            currentHistory.addLine(
+            new CommandUI(History).addLine(
                     new TXTReader(
                             new CurrentPath().getDir()
                             + "/Data/Docs/"

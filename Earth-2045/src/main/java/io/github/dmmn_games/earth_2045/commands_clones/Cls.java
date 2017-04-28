@@ -28,7 +28,6 @@ public class Cls implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        Clear runCommand = new Clear();
-        runCommand.run(Arguments, History, Game);
+        new Clear().run(Arguments, History, Game);
     }
 }

@@ -28,7 +28,6 @@ public class Speak implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        Talk runCommand = new Talk();
-        runCommand.run(Arguments, History, Game);
+        new Talk().run(Arguments, History, Game);
     }
 }

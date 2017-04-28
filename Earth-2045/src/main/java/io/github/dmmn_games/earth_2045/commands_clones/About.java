@@ -28,7 +28,7 @@ public class About implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        Info runCommand = new Info();
-        runCommand.run(Arguments, History, Game);
+        new Info().run(Arguments, History, Game);
+
     }
 }

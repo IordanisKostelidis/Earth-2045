@@ -28,7 +28,6 @@ public class Pickup implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        Pick runCommand = new Pick();
-        runCommand.run(Arguments, History, Game);
+        new Pick().run(Arguments, History, Game);
     }
 }

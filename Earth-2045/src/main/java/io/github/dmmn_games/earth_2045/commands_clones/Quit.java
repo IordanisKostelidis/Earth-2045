@@ -28,7 +28,6 @@ public class Quit implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        Exit runCommand = new Exit();
-        runCommand.run(Arguments, History, Game);
+        new Exit().run(Arguments, History, Game);
     }
 }

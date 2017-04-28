@@ -28,8 +28,7 @@ public class WhereAmI implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI newHistory = new CommandUI(History);
-        newHistory.addLine("Floor = " + Game.getUser().getFloor());
-        newHistory.addLine("Room = " + Game.getUser().getRoom());
+        new CommandUI(History).addLine("Floor = " + Game.getUser().getFloor());
+        new CommandUI(History).addLine("Room = " + Game.getUser().getRoom());
     }
 }

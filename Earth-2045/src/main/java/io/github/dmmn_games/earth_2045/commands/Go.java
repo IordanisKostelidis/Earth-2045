@@ -29,10 +29,9 @@ public class Go implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
 
         if (Arguments.length == 1) {
-            currentHistory.addLine("Go where ?");
+            new CommandUI(History).addLine("Go where ?");
         } else {
             if (Arguments[1].toUpperCase().equals(Location.NORTH.name())
                     || Arguments[1].toUpperCase().equals(Location.SOUTH.name())
@@ -45,10 +44,10 @@ public class Go implements ICommand {
                         Game.getCommandsController().setCanDoCommand(false);
                         Game.stopTime();
                     }
-                    currentHistory.addLine(ex.getMessage());
+                    new CommandUI(History).addLine(ex.getMessage());
                 }
             } else {
-                currentHistory.addLine("You can't go there !");
+                new CommandUI(History).addLine("You can't go there !");
             }
         }
     }

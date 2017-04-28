@@ -27,24 +27,18 @@ public class Bot implements  Serializable {
         return position;
     }
 
-    public String talk(String msg) {
+    public String talk(String msg, String username) {
         String botmsg = "";
 
-        switch (msg) {
-            case "talk scientist":
-                botmsg = "fuck you DELI";
-                break;
-
-            case "talk prisoner":
-                botmsg = "Zaxaritsa kai lili sto stoma";
-                break;
-
-            default:
-                botmsg = "Learn how to talk correctly pal";
-                break;
+        if(msg.contains("hello")) {
+            return "Hello " + username;
+        } else if (msg.contains("you are ai") || msg.contains("what are you")) {
+            return "No, i am a stupid static bot !";
+        }else {
+            return "What do you want " + username + "?";
         }
 
-        return botmsg;
+
     }
 
 }

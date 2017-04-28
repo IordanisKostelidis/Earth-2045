@@ -67,6 +67,14 @@ public class CommandsController implements Serializable {
 
     }
 
+    public boolean isCanDoCommand() {
+        return canDoCommand;
+    }
+
+    public void setCanDoCommand(boolean canDoCommand) {
+        this.canDoCommand = canDoCommand;
+    }
+
     private String[] separateCommand(JTextField Command) {
         return Command.getText().
                 toLowerCase().
@@ -78,9 +86,10 @@ public class CommandsController implements Serializable {
     public void runCommand(JTextField Command, JTextArea History, GameController Game) {
 
         if (canDoCommand) {
-            CommandUI currentHistory = new CommandUI(History);
             listCommands = separateCommand(Command);
-
+            
+            new CommandUI(History).addLine("Command: " + Command.getText());
+            
             boolean commandFound = false;
             for (int i = 0; i < Commands.size(); i++) {
                 if (listCommands[0].equals(Commands.get(i).getCommand())) {
@@ -91,19 +100,10 @@ public class CommandsController implements Serializable {
             }
 
             if (!commandFound) {
-                currentHistory.addLine("Command not found !");
-
+                new CommandUI(History).addLine("Command not found !");
             }
             Command.setText("");
         }
-    }
-
-    public boolean isCanDoCommand() {
-        return canDoCommand;
-    }
-
-    public void setCanDoCommand(boolean canDoCommand) {
-        this.canDoCommand = canDoCommand;
     }
 
 }

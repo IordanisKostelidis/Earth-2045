@@ -28,15 +28,14 @@ public class Use implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
 
         if (Arguments.length == 1) {
-            currentHistory.addLine("Use what ???");
+            new CommandUI(History).addLine("Use what ???");
         } else {
             try {
                 Game.getUser().use(Game.getFloors(), Arguments[1]);
             } catch (Exception ex) {
-                currentHistory.addLine(ex.getMessage());
+                new CommandUI(History).addLine(ex.getMessage());
             }
         }
 

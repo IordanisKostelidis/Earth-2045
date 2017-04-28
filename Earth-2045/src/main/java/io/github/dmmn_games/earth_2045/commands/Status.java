@@ -30,21 +30,20 @@ public class Status implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
 
-        CommandUI newHistory = new CommandUI(History);
         
-        newHistory.addLine("=== User's Status ===");
-        newHistory.addLine("Username : " + Game.getUser().getUsername());
-        newHistory.addLine("Health : " + Game.getUser().getHealth());
-        newHistory.addLine("Floor : " + Game.getUser().getFloor());
-        newHistory.addLine("Room : " + Game.getUser().getRoom());
+        new CommandUI(History).addLine("=== User's Status ===");
+        new CommandUI(History).addLine("Username : " + Game.getUser().getUsername());
+        new CommandUI(History).addLine("Health : " + Game.getUser().getHealth());
+        new CommandUI(History).addLine("Floor : " + Game.getUser().getFloor());
+        new CommandUI(History).addLine("Room : " + Game.getUser().getRoom());
         
         ITool tempTool;
-        newHistory.addLine("=== Inventory ===");
+        new CommandUI(History).addLine("=== Inventory ===");
         for(int i=0;i<Game.getUser().getInventory().getTools().size();i++) {
             tempTool = Game.getUser().getInventory().getTools().get(i);
-            newHistory.addLine(tempTool.getKeyID());
+            new CommandUI(History).addLine(tempTool.getKeyID());
         }
-        newHistory.addLine("Total Tools : " + Game.getUser().getInventory().getTools().size());
+        new CommandUI(History).addLine("Total Tools : " + Game.getUser().getInventory().getTools().size());
 
     }
 }

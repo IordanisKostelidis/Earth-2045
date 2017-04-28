@@ -30,9 +30,9 @@ public class Help implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
+       
         if (Arguments.length == 1) {
-            currentHistory.addLine(
+            new CommandUI(History).addLine(
                     new TXTReader(
                             new CurrentPath().getDir()
                             + "/Data/Docs/"

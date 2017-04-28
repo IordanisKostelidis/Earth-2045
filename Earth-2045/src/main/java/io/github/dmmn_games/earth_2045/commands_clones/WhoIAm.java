@@ -28,7 +28,6 @@ public class WhoIAm implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        WhoAmI runCommand = new WhoAmI();
-        runCommand.run(Arguments, History, Game);
+        new WhoAmI().run(Arguments, History, Game);
     }
 }

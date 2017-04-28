@@ -28,7 +28,6 @@ public class Clear implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
-        currentHistory.clear();
+        new CommandUI(History).clear();
     }
 }

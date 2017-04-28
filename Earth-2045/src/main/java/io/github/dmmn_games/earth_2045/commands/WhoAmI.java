@@ -28,7 +28,6 @@ public class WhoAmI implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI newHistory = new CommandUI(History);
-        newHistory.addLine("You are a user, and your name is " + Game.getUser().getUsername());
+        new CommandUI(History).addLine("You are a user, and your name is " + Game.getUser().getUsername());
     }
 }

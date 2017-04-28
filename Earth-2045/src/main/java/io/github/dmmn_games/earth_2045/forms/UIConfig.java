@@ -63,7 +63,7 @@ public class UIConfig {
         try {
             currentFrame.setIconImage(javax.imageio.ImageIO.read(new File(new CurrentPath().getDir() + "/Data/Media/Images/Logo.dat")));
         } catch (IOException ex) {
-            Logger.getLogger(UIConfig.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(UIConfig.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

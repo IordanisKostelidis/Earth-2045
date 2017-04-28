@@ -28,15 +28,14 @@ public class Look implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
 
         if (Arguments.length == 1) {
-            currentHistory.addLine("Look where ?");
+            new CommandUI(History).addLine("Look where ?");
         } else {
                         
             if (Arguments[1].equals("around")) {
 
-                Game.getUser().lookAround(Game.getFloors(),Game.getElevator(), currentHistory);
+                Game.getUser().lookAround(Game.getFloors(),Game.getElevator(), new CommandUI(History));
 
             }
         }

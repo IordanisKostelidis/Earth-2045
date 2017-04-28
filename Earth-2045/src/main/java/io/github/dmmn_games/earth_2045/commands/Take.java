@@ -28,20 +28,19 @@ public class Take implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
 
         switch (Arguments.length) {
             case 1:
-                currentHistory.addLine("Take what ???");
+                new CommandUI(History).addLine("Take what ???");
                 break;
             case 2:
-                currentHistory.addLine("ODKOSPKDOPAK");
+                new CommandUI(History).addLine("You must set a floor !");
                 break;
             default:
                 try {
                     Game.getUser().take(Game.getFloors(), Game.getElevator(), Arguments[1], Arguments[2]);
                 } catch (Exception ex) {
-                    currentHistory.addLine(ex.getMessage());
+                    new CommandUI(History).addLine(ex.getMessage());
                 }   break;
         }
 

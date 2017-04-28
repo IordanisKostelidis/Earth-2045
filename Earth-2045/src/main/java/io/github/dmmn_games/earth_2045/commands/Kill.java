@@ -28,18 +28,17 @@ public class Kill implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
         
         if (Arguments.length == 1) {
-            currentHistory.addLine("Kill who ???");
+            new CommandUI(History).addLine("Kill who ???");
         } else {
             switch (Arguments[1]) {
                 case "guard": {
-                    currentHistory.addLine("You killed a guard !");
+                    new CommandUI(History).addLine("You killed a guard !");
                     break;
                 }
                 default: {
-                    currentHistory.addLine("You can't kill " + Arguments[1] + " !!!");
+                    new CommandUI(History).addLine("You can't kill " + Arguments[1] + " !!!");
                 }
             }
         }

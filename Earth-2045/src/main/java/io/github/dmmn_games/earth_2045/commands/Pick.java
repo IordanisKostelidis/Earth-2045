@@ -28,15 +28,14 @@ public class Pick implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
 
         if (Arguments.length == 1) {
-            currentHistory.addLine("Pick what ???");
+            new CommandUI(History).addLine("Pick what ???");
         } else {
             try {
                 Game.getUser().pick(Game.getFloors(), Arguments[1]);
             } catch (Exception ex) {
-                currentHistory.addLine(ex.getMessage());
+                new CommandUI(History).addLine(ex.getMessage());
             }
 
         }

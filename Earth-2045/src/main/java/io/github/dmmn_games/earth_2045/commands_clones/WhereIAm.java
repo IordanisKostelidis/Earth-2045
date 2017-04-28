@@ -28,7 +28,6 @@ public class WhereIAm implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        WhereAmI runCommand = new WhereAmI();
-        runCommand.run(Arguments, History, Game);
+        new WhereAmI().run(Arguments, History, Game);
     }
 }

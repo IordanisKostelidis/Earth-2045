@@ -35,28 +35,27 @@ public class Save implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        CommandUI currentHistory = new CommandUI(History);
         if(Arguments.length == 1) {
-            currentHistory.addLine("You must define the save slot !");
+            new CommandUI(History).addLine("You must define the save slot !");
         } else {
             switch(Arguments[1]) {
                 case "a": {
                     saveProcess("a", Game);
-                    currentHistory.addLine("Your game is saved on slot a !");
+                    new CommandUI(History).addLine("Your game is saved on slot a !");
                     break;
                 }
                 case "b": {
                     saveProcess("b", Game);
-                    currentHistory.addLine("Your game is saved on slot b !");
+                    new CommandUI(History).addLine("Your game is saved on slot b !");
                     break;
                 }
                 case "c": {
                     saveProcess("c", Game);
-                    currentHistory.addLine("Your game is saved on slot c !");
+                    new CommandUI(History).addLine("Your game is saved on slot c !");
                     break;
                 }
                 default: {
-                    currentHistory.addLine("This is not a valid save slot !");
+                    new CommandUI(History).addLine("This is not a valid save slot !");
                 }
             }
         }

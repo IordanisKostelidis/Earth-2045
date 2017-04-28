@@ -59,35 +59,27 @@ public class GameController implements java.io.Serializable {
         
         Elevator = new Elevator("elevator", 2, Location.NORTH);
         
-        Floors.add(
-                new Floor()
-        ); // added the underground
-        Floors.add(
-                new Floor()
-        ); // added 1st floor
-        Floors.add(
-                new Floor()
-        ); // added 2nd Floor
-        Floors.add(
-                new Floor()
-        ); // added 3rd floor
-        Floors.add(
-                new Floor()
-        ); // added 4th floor
+        initFloors();
+        initUnderground();
+        initGround();
+        initUppergroundA();
 
-        Floors.get(1).addRoom(
-                new Room())
-                ; // added room0 in 1st floor
-        Floors.get(1).addRoom(
-                new Room()
-        ); // added room1 in 1st floor
-        Floors.get(1).addRoom(
-                new Room()
-        ); // added room2 in 1st floor
-        Floors.get(1).addRoom(
-                new Room()
-        ); // added room3 in 1st floor
-
+    }
+    
+    public void initFloors() {
+       for(int i=0;i<6;i++) {
+           Floors.add(new Floor());
+           for(int j=0;j<4;j++) {
+               Floors.get(i).addRoom(new Room());
+           } // Create 4 Rooms
+       } // Create 6 Floors (Underground, Ground, 4 Upperground)
+    }
+    
+    public void initUnderground() {
+        
+    }
+    
+    public void initGround() {
         Floors.get(1).addDoor(
                 new Door("Main - Conference", 
                         0, 
@@ -95,7 +87,7 @@ public class GameController implements java.io.Serializable {
                         Location.NORTH, 
                         100, 
                         false)
-        ); // add door0to1 in 1st floor
+        ); // Room 0 to 1
         Floors.get(1).addDoor(
                 new Door("Main - Security", 
                         0, 
@@ -103,7 +95,7 @@ public class GameController implements java.io.Serializable {
                         Location.WEST, 
                         200, 
                         true)
-        ); // add door3to1 in 1st floor
+        ); // Room 0 to 3
         Floors.get(1).addDoor(
                 new Door("Conference - Elevator", 
                         1, 
@@ -111,22 +103,45 @@ public class GameController implements java.io.Serializable {
                         Location.WEST, 
                         300, 
                         true)
-        ); // add door1to2 in 1st floor
-        Floors.get(1).addDoor(
-                new Door("Elevator", 
-                        2, 
-                        -1, 
-                        Location.NORTH
-                        , 
-                        0, 
-                        true)
-        ); // ending door - demo
-
+        ); // Room 1 to 2
+        
+        
         Floors.get(1).getRoom(3).addKey(new Key("key", 100));
         
         
-        Floors.get(1).addBot(new Bot("god", 0));
+        Floors.get(1).addBot(new Bot("thebot", 0));
 
+    }
+    
+    public void initUppergroundA() {
+        Floors.get(2).addDoor(
+                new Door("Room 0 - Room 1", 
+                        0, 
+                        1, 
+                        Location.NORTH, 
+                        100, 
+                        true)
+        ); // Room 0 to 1
+        
+        Floors.get(2).addDoor(
+                new Door("Room 2 - Room 3", 
+                        2, 
+                        3, 
+                        Location.SOUTH, 
+                        100, 
+                        true)
+        ); // Room 2 to 3
+        
+        Floors.get(2).addDoor(
+                new Door("Room 3 - Room 0", 
+                        3, 
+                        0, 
+                        Location.EAST, 
+                        100, 
+                        true)
+        ); // Room 3 to 0
+        
+        
     }
 
     public CommandsController getCommandsController() {

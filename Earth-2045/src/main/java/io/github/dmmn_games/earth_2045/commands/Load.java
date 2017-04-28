@@ -34,28 +34,27 @@ public class Load implements ICommand {
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
 
-        CommandUI currentHistory = new CommandUI(History);
         if (Arguments.length == 1) {
-            currentHistory.addLine("You must define the load slot !");
+            new CommandUI(History).addLine("You must define the load slot !");
         } else {
             switch (Arguments[1]) {
                 case "a": {
                     Game = loadProcess("a");
-                    currentHistory.addLine("Your game is loaded from slot a !");
+                    new CommandUI(History).addLine("Your game is loaded from slot a !");
                     break;
                 }
                 case "b": {
                     Game = loadProcess("a");
-                    currentHistory.addLine("Your game is loaded from slot b !");
+                    new CommandUI(History).addLine("Your game is loaded from slot b !");
                     break;
                 }
                 case "c": {
                     Game = loadProcess("a");
-                    currentHistory.addLine("Your game is loaded from slot c !");
+                    new CommandUI(History).addLine("Your game is loaded from slot c !");
                     break;
                 }
                 default: {
-                    currentHistory.addLine("This is not a valid slot !");
+                    new CommandUI(History).addLine("This is not a valid slot !");
                 }
             }
         }
