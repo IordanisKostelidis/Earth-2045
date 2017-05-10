@@ -10,7 +10,9 @@ import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.elevator.Elevator;
 import io.github.dmmn_games.earth_2045.enviroment.*;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
+import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.Key;
+import io.github.dmmn_games.earth_2045.tools.Weapon;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,11 +107,14 @@ public class GameController implements java.io.Serializable {
                         true)
         ); // Room 1 to 2
         
-        
-        Floors.get(1).getRoom(3).addKey(new Key("key", 100));
+        Floors.get(1).getRoom(1).addTool(new Weapon("weapon",40));
+        Floors.get(1).getRoom(3).addTool(new Key("key", 100));
         
         
         Floors.get(1).addBot(new Bot("thebot", 0));
+        Floors.get(1).getRoom(2).addEnemy(new Enemy(true, "aizen", 100));
+        
+        
 
     }
     

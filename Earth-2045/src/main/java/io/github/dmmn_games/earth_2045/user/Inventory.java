@@ -41,7 +41,7 @@ public class Inventory implements Serializable {
         ITool tempTool = null;
         for (int i = 0; i < tools.size(); i++) {
             tempTool = tools.get(i);
-            if (tempTool.getKeyID().equals(toolName)) {
+            if (tempTool.getToolName().equals(toolName)) {
                 found = true;
                 break;
             }

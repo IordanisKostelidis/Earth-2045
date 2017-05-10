@@ -36,6 +36,7 @@ public class CommandsController implements Serializable {
         Commands.add(new Info());
         Commands.add(new Help());
         Commands.add(new Man());
+        // Commands.add(new Start());
         Commands.add(new Exit());
         Commands.add(new Copyright());
 
@@ -51,6 +52,7 @@ public class CommandsController implements Serializable {
         Commands.add(new Use());
         Commands.add(new Talk());
         Commands.add(new Take());
+        Commands.add(new Shoot());
 
         // Save Load
         Commands.add(new Save());

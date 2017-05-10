@@ -7,18 +7,20 @@ package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
 
 /**
  *
  * @author iordkost
  */
-public class Kill implements ICommand {
+public class Shoot implements ICommand {
 
     private final String Command;
 
-    public Kill() {
-        this.Command = "kill";
+    public Shoot() {
+        this.Command = "shoot";
     }
 
     @Override
@@ -30,15 +32,14 @@ public class Kill implements ICommand {
     public void run(String[] Arguments, JTextArea History, GameController Game) {
         
         if (Arguments.length == 1) {
-            new CommandUI(History).addLine("Kill who ???");
+            new CommandUI(History).addLine("Shoot who ???");
         } else {
-            switch (Arguments[1]) {
-                case "guard": {
-                    new CommandUI(History).addLine("You killed a guard !");
-                    break;
-                }
-                default: {
-                    new CommandUI(History).addLine("You can't kill " + Arguments[1] + " !!!");
+            try {
+                Game.getUser().shoot(Game.getFloors(),Arguments[1]);
+            } catch (Exception ex) {
+                new CommandUI(History).addLine(ex.getMessage());
+                if(ex.getMessage().contains("is dead")) {
+                    // ToDo - Remove Enemy from World
                 }
             }
         }

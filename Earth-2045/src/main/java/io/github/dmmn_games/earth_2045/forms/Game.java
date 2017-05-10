@@ -47,6 +47,11 @@ public class Game extends javax.swing.JFrame {
                 currentCommand,
                 submitCommand
         );
+        
+        currentCommand.setText("man story");
+        GameController.getCommandsController().runCommand(currentCommand, commandLogger, GameController);
+        
+        
         GameController.startTime();
     }
 
@@ -106,9 +111,15 @@ public class Game extends javax.swing.JFrame {
         secsRemLabelReal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         commandLogger.setEditable(false);
         commandLogger.setColumns(20);
+        commandLogger.setLineWrap(true);
         commandLogger.setRows(5);
         scrollPanel.setViewportView(commandLogger);
 
@@ -127,7 +138,7 @@ public class Game extends javax.swing.JFrame {
 
         secsRemLabel.setText("Time Remaining");
 
-        secsRemLabelReal.setText("???");
+        secsRemLabelReal.setText("00:00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,6 +223,10 @@ public class Game extends javax.swing.JFrame {
            
         }
     }//GEN-LAST:event_currentCommandKeyPressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        currentCommand.requestFocus();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

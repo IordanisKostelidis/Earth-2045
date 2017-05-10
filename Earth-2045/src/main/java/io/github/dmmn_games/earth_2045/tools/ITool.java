@@ -12,8 +12,7 @@ import java.io.Serializable;
  * @author iordkost
  */
 public interface ITool extends Serializable {
-    public String getKeyID();
-    public int getID();
+    public String getToolName();
+    public int getToolValue();
 
-    public int getDamage();
 }

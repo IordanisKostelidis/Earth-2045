@@ -102,7 +102,7 @@ public class Floor implements Serializable {
             tempDoor = Doors.get(i);
             if (tempDoor.getRoomA() == userRoom || tempDoor.getRoomB() == userRoom) {
                 if (!tempDoor.isIsOpen()) {
-                    if (Tool.getID() == tempDoor.getIdPass()) {
+                    if (Tool.getToolValue()== tempDoor.getIdPass()) {
                         tempDoor.setIsOpen(true);
                         return true;
                     }

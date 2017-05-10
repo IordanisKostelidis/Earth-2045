@@ -19,15 +19,15 @@ public class Room implements Serializable {
 
     private List<ITool> tools = new ArrayList<>();
     private List<IItem> items = new ArrayList<>();
-    private List<Enemy> enemies = new ArrayList<Enemy>();
+    private List<Enemy> enemies = new ArrayList<>();
 
     public Room() {
         this.tools = new ArrayList<>();
         this.items = new ArrayList<>();
     }
 
-    public void addKey(Key newKey) {
-        tools.add(newKey);
+    public void addTool(ITool tool) {
+        tools.add(tool);
     }
 
     public List<ITool> getTools() {
@@ -50,7 +50,7 @@ public class Room implements Serializable {
         
         for (int i=0;i<tools.size();i++)
         {
-            if (tools.get(i).getKeyID().equals(toolName)){
+            if (tools.get(i).getToolName().equals(toolName)){
                 return tools.get(i);
             }
         }

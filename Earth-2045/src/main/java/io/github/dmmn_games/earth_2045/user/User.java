@@ -25,6 +25,7 @@ public class User implements Serializable {
 
     private final String username;
     private int health;
+    private boolean alive;
 
     private Inventory inventory;
 
@@ -34,6 +35,7 @@ public class User implements Serializable {
     public User(String username) {
         this.username = username;
         this.health = 100;
+        this.alive = true;
 
         this.inventory = new Inventory();
 
@@ -133,7 +135,7 @@ public class User implements Serializable {
             health = health - damage;
         } else {
             health = 0;
-            throw new Exception("User Die!!!");
+            throw new Exception("I have died !!!");
 
         }
     }
@@ -150,7 +152,7 @@ public class User implements Serializable {
 
         info.addLine("== Tools ==");
         for (int i = 0; i < tools.size(); i++) {
-            info.addLine(tools.get(i).getKeyID());
+            info.addLine(tools.get(i).getToolName());
 
         }
 
@@ -177,6 +179,7 @@ public class User implements Serializable {
             }
 
         }
+        
         List<Bot> bots = floors.get(floor).getBots();
 
         info.addLine("== Bots ==");
@@ -185,6 +188,13 @@ public class User implements Serializable {
                 info.addLine(bots.get(i).getName());
             }
 
+        }
+        
+        List<Enemy> enemies = floors.get(floor).getRoom(room).getEnemies();
+
+        info.addLine("== Enemies ==");
+        for (int i = 0; i < enemies.size(); i++) {
+                info.addLine(enemies.get(i).getName());
         }
 
     }
@@ -196,44 +206,43 @@ public class User implements Serializable {
                 if (floors.size() >= Integer.parseInt(FloorToGo)) {
                     floor = Integer.parseInt(FloorToGo);
                 } else {
-                    throw new Exception("Out of index");
+                    throw new Exception("I can't find a button for this floor !!!");
                 }
 
             } else {
-                throw new Exception("NO ELEVATOR");
+                throw new Exception("I can't find the elevator here !!!");
             }
 
         } else {
-            throw new Exception("BUGGGGGGGG");
+            throw new Exception("What you want ? I can take only elevator !");
         }
     }
 
     public void shoot(List<Floor> floors, String enemyName) throws Exception {
         Enemy tempEnemy = floors.get(this.floor).getRoom(this.room).findEnemy(enemyName);
         ITool tempWeapon = this.inventory.find("weapon");
-        tempEnemy.receiveDamage(tempWeapon.getDamage());
+        tempEnemy.receiveDamage(tempWeapon.getToolValue());
         if (tempEnemy.isAlive()) {
             tempEnemy.shoot(this);
-            throw new Exception("You have " + this.health + " health and " + enemyName + "have" + tempEnemy.getHealth() + " health");
+            throw new Exception("You have " + this.health + " health and " + enemyName + " have " + tempEnemy.getHealth() + " health");
 
         } else {
-            throw new Exception("You have " + this.health + " health and " + enemyName + "have Died!!!");
+            floors.get(floor).getRoom(room).getEnemies().remove(tempEnemy);
+            throw new Exception("You have " + this.health + " health and " + enemyName + " is dead!!!");
         }
 
     }
 
     public void receiveDamage(int damage) {
         this.health -= damage;
+        if(health <= 0) {
+            alive = false;
+        }
 
     }
 
     public boolean isAlive() {
-        if (this.health > 0) {
-            return true;
-        } else {
-
-            return false;
-        }
+        return alive;
     }
 
 }

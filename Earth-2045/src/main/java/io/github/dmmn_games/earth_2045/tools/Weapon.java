@@ -9,16 +9,26 @@ package io.github.dmmn_games.earth_2045.tools;
  *
  * @author makis
  */
-public class Weapon {
-    int damage;
+public class Weapon implements ITool {
 
-    public Weapon(int damage) {
-        this.damage = damage;
+    String toolName;
+    int toolValue;
+
+    public Weapon(String toolName, int toolValue) {
+        this.toolName = toolName;
+        this.toolValue = toolValue;
     }
 
-    public int getDamage() {
-        return damage;
+    @Override
+    public String getToolName() {
+        return toolName;
     }
-    
-    
+
+    @Override
+    public int getToolValue() {
+        return toolValue;
+    }
+
+
+
 }

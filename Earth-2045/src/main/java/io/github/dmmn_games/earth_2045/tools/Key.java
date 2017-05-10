@@ -10,27 +10,23 @@ package io.github.dmmn_games.earth_2045.tools;
  * @author makis
  */
 public class Key implements ITool {
-    String KeyID;
-    int ID;
+    String toolName;
+    int toolValue;
 
-    public Key(String KeyID, int ID) {
-        this.KeyID = KeyID;
-        this.ID = ID;
+    public Key(String toolName, int toolValue) {
+        this.toolName = toolName;
+        this.toolValue = toolValue;
     }
     
     @Override
-    public String getKeyID() {
-        return KeyID;
-    }
-    @Override
-    public int getID() {
-        return ID;
-    }
-
-    @Override
-    public int getDamage() {
-        return 0;
+    public String getToolName() {
+        return toolName;
     }
     
+    @Override
+    public int getToolValue() {
+        return toolValue;
+    }
+
     
 }
