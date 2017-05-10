@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.enviroment;
 
 import io.github.dmmn_games.earth_2045.items.*;
+import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.*;
 import java.io.Serializable;
 import java.util.*;
@@ -18,6 +19,7 @@ public class Room implements Serializable {
 
     private List<ITool> tools = new ArrayList<>();
     private List<IItem> items = new ArrayList<>();
+    private List<Enemy> enemies = new ArrayList<Enemy>();
 
     public Room() {
         this.tools = new ArrayList<>();
@@ -55,5 +57,23 @@ public class Room implements Serializable {
        
         throw new Exception("Tool not found");
     
+    }
+    
+    public void addEnemy(Enemy newEnemy) {
+        this.enemies.add(newEnemy);
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+    
+    public Enemy findEnemy(String Name) throws Exception {
+        for(int i=0;i<this.enemies.size();i++) {
+          if(enemies.get(i).getName().equals(Name)) {
+              return enemies.get(i);
+          }  
+        }
+        
+        throw new Exception("Enemy not found");
     }
 }

@@ -12,6 +12,7 @@ import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.items.IItem;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
+import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.List;
@@ -204,6 +205,34 @@ public class User implements Serializable {
 
         } else {
             throw new Exception("BUGGGGGGGG");
+        }
+    }
+
+    public void shoot(List<Floor> floors, String enemyName) throws Exception {
+        Enemy tempEnemy = floors.get(this.floor).getRoom(this.room).findEnemy(enemyName);
+        ITool tempWeapon = this.inventory.find("weapon");
+        tempEnemy.receiveDamage(tempWeapon.getDamage());
+        if (tempEnemy.isAlive()) {
+            tempEnemy.shoot(this);
+            throw new Exception("You have " + this.health + " health and " + enemyName + "have" + tempEnemy.getHealth() + " health");
+
+        } else {
+            throw new Exception("You have " + this.health + " health and " + enemyName + "have Died!!!");
+        }
+
+    }
+
+    public void receiveDamage(int damage) {
+        this.health -= damage;
+
+    }
+
+    public boolean isAlive() {
+        if (this.health > 0) {
+            return true;
+        } else {
+
+            return false;
         }
     }
 

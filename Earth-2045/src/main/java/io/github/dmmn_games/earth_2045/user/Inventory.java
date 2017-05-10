@@ -48,7 +48,7 @@ public class Inventory implements Serializable {
 
         }
         if (!found) {
-            throw new Exception("You don't have this tool !!!");
+            throw new Exception("You don't have "+toolName+" !!!");
         } else {
             return tempTool;
         }
