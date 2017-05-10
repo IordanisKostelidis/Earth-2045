@@ -55,7 +55,7 @@ public class Room implements Serializable {
             }
         }
        
-        throw new Exception("Tool not found");
+        throw new Exception("I can't find " + toolName + " !!!");
     
     }
     
@@ -74,6 +74,6 @@ public class Room implements Serializable {
           }  
         }
         
-        throw new Exception("Enemy not found");
+        throw new Exception("I can't find " + Name + " !!!");
     }
 }

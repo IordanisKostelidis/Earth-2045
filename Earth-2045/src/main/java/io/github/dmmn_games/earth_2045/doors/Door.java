@@ -14,27 +14,27 @@ import java.io.Serializable;
  */
 public class Door implements Serializable {
 
-    private final String doorID;
+    private final String doorName;
     private final int roomA;
     private final int roomB;
     private final Location posA;
     private final Location posB;
-    private final int passID;
+    private final int doorID;
     private boolean isOpen;
 
-    public Door(String doorId, int roomA, int roomB, Location posA, int IdPass, boolean isOpen) {
-        this.doorID = doorId;
+    public Door(String doorName, int roomA, int roomB, Location posA, int doorID, boolean isOpen) {
+        this.doorName = doorName;
         this.roomA = roomA;
         this.roomB = roomB;
         this.posA = posA;
         this.posB = this.posA.getNegativeLocation();
-        this.passID = IdPass;
+        this.doorID = doorID;
         this.isOpen = isOpen;
 
     }
 
     public String getDoorId() {
-        return doorID;
+        return doorName;
     }
 
     public int getRoomA() {
@@ -54,15 +54,15 @@ public class Door implements Serializable {
     }
 
     public int getIdPass() {
-        return passID;
+        return doorID;
     }
 
     public boolean isIsOpen() {
         return isOpen;
     }
-
-    public void setIsOpen(boolean isOpen) {
-        this.isOpen = isOpen;
+    
+    public void unlockDoor() {
+        this.isOpen = true;
     }
 
 }

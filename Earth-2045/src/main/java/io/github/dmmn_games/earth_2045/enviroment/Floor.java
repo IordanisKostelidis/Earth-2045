@@ -55,36 +55,35 @@ public class Floor implements Serializable {
     public void addBot(Bot newBot) {
         Bots.add(newBot);
     }
-    
+
     public void getBot(int index) {
         Bots.get(index);
     }
-    
+
     public List<Bot> getBots() {
         return Bots;
     }
-    
-    
+
     public Bot findBot(String BotName, int UserPos) throws Exception {
         Bot tempBot;
 
         for (int i = 0; i < Bots.size(); i++) {
-
             tempBot = Bots.get(i);
-
+            
             if (tempBot.getName().equals(BotName) && tempBot.getPosition() == UserPos) {
                 return tempBot;
             }
 
         }
-        throw new Exception("The " + BotName + " not found!!");
+        throw new Exception("I can't find " + BotName + " !");
     }
 
-   
     public Door findDoorToGo(int userRoom, Location goLocation) {
         Door tempDoor;
+
         for (int i = 0; i < Doors.size(); i++) {
             tempDoor = Doors.get(i);
+            
             if (tempDoor.getRoomA() == userRoom && tempDoor.getPosA() == goLocation) {
                 return tempDoor;
             } else if (tempDoor.getRoomB() == userRoom && tempDoor.getPosB() == goLocation) {
@@ -102,8 +101,8 @@ public class Floor implements Serializable {
             tempDoor = Doors.get(i);
             if (tempDoor.getRoomA() == userRoom || tempDoor.getRoomB() == userRoom) {
                 if (!tempDoor.isIsOpen()) {
-                    if (Tool.getToolValue()== tempDoor.getIdPass()) {
-                        tempDoor.setIsOpen(true);
+                    if (Tool.getToolValue() == tempDoor.getIdPass()) {
+                        tempDoor.unlockDoor();
                         return true;
                     }
                 }

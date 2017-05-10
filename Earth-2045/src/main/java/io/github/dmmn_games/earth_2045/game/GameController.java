@@ -9,6 +9,7 @@ import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.elevator.Elevator;
 import io.github.dmmn_games.earth_2045.enviroment.*;
+import io.github.dmmn_games.earth_2045.items.Window;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.Key;
@@ -109,6 +110,7 @@ public class GameController implements java.io.Serializable {
         
         Floors.get(1).getRoom(1).addTool(new Weapon("weapon",40));
         Floors.get(1).getRoom(3).addTool(new Key("key", 100));
+        Floors.get(1).getRoom(0).getItems().add(new Window("East Window", "WHATT"));
         
         
         Floors.get(1).addBot(new Bot("thebot", 0));

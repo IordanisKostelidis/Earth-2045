@@ -13,12 +13,12 @@ import javax.swing.JTextArea;
  *
  * @author iordkost
  */
-public class About implements ICommand {
+public class Kill implements ICommand {
 
     private final String Command;
 
-    public About() {
-        this.Command = "about";
+    public Kill() {
+        this.Command = "kill";
     }
 
     @Override
@@ -28,7 +28,7 @@ public class About implements ICommand {
 
     @Override
     public void run(String[] Arguments, JTextArea History, GameController Game) {
-        new Info().run(Arguments, History, Game);
+        new Shoot().run(Arguments, History, Game);
 
     }
 }

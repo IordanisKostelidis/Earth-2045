@@ -12,5 +12,6 @@ import java.io.Serializable;
  * @author iordkost
  */
 public interface IItem extends Serializable {
-    public String getItemID();
+    public String getItemName();
+    public String getItemValue();
 }

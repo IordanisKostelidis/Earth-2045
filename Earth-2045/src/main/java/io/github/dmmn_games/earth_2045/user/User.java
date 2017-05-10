@@ -145,7 +145,7 @@ public class User implements Serializable {
 
         info.addLine("== Items ==");
         for (int i = 0; i < items.size(); i++) {
-            info.addLine(items.get(i).getItemID());
+            info.addLine(items.get(i).getItemName());
 
         }
         List<ITool> tools = floors.get(floor).getRoom(room).getTools();
@@ -158,7 +158,7 @@ public class User implements Serializable {
 
         if (room == elevator.getRoom()) {
             info.addLine("== Elevator ==");
-            info.addLine(elevator.getPos().name());
+            info.addLine(elevator.getPosition().name());
         }
 
         List<Door> doors = floors.get(floor).getDoors();
@@ -200,7 +200,7 @@ public class User implements Serializable {
     }
 
     public void take(List<Floor> floors, Elevator Elevator, String Word, String FloorToGo) throws Exception {
-        if (Word.equals(Elevator.getElevatorID())) {
+        if (Word.equals(Elevator.getElevatorName())) {
 
             if (room == Elevator.getRoom()) {
                 if (floors.size() >= Integer.parseInt(FloorToGo)) {
