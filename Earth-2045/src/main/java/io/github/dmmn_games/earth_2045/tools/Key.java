@@ -26,6 +26,11 @@ public class Key implements ITool {
     public int getID() {
         return ID;
     }
+
+    @Override
+    public int getDamage() {
+        return 0;
+    }
     
     
 }

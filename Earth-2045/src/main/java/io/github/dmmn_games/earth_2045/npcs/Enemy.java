@@ -7,17 +7,19 @@ import io.github.dmmn_games.earth_2045.user.User;
 public class Enemy
 {
 
-    private boolean alive = true;
-    private int health = 100;
-    
-    public Enemy()
-    {
-        alive = true;
+    private boolean alive;
+    private String name;
+    private int health;
+
+    public Enemy(boolean alive, String name, int health) {
+        this.alive = alive;
+        this.name = name;
+        this.health = health;
     }
     
     public void shoot(User user){
             
-        user.receiveDamage();
+        user.receiveDamage(10);
         
     }
     
@@ -27,6 +29,10 @@ public class Enemy
         
     }
     
+    public int getHealth() {
+        return this.health;
+    }
+    
     public boolean isAlive(){
         
         if (health <= 0){
@@ -34,6 +40,10 @@ public class Enemy
         }
         
         return alive;
+    }
+
+    public String getName() {
+        return name;
     }
     
     

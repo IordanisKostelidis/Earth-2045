@@ -14,4 +14,6 @@ import java.io.Serializable;
 public interface ITool extends Serializable {
     public String getKeyID();
     public int getID();
+
+    public int getDamage();
 }
