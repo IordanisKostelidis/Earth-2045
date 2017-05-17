@@ -36,6 +36,24 @@ public class Room implements Serializable {
         this.bots = new ArrayList<>();
         this.enemies = new ArrayList<>();
     }
+    
+    public void addDoor(Door newDoor) {
+        doors.add(newDoor);
+    }
+    
+    public void addTool(ITool newITool) {
+        tools.add(newITool);
+    }
+    
+    public void addItem(IItem newIItem) {
+        items.add(newIItem);
+    }
+    public void addBot(Bot newBot) {
+        bots.add(newBot);
+    }
+    public void addEnemy(Enemy newEnemy) {
+        enemies.add(newEnemy);
+    }
 
     
 }
