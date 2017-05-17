@@ -17,15 +17,22 @@ public class Door implements Serializable {
 
     private final String doorName;
     private final int doorID;
+    private final Location geoloc;
     private final Room nextRoom;
     private boolean isOpen;
 
-    public Door(String doorName, int doorID, Room nextRoom, boolean isOpen) {
+    public Door(String doorName, int doorID, Location geoloc, Room nextRoom, boolean isOpen) {
         this.doorName = doorName;
         this.doorID = doorID;
+        this.geoloc = geoloc;
         this.nextRoom = nextRoom;
         this.isOpen = isOpen;
     }
+
+    public Location getGeoloc() {
+        return geoloc;
+    }
+
 
     public void setIsOpen(boolean isOpen) {
         this.isOpen = isOpen;
@@ -51,4 +58,6 @@ public class Door implements Serializable {
         this.isOpen = true;
     }
 
+
+    
 }
