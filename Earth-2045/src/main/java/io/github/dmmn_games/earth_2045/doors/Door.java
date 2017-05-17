@@ -5,6 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.doors;
 
+import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.Location;
 import java.io.Serializable;
 
@@ -15,46 +16,31 @@ import java.io.Serializable;
 public class Door implements Serializable {
 
     private final String doorName;
-    private final int roomA;
-    private final int roomB;
-    private final Location posA;
-    private final Location posB;
     private final int doorID;
+    private final Room nextRoom;
     private boolean isOpen;
 
-    public Door(String doorName, int roomA, int roomB, Location posA, int doorID, boolean isOpen) {
+    public Door(String doorName, int doorID, Room nextRoom, boolean isOpen) {
         this.doorName = doorName;
-        this.roomA = roomA;
-        this.roomB = roomB;
-        this.posA = posA;
-        this.posB = this.posA.getNegativeLocation();
         this.doorID = doorID;
+        this.nextRoom = nextRoom;
         this.isOpen = isOpen;
-
     }
 
-    public String getDoorId() {
+    public void setIsOpen(boolean isOpen) {
+        this.isOpen = isOpen;
+    }
+
+    public String getDoorName() {
         return doorName;
     }
 
-    public int getRoomA() {
-        return roomA;
-    }
-
-    public int getRoomB() {
-        return roomB;
-    }
-
-    public Location getPosA() {
-        return posA;
-    }
-
-    public Location getPosB() {
-        return posB;
-    }
-
-    public int getIdPass() {
+    public int getDoorID() {
         return doorID;
+    }
+
+    public Room getNextRoom() {
+        return nextRoom;
     }
 
     public boolean isIsOpen() {
