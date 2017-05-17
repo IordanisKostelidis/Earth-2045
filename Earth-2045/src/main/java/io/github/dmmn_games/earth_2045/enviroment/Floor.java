@@ -5,10 +5,6 @@
  */
 package io.github.dmmn_games.earth_2045.enviroment;
 
-import io.github.dmmn_games.earth_2045.doors.Door;
-import io.github.dmmn_games.earth_2045.game.Location;
-import io.github.dmmn_games.earth_2045.npcs.Bot;
-import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.*;
 
@@ -18,21 +14,21 @@ import java.util.*;
  */
 public class Floor implements Serializable {
 
-    private List<Room> Rooms = new ArrayList<>();    
+    private List<Room> rooms = new ArrayList<>();    
 
     public Floor() {
-        this.Rooms = new ArrayList<>();
+        this.rooms = new ArrayList<>();
     }
 
     public Room getRoom(int index) {
-        return Rooms.get(index);
+        return rooms.get(index);
     }
     
-    /*public void addRoom(Room newRoom) {
-        newRoom.Room.add(newRoom);
-    }*/
+    public void addRoom(Room newRoom) {
+        rooms.add(newRoom);
+    }
     
     public List<Room> getRooms() {
-        return this.Rooms;
+        return this.rooms;
     }
 }
