@@ -185,7 +185,6 @@ public class Game extends javax.swing.JFrame {
         } else {
             new CommandUI(commandLogger).addLine(Response);
         }
-        GameController.getCommandHistory().add(currentCommand.getText());
         currentCommand.setText("");
 
     }
