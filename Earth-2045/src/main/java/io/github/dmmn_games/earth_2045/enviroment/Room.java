@@ -59,7 +59,7 @@ public class Room implements Serializable {
     public Door findDoor(Location location) throws Exception{
         
         for (Door tempDoor : doors){
-            if (tempDoor.getGeoloc() == location){
+            if (tempDoor.getGeoloc().equals(location)){
                 return tempDoor;
             }
             
@@ -70,7 +70,7 @@ public class Room implements Serializable {
     public ITool findItool(String ITool) throws Exception{
         
         for (ITool tempItool : tools){
-            if (tempItool.getToolName() == ITool){
+            if (tempItool.getToolName().equals(ITool)){
                 return tempItool;
             }
             
@@ -81,7 +81,7 @@ public class Room implements Serializable {
     public IItem findIitem(String IItem) throws Exception{
         
         for (IItem tempIitem : items){
-            if (tempIitem.getItemName() == IItem){
+            if (tempIitem.getItemName().equals(IItem)){
                 return tempIitem;
             }
             
@@ -92,7 +92,7 @@ public class Room implements Serializable {
     public Bot findBot(String Botname) throws Exception{
         
         for (Bot tempBot : bots){
-            if (tempBot.getName() == Botname){
+            if (tempBot.getName().equals(Botname)){
                 return tempBot;
             }
             
@@ -103,11 +103,32 @@ public class Room implements Serializable {
     public Enemy findEnemy(String Enemyname) throws Exception{
         
         for (Enemy tempEnemy : enemies){
-            if (tempEnemy.getName() == Enemyname){
+            if (tempEnemy.getName().equals(Enemyname)){
                 return tempEnemy;
             }
             
         }
         throw new Exception("the tool"+Enemyname+" not found");
     }
+    
+    public String removeITool(String toolName){
+        for (ITool tempItool : tools){
+            if (tempItool.getToolName().equals(toolName)){
+                tools.remove(tempItool);
+                return "the tool "+tempItool.getToolName()+" removed";
+            }
+        }
+        return "the tool "+toolName+" didn't find";
+    }
+    
+    public String removeEnemy(String enemyName){
+        for (Enemy tempEnemy : enemies){
+            if (tempEnemy.getName().equals(enemyName)){
+                enemies.remove(tempEnemy);
+                return "the enemy "+tempEnemy.getName()+" removed";
+            }
+        }
+        return "the enemy didn't find";
+    }
 }
+
