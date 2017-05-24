@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.tools.ITool;
+import io.github.dmmn_games.earth_2045.tools.Weapon;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,24 +49,40 @@ public class Inventory implements Serializable {
 
         }
         if (!found) {
-            throw new Exception("You don't have "+toolName+" !!!");
+            throw new Exception("You don't have " + toolName + " !!!");
         } else {
             return tempTool;
         }
     }
-    public boolean findkey(int doorid)
-    {
-        for(int i=0;i<this.tools.size();i++)
-        {
-            if(tools.get(i).getToolValue()==doorid)
-            {
-            return true;
+
+    public boolean findkey(int doorid) {
+        for (int i = 0; i < this.tools.size(); i++) {
+            if (tools.get(i).getToolValue() == doorid) {
+                return true;
             }
 
-        
-        
-        }            
-    
-    return false;
+        }
+
+        return false;
+    }
+
+    public int findWeapondmg() {
+        Weapon tmpWpn = null;
+
+        // Search all tools and find the weapon
+        for (ITool temptool : tools) {
+            if (temptool.getClass() == Weapon.class) {
+                tmpWpn = (Weapon) temptool;
+                break;
+            }
+        }
+
+        // Weapon found
+        if (null != tmpWpn) {
+            return tmpWpn.getDamage();
+        } else {
+            return 1; // Bare Hand Damage
+        }
+
     }
 }

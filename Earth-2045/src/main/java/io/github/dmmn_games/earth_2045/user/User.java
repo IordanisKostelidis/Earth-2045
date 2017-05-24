@@ -42,8 +42,6 @@ public class User implements Serializable {
 
         this.inventory = new Inventory();
 
-        
-
     }
 
     public String getUsername() {
@@ -66,58 +64,39 @@ public class User implements Serializable {
         this.inventory = inventory;
     }
 
-
-    public 
-        String go(Location loctogo) {
+    public String go(Location loctogo) {
         try {
-            
-           Door tempdoor=room.findDoor(loctogo);
-           if(tempdoor.isIsOpen())
-           {    
-               room=tempdoor.getNextRoom();
-           
-           }
-           else
-           {
-           if(inventory.findkey(tempdoor.getDoorID()))
-           {    
-               tempdoor.unlockDoor();
-           
-           
-           }
-           else
-           {
-                return ("Door is Locked and yu dont have the key to open it");
-           
-           }
-           
-           }
+
+            Door tempdoor = room.findDoor(loctogo);
+            if (tempdoor.isIsOpen()) {
+                room = tempdoor.getNextRoom();
+
+            } else {
+                if (inventory.findkey(tempdoor.getDoorID())) {
+                    tempdoor.unlockDoor();
+
+                } else {
+                    return ("Door is Locked and yu dont have the key to open it");
+
+                }
+
+            }
         } catch (Exception ex) {
             return (ex.getMessage());
         }
-        
+
         return ("Go success");
-        
-        
-        
-        
-        
-       
-    
-     }
+
+    }
 
     public String pick(String toolName) {
-    try
-    {inventory.add(room.findTool(toolName));
+        try {
+            inventory.add(room.findItool(toolName));
+        } catch (Exception ex) {
+            return (ex.getMessage());
+        }
+        return ("You pick" + toolName);
     }
-    catch(Exception ex)
-    {
-        return(ex.getMessage());
-    }
-    return("You pick"+toolName);
-    }
-
-    
 
     public String talk(List<Floor> floors, String bot, String message) throws Exception {
         Bot botTalk = floors.get(floor).findBot(bot, room);
@@ -136,107 +115,100 @@ public class User implements Serializable {
     }
 
     public String look(String selector) {
-       String response="";
-        switch(selector)
-                {
-                    case "Tools":{response+=lookTools();
-                
-                    break;
-        }
-                    case"Items":{
-                        response+=lookItem();
-                        break;
-                    }
-                    case"Bots":{
-                        response+=lookBots();
-                        break;
-                    }
-                    case"Enemy":{
-                    response+=lookEnemy();
-                    break;}
-                    case"Doors":{
-                    response+=lookDoors();
-                    break;
-                            }
-                    case:"Around"{
-                    response+=lookDoors();
-                    response+=lookTools();
-                    response+=lookItem();
-                    response+=lookBots();
-                    response+=lookEnemy();
-                    }
-                    default:{
-                    response+="unsupported Response";
-                    }
-                    
+        String response = "";
+        switch (selector) {
+            case "Tools": {
+                response += lookTools();
+
+                break;
+            }
+            case "Items": {
+                response += lookItem();
+                break;
+            }
+            case "Bots": {
+                response += lookBots();
+                break;
+            }
+            case "Enemy": {
+                response += lookEnemy();
+                break;
+            }
+            case "Doors": {
+                response += lookDoors();
+                break;
+            }
+            case "Around": {
+                response += lookDoors();
+                response += lookTools();
+                response += lookItem();
+                response += lookBots();
+                response += lookEnemy();
+                break;
+            }
+            default: {
+                response += "unsupported Response";
+            }
+
         }
         return response;
 
+    }
+
+    private String lookTools() {
+        List<ITool> temptools = room.getTools();
+        String response = "";
+        for (int i = 0; i < temptools.size(); i++) {
+            response += temptools.get(i).getToolName();
+
+        }
+        return response;
 
     }
-  private String lookTools()
-  { List<ITool> temptools=room.getTools();
-      String response="";
-      for(int i=0;i<temptools.size();i++)
-      {
-            response+=temptools.get(i).getToolName();
-      
-      }
-      return response;
-  
-  }
-  private String lookItem()
-  {
-      List<IItem> tempitems=room.getItem();
-      String response="";
-      for(int i=0;i<tempitems.size();i++)
-      {
-            response+=tempitems.get(i).getItemName();
-      
-      }
-      return response;
-      
-  
-  
-  
-  }
-  private String lookBots()
-  {
-      List<Bot> tempbots=room.getBots();
-      String response="";
-      for(int i=0;i<tempbots.size();i++)
-      {
-            response+=tempbots.get(i).getName();
-      
-      }
-      return response;
-  
-  
-  }
-  private String lookEnemy()
-  {      List<Enemy> tempenemy=room.getEnemy();
-      String response="";
-      for(int i=0;i<tempenemy.size();i++)
-      {
-            response+=tempenemy.get(i).getName();
-      
-      }
-      return response;
-  
-  
-  }
-  private String lookDoors()
-  {List<Door> tempdoors=room.getDoors();
-      String response="";
-      for(int i=0;i<tempdoors.size();i++)
-      {
-            response+=tempdoors.get(i).getDoorName();
-      
-      }
-      return response;
-  
-  
-  }
+
+    private String lookItem() {
+        List<IItem> tempitems = room.getItems();
+        String response = "";
+        for (int i = 0; i < tempitems.size(); i++) {
+            response += tempitems.get(i).getItemName();
+
+        }
+        return response;
+
+    }
+
+    private String lookBots() {
+        List<Bot> tempbots = room.getBots();
+        String response = "";
+        for (int i = 0; i < tempbots.size(); i++) {
+            response += tempbots.get(i).getName();
+
+        }
+        return response;
+
+    }
+
+    private String lookEnemy() {
+        List<Enemy> tempenemy = room.getEnemies();
+        String response = "";
+        for (int i = 0; i < tempenemy.size(); i++) {
+            response += tempenemy.get(i).getName();
+
+        }
+        return response;
+
+    }
+
+    private String lookDoors() {
+        List<Door> tempdoors = room.getDoors();
+        String response = "";
+        for (int i = 0; i < tempdoors.size(); i++) {
+            response += tempdoors.get(i).getDoorName();
+
+        }
+        return response;
+
+    }
 
     public String take(List<Floor> floors, Elevator Elevator, String Word, String FloorToGo) throws Exception {
         if (Word.equals(Elevator.getElevatorName())) {
@@ -257,14 +229,36 @@ public class User implements Serializable {
         }
     }
 
-    public String shoot( String enemyName) throws Exception {
-        Enemy tempEnemy =room.findEnemy
+    public String shoot(String enemyName) {
+      
+        try {
+            Enemy tempEnemy = room.findEnemy(enemyName);
+            tempEnemy.receiveDamage(inventory.findWeapondmg());
+            if(tempEnemy.isAlive())
+            {
+                 tempEnemy.shoot(this);
+                 return "Double Shot";
+            
+            }
+            else{
+                return "You kill the Enemy";
+            
+            }
+            
+            
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+        
+        
+        
+        
 
     }
 
     public void receiveDamage(int damage) {
         this.health -= damage;
-        if(health <= 0) {
+        if (health <= 0) {
             alive = false;
         }
 
