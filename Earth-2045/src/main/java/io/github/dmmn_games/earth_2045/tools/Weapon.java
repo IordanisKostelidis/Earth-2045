@@ -12,11 +12,15 @@ package io.github.dmmn_games.earth_2045.tools;
 public class Weapon implements ITool {
 
     String toolName;
-    int toolValue;
+    int damage;
 
-    public Weapon(String toolName, int toolValue) {
+    public Weapon(String toolName, int damage) {
         this.toolName = toolName;
-        this.toolValue = toolValue;
+        this.damage = damage;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     @Override
@@ -26,9 +30,7 @@ public class Weapon implements ITool {
 
     @Override
     public int getToolValue() {
-        return toolValue;
+        return 0;
     }
-
-
 
 }
