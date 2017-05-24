@@ -76,13 +76,12 @@ public class CommandsController implements Serializable {
         for (int i = 0; i < Commands.size(); i++) {
             if (listCommands[0].equals(Commands.get(i).getCommand())) {
                 commandFound = true;
-                Commands.get(i).run(listCommands, Game.getUser());
-                break;
+                Response = Commands.get(i).run(listCommands, Game.getUser());
             }
         }
 
         if (!commandFound) {
-            Response += "Command not found !";
+            Response = "Command not found !";
         }
         
         return Response;
