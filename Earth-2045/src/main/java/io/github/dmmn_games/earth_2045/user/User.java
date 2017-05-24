@@ -40,10 +40,29 @@ public class User implements Serializable {
         this.username = username;
         this.health = 100;
         this.alive = true;
+       
 
         this.inventory = new Inventory();
 
     }
+
+    public Floor getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Floor floor) {
+        this.floor = floor;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+    
+    
 
     public String getUsername() {
         return username;
@@ -122,28 +141,28 @@ public class User implements Serializable {
     public String look(String selector) {
         String response = "";
         switch (selector) {
-            case "Tools": {
+            case "tools": {
                 response += lookTools();
 
                 break;
             }
-            case "Items": {
+            case "items": {
                 response += lookItem();
                 break;
             }
-            case "Bots": {
+            case "bots": {
                 response += lookBots();
                 break;
             }
-            case "Enemy": {
+            case "enemy": {
                 response += lookEnemy();
                 break;
             }
-            case "Doors": {
+            case "doors": {
                 response += lookDoors();
                 break;
             }
-            case "Around": {
+            case "around": {
                 response += lookDoors();
                 response += lookTools();
                 response += lookItem();

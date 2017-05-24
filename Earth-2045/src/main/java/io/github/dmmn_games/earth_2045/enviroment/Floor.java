@@ -18,7 +18,9 @@ public class Floor implements Serializable {
     private Floor nextfloor;
     private List<Room> rooms;  
 
-    public Floor(){}
+    public Floor(){
+        rooms = new ArrayList<>();
+    }
     
     public Floor(Floor previousfloor, Floor nextfloor) {
         this.previousfloor = previousfloor;

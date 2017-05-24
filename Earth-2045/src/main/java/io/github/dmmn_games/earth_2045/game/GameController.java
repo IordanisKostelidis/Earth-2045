@@ -25,11 +25,10 @@ public class GameController implements java.io.Serializable {
 
 
     public GameController() {
-        CommandsController = new CommandsController();
-        initWorld();
+        CommandsController = new CommandsController();        
     }
 
-    private void initWorld() {
+    public void initWorld(String Username) {
         Floor flrGround= new Floor();
         Floor flr0= new Floor();
         Floor flr1= new Floor();
@@ -56,6 +55,10 @@ public class GameController implements java.io.Serializable {
         
         flr1.getRoom(1).addDoor(new Door("aa",1,WEST,flr1.getRoom(2),true));
         
+        
+        this.User = new User(Username);
+        this.User.setFloor(flr1);
+        this.User.setRoom(flr1.getRoom(1));
         
     }
 

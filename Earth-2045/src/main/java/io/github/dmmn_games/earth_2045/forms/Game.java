@@ -42,7 +42,7 @@ public class Game extends javax.swing.JFrame {
         initGame();
 
         this.GameController = new GameController();
-        GameController.setUser(new User(Username));
+        this.GameController.initWorld(Username);
 
         currentCommand.setText("man story");
         GameController.getCommandsController().runCommand(currentCommand.getText(), GameController);
