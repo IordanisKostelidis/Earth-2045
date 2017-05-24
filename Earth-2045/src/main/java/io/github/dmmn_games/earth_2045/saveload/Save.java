@@ -18,7 +18,7 @@ import java.io.ObjectOutputStream;
  */
 public class Save {
 
-    public String run(String[] Arguments, GameController Game) throws Exception {
+    public void run(String[] Arguments, GameController Game) throws Exception {
         if(Arguments.length == 1) {
             throw new Exception("You must define the save slot !");
         } else {
