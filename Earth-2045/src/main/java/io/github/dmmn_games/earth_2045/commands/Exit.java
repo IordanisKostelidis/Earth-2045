@@ -5,8 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.GameController;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -25,7 +24,8 @@ public class Exit implements ICommand {
     }
     
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
+    public String run(String[] Arguments, User user) {
         System.exit(0);
+        return "EXIT";
     }
 }

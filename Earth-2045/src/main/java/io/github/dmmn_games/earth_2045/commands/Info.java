@@ -5,9 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.GameController;
-import io.github.dmmn_games.earth_2045.game.CommandUI;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -27,20 +25,8 @@ public class Info implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
-        new CommandUI(History).addLine(
-                new io.github.dmmn_games.earth_2045.global.Info().getName()
-                + " " + new io.github.dmmn_games.earth_2045.global.Info().getVersion()
-        );
-        new CommandUI(History).addLine(
-                new io.github.dmmn_games.earth_2045.global.Info().getDesc()
-        );
-        new CommandUI(History).addLine(
-                "Developed by " + new io.github.dmmn_games.earth_2045.global.Info().getDev()
-        );
-        new CommandUI(History).addLine(
-                new io.github.dmmn_games.earth_2045.global.Info().getWebsite()
-        );
+    public String run(String[] Arguments, User user) {
+        return "";
     }
 
 }

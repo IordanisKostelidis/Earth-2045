@@ -5,10 +5,8 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.CommandUI;
-import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.game.Location;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -28,26 +26,18 @@ public class Go implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
+    public String run(String[] Arguments, User user) {
 
         if (Arguments.length == 1) {
-            new CommandUI(History).addLine("Go where ?");
+            return "Go where ?";
         } else {
             if (Arguments[1].toUpperCase().equals(Location.NORTH.name())
                     || Arguments[1].toUpperCase().equals(Location.SOUTH.name())
                     || Arguments[1].toUpperCase().equals(Location.EAST.name())
                     || Arguments[1].toUpperCase().equals(Location.WEST.name())) {
-                try {
-                    Game.getUser().go(Game.getFloors(), Location.valueOf(Arguments[1].toUpperCase()));
-                } catch (Exception ex) {
-                    if(ex.getMessage().equals("The End")) {
-                        Game.getCommandsController().setCanDoCommand(false);
-                        Game.stopTime();
-                    }
-                    new CommandUI(History).addLine(ex.getMessage());
-                }
+                return user.go(Location.valueOf(Arguments[1].toUpperCase()));
             } else {
-                new CommandUI(History).addLine("You can't go there !");
+                return "You can't go there !";
             }
         }
     }

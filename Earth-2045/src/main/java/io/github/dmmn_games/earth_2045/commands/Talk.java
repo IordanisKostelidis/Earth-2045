@@ -5,10 +5,8 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.CommandUI;
-import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.global.SuperString;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -28,21 +26,14 @@ public class Talk implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
+    public String run(String[] Arguments, User user) {
 
         if (Arguments.length == 1) {
-            new CommandUI(History).addLine("Talk to who ?");
+            return "Talk to who ?";
         } else {
-            try {
-                String Msg = new SuperString(Arguments).GetString(2);
-                new CommandUI(History).addLine(Game.getUser().talk(Game.getFloors(), Arguments[1], Msg));
-            } catch (Exception ex) {
-                if (ex.getMessage().equals("The End")) {
-                    Game.getCommandsController().setCanDoCommand(false);
-                    Game.stopTime();
-                }
-                new CommandUI(History).addLine(ex.getMessage());
-            }
+            String Msg = new SuperString(Arguments).GetString(2);
+            return user.talk(Arguments[1], Msg);
         }
+        
     }
 }

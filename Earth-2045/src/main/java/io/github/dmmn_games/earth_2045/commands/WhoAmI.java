@@ -5,9 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.CommandUI;
-import io.github.dmmn_games.earth_2045.game.GameController;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -27,7 +25,7 @@ public class WhoAmI implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
-        new CommandUI(History).addLine("You are a user, and your name is " + Game.getUser().getUsername());
+    public String run(String[] Arguments, User user) {
+        return "You are a user, and your name is " + user.getUsername();
     }
 }

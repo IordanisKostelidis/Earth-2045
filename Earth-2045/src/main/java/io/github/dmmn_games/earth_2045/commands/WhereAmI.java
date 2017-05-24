@@ -5,9 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.CommandUI;
-import io.github.dmmn_games.earth_2045.game.GameController;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -27,8 +25,7 @@ public class WhereAmI implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
-        new CommandUI(History).addLine("Floor = " + Game.getUser().getFloor());
-        new CommandUI(History).addLine("Room = " + Game.getUser().getRoom());
+    public String run(String[] Arguments, User user) {
+        return "";
     }
 }

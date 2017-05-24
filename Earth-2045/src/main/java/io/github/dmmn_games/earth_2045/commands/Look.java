@@ -5,9 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.CommandUI;
-import io.github.dmmn_games.earth_2045.game.GameController;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -27,17 +25,13 @@ public class Look implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
+    public String run(String[] Arguments, User user) {
 
         if (Arguments.length == 1) {
-            new CommandUI(History).addLine("Look where ?");
+            return "Look where ?";
         } else {
                         
-            if (Arguments[1].equals("around")) {
-
-                Game.getUser().lookAround(Game.getFloors(),Game.getElevator(), new CommandUI(History));
-
-            }
+            return user.look(Arguments[1]);
         }
     }
 }

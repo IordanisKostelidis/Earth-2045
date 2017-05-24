@@ -5,9 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.CommandUI;
-import io.github.dmmn_games.earth_2045.game.GameController;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -27,22 +25,10 @@ public class Take implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
+    public String run(String[] Arguments, User user) {
 
-        switch (Arguments.length) {
-            case 1:
-                new CommandUI(History).addLine("Take what ???");
-                break;
-            case 2:
-                new CommandUI(History).addLine("You must set a floor !");
-                break;
-            default:
-                try {
-                    Game.getUser().take(Game.getFloors(), Game.getElevator(), Arguments[1], Arguments[2]);
-                } catch (Exception ex) {
-                    new CommandUI(History).addLine(ex.getMessage());
-                }   break;
-        }
+        // TODO : Create Take
 
+        return "";
     }
 }

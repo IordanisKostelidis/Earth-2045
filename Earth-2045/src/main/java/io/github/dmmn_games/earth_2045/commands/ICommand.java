@@ -5,8 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.GameController;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -15,6 +14,6 @@ import javax.swing.JTextArea;
 public interface ICommand extends java.io.Serializable {
 
     String getCommand();
-    void run(String[] Arguments, JTextArea History, GameController Game);
+    String run(String[] Arguments, User user);
     
 }
