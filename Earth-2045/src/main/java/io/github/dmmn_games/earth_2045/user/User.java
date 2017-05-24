@@ -7,6 +7,7 @@ package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.elevator.Elevator;
+import io.github.dmmn_games.earth_2045.enviroment.ElevatorDirection;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
@@ -98,9 +99,13 @@ public class User implements Serializable {
         return ("You pick" + toolName);
     }
 
-    public String talk(List<Floor> floors, String bot, String message) throws Exception {
-        Bot botTalk = floors.get(floor).findBot(bot, room);
-        return botTalk.talk(message, username);
+    public String talk(String bot, String message) {
+        try {
+            Bot tempBot = room.findBot(bot);
+            return tempBot.talk(message, this.username);
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
 
     }
 
@@ -210,49 +215,55 @@ public class User implements Serializable {
 
     }
 
-    public String take(List<Floor> floors, Elevator Elevator, String Word, String FloorToGo) throws Exception {
-        if (Word.equals(Elevator.getElevatorName())) {
+    public String take(String elevator, ElevatorDirection direction, int loop) {
+        if (room.isElavator()) {
 
-            if (room == Elevator.getRoom()) {
-                if (floors.size() >= Integer.parseInt(FloorToGo)) {
-                    floor = Integer.parseInt(FloorToGo);
-                } else {
-                    throw new Exception("I can't find a button for this floor !!!");
+            if (direction == ElevatorDirection.UP) {
+                for (int i = 0; i < loop; i++) {
+                    floor = floor.getNextfloor();
+                    try {
+                        room = floor.getElavatorRoom();
+                    } catch (Exception ex) {
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
 
             } else {
-                throw new Exception("I can't find the elevator here !!!");
+                for (int i = 0; i < loop; i++) {
+                    floor = floor.getPreviousfloor();
+                    try {
+                        room = floor.getElavatorRoom();
+                    } catch (Exception ex) {
+                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+
             }
 
-        } else {
-            throw new Exception("What you want ? I can take only elevator !");
         }
+
+        return "You changed Floor";
     }
 
     public String shoot(String enemyName) {
-      
+
         try {
             Enemy tempEnemy = room.findEnemy(enemyName);
             tempEnemy.receiveDamage(inventory.findWeapondmg());
-            if(tempEnemy.isAlive())
-            {
-                 tempEnemy.shoot(this);
-                 return "Double Shot";
-            
-            }
-            else{
+            if (tempEnemy.isAlive()) {
+                tempEnemy.shoot(this);
+                return "Double Shot";
+
+            } else {
                 return "You kill the Enemy";
-            
+
             }
-            
-            
+
         } catch (Exception ex) {
             return ex.getMessage();
         }
-        
-        
-        
-        
 
     }
 
