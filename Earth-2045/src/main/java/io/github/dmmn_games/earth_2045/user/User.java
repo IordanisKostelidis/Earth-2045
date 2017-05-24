@@ -8,6 +8,7 @@ package io.github.dmmn_games.earth_2045.user;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.elevator.Elevator;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
+import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.items.IItem;
@@ -16,6 +17,8 @@ import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,8 +32,8 @@ public class User implements Serializable {
 
     private Inventory inventory;
 
-    private int floor;
-    private int room;
+    private Floor floor;
+    private Room room;
 
     public User(String username) {
         this.username = username;
@@ -39,8 +42,7 @@ public class User implements Serializable {
 
         this.inventory = new Inventory();
 
-        this.floor = 1;
-        this.room = 0;
+        
 
     }
 
@@ -64,65 +66,58 @@ public class User implements Serializable {
         this.inventory = inventory;
     }
 
-    public int getFloor() {
-        return floor;
-    }
 
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
-
-    public int getRoom() {
-        return room;
-    }
-
-    public void setRoom(int room) {
-        this.room = room;
-    }
-
-    public void go(List<Floor> Floors, Location LocToGo) throws Exception {
-        Door result = Floors.get(floor).findDoorToGo(room, LocToGo);
-        if (result == null) {
-            throw new Exception("What ? I can't pass through walls " + username + "!");
-        } else {
-            if (result.getRoomA() == -1 || result.getRoomB() == -1) {
-                throw new Exception("The End Of Everything");
-            } else {
-                if (result.isIsOpen()) {
-                    if (result.getRoomA() == room) {
-                        room = result.getRoomB();
-                    } else {
-                        room = result.getRoomA();
-                    }
-                    throw new Exception("You go " + LocToGo + "!");
-                } else {
-                    throw new Exception("What ? The door is locked !");
-                }
-            }
+    public 
+        String go(Location loctogo) {
+        try {
+            
+           Door tempdoor=room.findDoor(loctogo);
+           if(tempdoor.isIsOpen())
+           {    
+               room=tempdoor.getNextRoom();
+           
+           }
+           else
+           {
+           if(inventory.findkey(tempdoor.getDoorID()))
+           {    
+               tempdoor.unlockDoor();
+           
+           
+           }
+           else
+           {
+                return ("Door is Locked and yu dont have the key to open it");
+           
+           }
+           
+           }
+        } catch (Exception ex) {
+            return (ex.getMessage());
         }
+        
+        return ("Go success");
+        
+        
+        
+        
+        
+       
+    
+     }
+
+    public String pick(String toolName) {
+    try
+    {inventory.add(room.findTool(toolName));
+    }
+    catch(Exception ex)
+    {
+        return(ex.getMessage());
+    }
+    return("You pick"+toolName);
     }
 
-    public void pick(List<Floor> floors, String toolName) throws Exception {
-        ITool result = floors.get(floor).getRoom(room).findTool(toolName);
-        if (result == null) {
-            throw new Exception("I don't have this tool " + username);
-        } else {
-            inventory.add(result);
-            floors.get(floor).getRoom(room).getTools().remove(result);
-            throw new Exception("Nice, i have picked a " + toolName);
-        }
-
-    }
-
-    public void use(List<Floor> floors, String toolName) throws Exception {
-        ITool tempTool = inventory.find(toolName);
-        if (floors.get(floor).findDoorToUse(room, tempTool)) {
-            inventory.remove(toolName);
-            throw new Exception("Whoa ! I have unlocked this door " + username);
-        } else {
-            throw new Exception("WHATT? I can't use this key on this door " + username);
-        }
-    }
+    
 
     public String talk(List<Floor> floors, String bot, String message) throws Exception {
         Bot botTalk = floors.get(floor).findBot(bot, room);
@@ -140,66 +135,110 @@ public class User implements Serializable {
         }
     }
 
-    public void lookAround(List<Floor> floors, Elevator elevator, CommandUI info) {
-        List<IItem> items = floors.get(floor).getRoom(room).getItems();
-
-        info.addLine("== Items ==");
-        for (int i = 0; i < items.size(); i++) {
-            info.addLine(items.get(i).getItemName());
-
+    public String look(String selector) {
+       String response="";
+        switch(selector)
+                {
+                    case "Tools":{response+=lookTools();
+                
+                    break;
         }
-        List<ITool> tools = floors.get(floor).getRoom(room).getTools();
-
-        info.addLine("== Tools ==");
-        for (int i = 0; i < tools.size(); i++) {
-            info.addLine(tools.get(i).getToolName());
-
+                    case"Items":{
+                        response+=lookItem();
+                        break;
+                    }
+                    case"Bots":{
+                        response+=lookBots();
+                        break;
+                    }
+                    case"Enemy":{
+                    response+=lookEnemy();
+                    break;}
+                    case"Doors":{
+                    response+=lookDoors();
+                    break;
+                            }
+                    case:"Around"{
+                    response+=lookDoors();
+                    response+=lookTools();
+                    response+=lookItem();
+                    response+=lookBots();
+                    response+=lookEnemy();
+                    }
+                    default:{
+                    response+="unsupported Response";
+                    }
+                    
         }
+        return response;
 
-        if (room == elevator.getRoom()) {
-            info.addLine("== Elevator ==");
-            info.addLine(elevator.getPosition().name());
-        }
-
-        List<Door> doors = floors.get(floor).getDoors();
-
-        info.addLine("== Doors ==");
-        for (int i = 0; i < doors.size(); i++) {
-            Door tempDoor = doors.get(i);
-            if (tempDoor.getRoomA() == room || tempDoor.getRoomB() == room) {
-                if (room == tempDoor.getRoomA()) {
-                    info.addLine(
-                            tempDoor.getPosA().name()
-                    );
-                } else {
-                    info.addLine(
-                            tempDoor.getPosB().name()
-                    );
-                }
-            }
-
-        }
-        
-        List<Bot> bots = floors.get(floor).getBots();
-
-        info.addLine("== Bots ==");
-        for (int i = 0; i < bots.size(); i++) {
-            if (bots.get(i).getPosition() == room) {
-                info.addLine(bots.get(i).getName());
-            }
-
-        }
-        
-        List<Enemy> enemies = floors.get(floor).getRoom(room).getEnemies();
-
-        info.addLine("== Enemies ==");
-        for (int i = 0; i < enemies.size(); i++) {
-                info.addLine(enemies.get(i).getName());
-        }
 
     }
+  private String lookTools()
+  { List<ITool> temptools=room.getTools();
+      String response="";
+      for(int i=0;i<temptools.size();i++)
+      {
+            response+=temptools.get(i).getToolName();
+      
+      }
+      return response;
+  
+  }
+  private String lookItem()
+  {
+      List<IItem> tempitems=room.getItem();
+      String response="";
+      for(int i=0;i<tempitems.size();i++)
+      {
+            response+=tempitems.get(i).getItemName();
+      
+      }
+      return response;
+      
+  
+  
+  
+  }
+  private String lookBots()
+  {
+      List<Bot> tempbots=room.getBots();
+      String response="";
+      for(int i=0;i<tempbots.size();i++)
+      {
+            response+=tempbots.get(i).getName();
+      
+      }
+      return response;
+  
+  
+  }
+  private String lookEnemy()
+  {      List<Enemy> tempenemy=room.getEnemy();
+      String response="";
+      for(int i=0;i<tempenemy.size();i++)
+      {
+            response+=tempenemy.get(i).getName();
+      
+      }
+      return response;
+  
+  
+  }
+  private String lookDoors()
+  {List<Door> tempdoors=room.getDoors();
+      String response="";
+      for(int i=0;i<tempdoors.size();i++)
+      {
+            response+=tempdoors.get(i).getDoorName();
+      
+      }
+      return response;
+  
+  
+  }
 
-    public void take(List<Floor> floors, Elevator Elevator, String Word, String FloorToGo) throws Exception {
+    public String take(List<Floor> floors, Elevator Elevator, String Word, String FloorToGo) throws Exception {
         if (Word.equals(Elevator.getElevatorName())) {
 
             if (room == Elevator.getRoom()) {
@@ -218,18 +257,8 @@ public class User implements Serializable {
         }
     }
 
-    public void shoot(List<Floor> floors, String enemyName) throws Exception {
-        Enemy tempEnemy = floors.get(this.floor).getRoom(this.room).findEnemy(enemyName);
-        ITool tempWeapon = this.inventory.find("weapon");
-        tempEnemy.receiveDamage(tempWeapon.getToolValue());
-        if (tempEnemy.isAlive()) {
-            tempEnemy.shoot(this);
-            throw new Exception("You have " + this.health + " health and " + enemyName + " have " + tempEnemy.getHealth() + " health");
-
-        } else {
-            floors.get(floor).getRoom(room).getEnemies().remove(tempEnemy);
-            throw new Exception("You have " + this.health + " health and " + enemyName + " is dead!!!");
-        }
+    public String shoot( String enemyName) throws Exception {
+        Enemy tempEnemy =room.findEnemy
 
     }
 

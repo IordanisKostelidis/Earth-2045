@@ -53,4 +53,19 @@ public class Inventory implements Serializable {
             return tempTool;
         }
     }
+    public boolean findkey(int doorid)
+    {
+        for(int i=0;i<this.tools.size();i++)
+        {
+            if(tools.get(i).getToolValue()==doorid)
+            {
+            return true;
+            }
+
+        
+        
+        }            
+    
+    return false;
+    }
 }
