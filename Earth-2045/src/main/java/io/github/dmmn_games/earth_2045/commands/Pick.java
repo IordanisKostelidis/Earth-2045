@@ -5,9 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.game.CommandUI;
-import io.github.dmmn_games.earth_2045.game.GameController;
-import javax.swing.JTextArea;
+import io.github.dmmn_games.earth_2045.user.User;
 
 /**
  *
@@ -27,17 +25,12 @@ public class Pick implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
+    public String run(String[] Arguments, User user) {
 
         if (Arguments.length == 1) {
-            new CommandUI(History).addLine("Pick what ???");
+            return "Pick what ???";
         } else {
-            try {
-                Game.getUser().pick(Game.getFloors(), Arguments[1]);
-            } catch (Exception ex) {
-                new CommandUI(History).addLine(ex.getMessage());
-            }
-
+              return user.pick(Arguments[1]);
         }
 
     }
