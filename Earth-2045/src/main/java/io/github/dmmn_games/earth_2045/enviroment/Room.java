@@ -37,6 +37,27 @@ public class Room implements Serializable {
         this.bots = new ArrayList<>();
         this.enemies = new ArrayList<>();
     }
+
+    public List<Door> getDoors() {
+        return doors;
+    }
+
+    public List<ITool> getTools() {
+        return tools;
+    }
+
+    public List<IItem> getItems() {
+        return items;
+    }
+
+    public List<Bot> getBots() {
+        return bots;
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+    
     
     public void addDoor(Door newDoor) {
         doors.add(newDoor);
@@ -130,5 +151,7 @@ public class Room implements Serializable {
         }
         return "the enemy didn't find";
     }
+    
+    
 }
 
