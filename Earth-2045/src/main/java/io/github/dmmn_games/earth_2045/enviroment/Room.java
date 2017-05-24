@@ -20,6 +20,8 @@ import java.util.*;
  */
 public class Room implements Serializable {
 
+    boolean elavator;
+    
     private List<Door> doors;
 
     private List<ITool> tools;
@@ -36,6 +38,15 @@ public class Room implements Serializable {
         
         this.bots = new ArrayList<>();
         this.enemies = new ArrayList<>();
+        this.elavator = false;
+    }
+
+    public boolean isElavator() {
+        return elavator;
+    }
+
+    public void setElavator(boolean elavator) {
+        this.elavator = elavator;
     }
 
     public List<Door> getDoors() {
