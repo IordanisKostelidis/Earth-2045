@@ -50,6 +50,5 @@ public class Floor implements Serializable {
             }
         }
         throw new Exception("there are no Elevator to this Floor");
-        
     }
 }
