@@ -56,14 +56,58 @@ public class Room implements Serializable {
         enemies.add(newEnemy);
     }
 
-    public Room findDoor(Location location) throws Exception{
+    public Door findDoor(Location location) throws Exception{
         
         for (Door tempDoor : doors){
             if (tempDoor.getGeoloc() == location){
-                return tempDoor.getNextRoom();
+                return tempDoor;
             }
             
         }
         throw new Exception("the door not found");
+    }
+    
+    public ITool findItool(String ITool) throws Exception{
+        
+        for (ITool tempItool : tools){
+            if (tempItool.getToolName() == ITool){
+                return tempItool;
+            }
+            
+        }
+        throw new Exception("the tool"+ITool+" not found");
+    }
+    
+    public IItem findIitem(String IItem) throws Exception{
+        
+        for (IItem tempIitem : items){
+            if (tempIitem.getItemName() == IItem){
+                return tempIitem;
+            }
+            
+        }
+        throw new Exception("the tool"+IItem+" not found");
+    }
+    
+    public Bot findBot(String Botname) throws Exception{
+        
+        for (Bot tempBot : bots){
+            if (tempBot.getName() == Botname){
+                return tempBot;
+            }
+            
+        }
+        throw new Exception("the tool"+Botname+" not found");
+    }
+    
+    public Enemy findEnemy(String Enemyname) throws Exception{
+        
+        for (Enemy tempEnemy : enemies){
+            if (tempEnemy.getName() == Enemyname){
+                return tempEnemy;
+            }
+            
+        }
+        throw new Exception("the tool"+Enemyname+" not found");
     }
 }
