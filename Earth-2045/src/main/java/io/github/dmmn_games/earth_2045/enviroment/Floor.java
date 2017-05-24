@@ -31,8 +31,6 @@ public class Floor implements Serializable {
         return nextfloor;
     }
 
-    
-
     public Room getRoom(int index) {
         return rooms.get(index);
     }

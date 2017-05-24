@@ -37,6 +37,27 @@ public class Room implements Serializable {
         this.bots = new ArrayList<>();
         this.enemies = new ArrayList<>();
     }
+
+    public List<Door> getDoors() {
+        return doors;
+    }
+
+    public List<ITool> getTools() {
+        return tools;
+    }
+
+    public List<IItem> getItems() {
+        return items;
+    }
+
+    public List<Bot> getBots() {
+        return bots;
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+    
     
     public void addDoor(Door newDoor) {
         doors.add(newDoor);
@@ -56,14 +77,81 @@ public class Room implements Serializable {
         enemies.add(newEnemy);
     }
 
-    public Room findDoor(Location location) throws Exception{
+    public Door findDoor(Location location) throws Exception{
         
         for (Door tempDoor : doors){
-            if (tempDoor.getGeoloc() == location){
-                return tempDoor.getNextRoom();
+            if (tempDoor.getGeoloc().equals(location)){
+                return tempDoor;
             }
             
         }
         throw new Exception("the door not found");
     }
+    
+    public ITool findItool(String ITool) throws Exception{
+        
+        for (ITool tempItool : tools){
+            if (tempItool.getToolName().equals(ITool)){
+                return tempItool;
+            }
+            
+        }
+        throw new Exception("the tool"+ITool+" not found");
+    }
+    
+    public IItem findIitem(String IItem) throws Exception{
+        
+        for (IItem tempIitem : items){
+            if (tempIitem.getItemName().equals(IItem)){
+                return tempIitem;
+            }
+            
+        }
+        throw new Exception("the tool"+IItem+" not found");
+    }
+    
+    public Bot findBot(String Botname) throws Exception{
+        
+        for (Bot tempBot : bots){
+            if (tempBot.getName().equals(Botname)){
+                return tempBot;
+            }
+            
+        }
+        throw new Exception("the tool"+Botname+" not found");
+    }
+    
+    public Enemy findEnemy(String Enemyname) throws Exception{
+        
+        for (Enemy tempEnemy : enemies){
+            if (tempEnemy.getName().equals(Enemyname)){
+                return tempEnemy;
+            }
+            
+        }
+        throw new Exception("the tool"+Enemyname+" not found");
+    }
+    
+    public String removeITool(String toolName){
+        for (ITool tempItool : tools){
+            if (tempItool.getToolName().equals(toolName)){
+                tools.remove(tempItool);
+                return "the tool "+tempItool.getToolName()+" removed";
+            }
+        }
+        return "the tool "+toolName+" didn't find";
+    }
+    
+    public String removeEnemy(String enemyName){
+        for (Enemy tempEnemy : enemies){
+            if (tempEnemy.getName().equals(enemyName)){
+                enemies.remove(tempEnemy);
+                return "the enemy "+tempEnemy.getName()+" removed";
+            }
+        }
+        return "the enemy didn't find";
+    }
+    
+    
 }
+
