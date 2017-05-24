@@ -5,7 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.forms;
 
-import io.github.dmmn_games.earth_2045.commands.Load;
+import io.github.dmmn_games.earth_2045.saveload.Load;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
@@ -19,17 +19,13 @@ import java.util.logging.Logger;
 public class LoadGame extends javax.swing.JFrame {
 
     private UIConfig UIConfig;
-    private Menu menuFrm;
     private final GameController[] Slots;
     /**
      * Creates new form LoadGame
-     * @param menuFrm
      */
-    public LoadGame(Menu menuFrm) {
+    public LoadGame() {
         initComponents();
-        
-        this.menuFrm = menuFrm;
-        
+                
         // Apply UI Settings
         UIConfig = new UIConfig();
         try {
@@ -48,7 +44,7 @@ public class LoadGame extends javax.swing.JFrame {
         String[] loadListItems = new String[3];
         
         for(int i=0;i<loadListItems.length;i++) {
-            if(Slots[i].getUser().getUsername() == "Empty") {
+            if("Empty".equals(Slots[i].getUser().getUsername())) {
                 loadListItems[i] = "Empty Slot";
             } else {
                 loadListItems[i] = "Username: " + Slots[i].getUser().getUsername() + " ";
@@ -61,9 +57,6 @@ public class LoadGame extends javax.swing.JFrame {
         
     }
 
-    private LoadGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,7 +99,7 @@ public class LoadGame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadListMouseClicked
-        if(Slots[loadList.getSelectedIndex()].getUser().getUsername() == "Empty") {
+        if("Empty".equals(Slots[loadList.getSelectedIndex()].getUser().getUsername())) {
             //
         } else {
             Game loadGame = new Game(Slots[loadList.getSelectedIndex()]);

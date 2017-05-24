@@ -34,7 +34,7 @@ public class Game extends javax.swing.JFrame {
     public Game() {
         initGame();
         GameController = new GameController();
-        
+
     }
 
     public Game(String Username, int Time) {
@@ -42,30 +42,16 @@ public class Game extends javax.swing.JFrame {
 
         this.GameController = new GameController();
         GameController.setUser(new User(Username));
-        GameController.setGameTimeField(secsRemLabelReal,
-                Time,
-                currentCommand,
-                submitCommand
-        );
-        
+
         currentCommand.setText("man story");
-        GameController.getCommandsController().runCommand(currentCommand, commandLogger, GameController);
-        
-        
-        GameController.startTime();
+        GameController.getCommandsController().runCommand(currentCommand.getText(), GameController);
+
     }
 
     public Game(GameController LoadedGame) {
         initGame();
 
         this.GameController = LoadedGame;
-        GameController.setGameTimeField(
-                secsRemLabelReal,
-                LoadedGame.getListener().getSeconds(),
-                currentCommand,
-                submitCommand
-        );
-        GameController.startTime();
     }
 
     private void initGame() {
@@ -87,7 +73,7 @@ public class Game extends javax.swing.JFrame {
         // Play Music
         BGMusic = new Music();
         BGMusic.Play();
-        
+
         // Init Command History
         this.commandHistory = new ArrayList<>();
         this.HistoryIndex = 0;
@@ -185,13 +171,13 @@ public class Game extends javax.swing.JFrame {
 
     private void execCommand() {
         if (currentCommand.isEditable()) {
-            
+
             commandHistory.add(currentCommand.getText());
             HistoryIndex = commandHistory.size() - 1;
-            
-            GameController.getCommandsController().runCommand(currentCommand, commandLogger, GameController);
+
+            GameController.getCommandsController().runCommand(currentCommand.getText(), GameController);
             GameController.getCommandHistory().add(currentCommand.getText());
-            
+
         }
     }
 
@@ -200,27 +186,26 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_submitCommandMouseClicked
 
     private void currentCommandKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_currentCommandKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            execCommand();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-           currentCommand.setText(commandHistory.get(HistoryIndex));
-           
-           if(HistoryIndex == 0) {
-               HistoryIndex = commandHistory.size() - 1;
-           } else {
-               HistoryIndex--;
-           }
-        } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-           
-           currentCommand.setText(commandHistory.get(HistoryIndex));
-           
-           if(HistoryIndex < commandHistory.size() - 1) {
-               HistoryIndex++;
-           } else {
-               HistoryIndex = 0;
-           }
-           
-           
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_ENTER:
+                execCommand();
+                break;
+            case KeyEvent.VK_UP:
+                currentCommand.setText(commandHistory.get(HistoryIndex));
+                if (HistoryIndex == 0) {
+                    HistoryIndex = commandHistory.size() - 1;
+                } else {
+                    HistoryIndex--;
+                }   break;
+            case KeyEvent.VK_DOWN:
+                currentCommand.setText(commandHistory.get(HistoryIndex));
+                if (HistoryIndex < commandHistory.size() - 1) {
+                    HistoryIndex++;
+                } else {
+                    HistoryIndex = 0;
+                }   break;
+            default:
+                break;
         }
     }//GEN-LAST:event_currentCommandKeyPressed
 

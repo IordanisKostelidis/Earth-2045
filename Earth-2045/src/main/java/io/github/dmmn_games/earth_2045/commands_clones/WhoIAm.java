@@ -7,6 +7,7 @@ package io.github.dmmn_games.earth_2045.commands_clones;
 
 import io.github.dmmn_games.earth_2045.commands.*;
 import io.github.dmmn_games.earth_2045.game.GameController;
+import io.github.dmmn_games.earth_2045.user.User;
 import javax.swing.JTextArea;
 
 /**
@@ -27,7 +28,7 @@ public class WhoIAm implements ICommand {
     }
 
     @Override
-    public void run(String[] Arguments, JTextArea History, GameController Game) {
-        new WhoAmI().run(Arguments, History, Game);
+    public String run(String[] Arguments, User user) {
+        return new WhoAmI().run(Arguments, user);
     }
 }
