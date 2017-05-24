@@ -17,26 +17,21 @@ import java.util.logging.Logger;
 public class NewGame extends javax.swing.JFrame {
 
     private UIConfig UIConfig;
-    private Menu menuFrm;
 
     /**
      * Creates new form NewGame
      * @param menuFrm
      */
-    public NewGame(Menu menuFrm) {
+    public NewGame() {
         initComponents();
-        this.menuFrm = menuFrm;
+
         // Apply UI Settings
         UIConfig = new UIConfig(this.getWidth(), this.getHeight());
         try {
             UIConfig.initUI(this);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(NewGame.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
-    }
-
-    private NewGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -51,8 +46,8 @@ public class NewGame extends javax.swing.JFrame {
         usernameLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         createGameButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        modeBox = new javax.swing.JComboBox<>();
+        modeLabel = new javax.swing.JLabel();
         cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,9 +68,9 @@ public class NewGame extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Easy", "Normal", "Hard", "Debug" }));
+        modeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Easy", "Normal", "Hard" }));
 
-        jLabel1.setText("Mode");
+        modeLabel.setText("Mode");
 
         cancel.setText("Cancel");
         cancel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,10 +92,10 @@ public class NewGame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(usernameLabel)
-                    .addComponent(jLabel1))
+                    .addComponent(modeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modeBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(usernameField, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -119,8 +114,8 @@ public class NewGame extends javax.swing.JFrame {
                             .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
+                            .addComponent(modeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modeLabel)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(createGameButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -136,14 +131,12 @@ public class NewGame extends javax.swing.JFrame {
 
         int Time = 15 * 60;
 
-        if (jComboBox1.getSelectedItem().equals("Easy")) {
+        if (modeBox.getSelectedItem().equals("Easy")) {
             Time = Time * 2;
-        } else if (jComboBox1.getSelectedItem().equals("Normal")) {
-            Time = Time;
-        } else if (jComboBox1.getSelectedItem().equals("Hard")) {
+        } else if (modeBox.getSelectedItem().equals("Normal")) {
+            Time = Time * 1;
+        } else if (modeBox.getSelectedItem().equals("Hard")) {
             Time = Time / 2;
-        } else {
-            Time = 30;
         }
 
         Game createdGame = new Game(
@@ -165,7 +158,7 @@ public class NewGame extends javax.swing.JFrame {
 
     private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
         this.setVisible(false);
-        menuFrm.setVisible(true);
+        new Menu().setVisible(true);
     }//GEN-LAST:event_cancelMouseClicked
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
@@ -209,8 +202,8 @@ public class NewGame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel;
     private javax.swing.JButton createGameButton;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> modeBox;
+    private javax.swing.JLabel modeLabel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
