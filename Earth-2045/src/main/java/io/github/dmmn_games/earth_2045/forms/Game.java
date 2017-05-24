@@ -5,6 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.forms;
 
+import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.music.Music;
 import io.github.dmmn_games.earth_2045.user.User;
@@ -175,7 +176,16 @@ public class Game extends javax.swing.JFrame {
             commandHistory.add(currentCommand.getText());
             HistoryIndex = commandHistory.size() - 1;
 
-            GameController.getCommandsController().runCommand(currentCommand.getText(), GameController);
+            String Response = GameController.getCommandsController().runCommand(
+                    currentCommand.getText(),
+                    GameController
+            );
+            
+            if(Response.equals("CLEAR")) {
+                commandLogger.setText("");
+            } else {
+                new CommandUI(commandLogger).addLine(Response);
+            }
             GameController.getCommandHistory().add(currentCommand.getText());
 
         }
@@ -196,14 +206,16 @@ public class Game extends javax.swing.JFrame {
                     HistoryIndex = commandHistory.size() - 1;
                 } else {
                     HistoryIndex--;
-                }   break;
+                }
+                break;
             case KeyEvent.VK_DOWN:
                 currentCommand.setText(commandHistory.get(HistoryIndex));
                 if (HistoryIndex < commandHistory.size() - 1) {
                     HistoryIndex++;
                 } else {
                     HistoryIndex = 0;
-                }   break;
+                }
+                break;
             default:
                 break;
         }

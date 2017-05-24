@@ -6,12 +6,10 @@
 package io.github.dmmn_games.earth_2045.forms;
 
 import io.github.dmmn_games.earth_2045.commands.Exit;
-import io.github.dmmn_games.earth_2045.game.GameController;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTextArea;
 
 /**
  *

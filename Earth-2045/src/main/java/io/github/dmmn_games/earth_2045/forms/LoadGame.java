@@ -48,8 +48,6 @@ public class LoadGame extends javax.swing.JFrame {
                 loadListItems[i] = "Empty Slot";
             } else {
                 loadListItems[i] = "Username: " + Slots[i].getUser().getUsername() + " ";
-                loadListItems[i] += "Floor: " + Slots[i].getUser().getFloor() + " ";
-                loadListItems[i] += "Room: " + Slots[i].getUser().getRoom();
             }
         }
         

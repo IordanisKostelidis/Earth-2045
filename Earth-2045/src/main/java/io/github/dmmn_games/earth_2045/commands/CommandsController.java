@@ -43,7 +43,6 @@ public class CommandsController implements Serializable {
         Commands.add(new Go());
         Commands.add(new Look());
         Commands.add(new Pick());
-        Commands.add(new Use());
         Commands.add(new Talk());
         Commands.add(new Take());
         Commands.add(new Shoot());
