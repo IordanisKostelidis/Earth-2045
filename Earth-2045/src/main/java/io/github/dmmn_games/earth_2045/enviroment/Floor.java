@@ -42,4 +42,14 @@ public class Floor implements Serializable {
     public List<Room> getRooms() {
         return this.rooms;
     }
+    
+    public Room getElavatorRoom() throws Exception{
+        for(Room tempRoom : rooms){
+            if (tempRoom.isElavator() == true){
+                return tempRoom;
+            }
+        }
+        throw new Exception("there are no Elevator to this Floor");
+        
+    }
 }
