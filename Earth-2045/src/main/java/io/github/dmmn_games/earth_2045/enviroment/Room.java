@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.enviroment;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.items.*;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
@@ -55,5 +56,14 @@ public class Room implements Serializable {
         enemies.add(newEnemy);
     }
 
-    
+    public Room findDoor(Location location) throws Exception{
+        
+        for (Door tempDoor : doors){
+            if (tempDoor.getGeoloc() == location){
+                return tempDoor.getNextRoom();
+            }
+            
+        }
+        throw new Exception("the door not found");
+    }
 }
