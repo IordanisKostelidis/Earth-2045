@@ -171,24 +171,22 @@ public class Game extends javax.swing.JFrame {
     }
 
     private void execCommand() {
-        if (currentCommand.isEditable()) {
 
-            commandHistory.add(currentCommand.getText());
-            HistoryIndex = commandHistory.size() - 1;
+        commandHistory.add(currentCommand.getText());
+        HistoryIndex = commandHistory.size() - 1;
 
-            String Response = GameController.getCommandsController().runCommand(
-                    currentCommand.getText(),
-                    GameController
-            );
-            
-            if(Response.equals("CLEAR")) {
-                commandLogger.setText("");
-            } else {
-                new CommandUI(commandLogger).addLine(Response);
-            }
-            GameController.getCommandHistory().add(currentCommand.getText());
+        String Response = GameController.getCommandsController().runCommand(
+                currentCommand.getText(),
+                GameController
+        );
 
+        if (Response.equals("CLEAR")) {
+            commandLogger.setText("");
+        } else {
+            new CommandUI(commandLogger).addLine(Response);
         }
+        currentCommand.setText("");
+
     }
 
     private void submitCommandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitCommandMouseClicked
