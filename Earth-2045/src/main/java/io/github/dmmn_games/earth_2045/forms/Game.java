@@ -8,11 +8,14 @@ package io.github.dmmn_games.earth_2045.forms;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.music.Music;
+import io.github.dmmn_games.earth_2045.saveload.Save;
 import io.github.dmmn_games.earth_2045.user.User;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Timer;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +31,10 @@ public class Game extends javax.swing.JFrame {
     private Music BGMusic;
     private List<String> commandHistory;
     private int HistoryIndex;
+    private String SaveSlot;
+    
+    TimeLimiter timeLmtr;
+    private Timer GameTimer;
 
     /**
      * Creates new form Game
@@ -38,21 +45,42 @@ public class Game extends javax.swing.JFrame {
 
     }
 
-    public Game(String Username, int Time) {
+    public Game(String Username, int Time, String SaveSlot) {
         initGame();
 
         this.GameController = new GameController();
-        this.GameController.initWorld(Username);
+        this.GameController.initWorld(Username, Time);
+
+        this.SaveSlot = SaveSlot;
+        
+        timeLmtr = new TimeLimiter(
+                secsRemLabelReal,
+                Time,
+                currentCommand,
+                submitCommand
+        );
+        GameTimer = new Timer(1000, timeLmtr);
+        GameTimer.start();
 
         currentCommand.setText("man story");
-        GameController.getCommandsController().runCommand(currentCommand.getText(), GameController);
-
+        execCommand();
     }
 
-    public Game(GameController LoadedGame) {
+    public Game(GameController LoadedGame, String SaveSlot) {
         initGame();
+        
 
         this.GameController = LoadedGame;
+        this.SaveSlot = SaveSlot;
+        
+        timeLmtr = new TimeLimiter(
+                secsRemLabelReal,
+                LoadedGame.getTime(),
+                currentCommand,
+                submitCommand
+        );
+        GameTimer = new Timer(1000, timeLmtr);
+        GameTimer.start();
     }
 
     private void initGame() {
@@ -96,6 +124,7 @@ public class Game extends javax.swing.JFrame {
         currentCommand = new javax.swing.JTextField();
         secsRemLabel = new javax.swing.JLabel();
         secsRemLabelReal = new javax.swing.JLabel();
+        saveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -127,6 +156,13 @@ public class Game extends javax.swing.JFrame {
 
         secsRemLabelReal.setText("00:00");
 
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +179,8 @@ public class Game extends javax.swing.JFrame {
                         .addComponent(secsRemLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(secsRemLabelReal)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -152,9 +189,10 @@ public class Game extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(secsRemLabel)
-                    .addComponent(secsRemLabelReal))
+                    .addComponent(secsRemLabelReal)
+                    .addComponent(saveButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitCommand)
@@ -223,6 +261,11 @@ public class Game extends javax.swing.JFrame {
         currentCommand.requestFocus();
     }//GEN-LAST:event_formWindowOpened
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        GameController.setTime(timeLmtr.getSeconds());
+        new Save().run(SaveSlot, GameController);
+    }//GEN-LAST:event_saveButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,6 +302,7 @@ public class Game extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea commandLogger;
     private javax.swing.JTextField currentCommand;
+    private javax.swing.JButton saveButton;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JLabel secsRemLabel;
     private javax.swing.JLabel secsRemLabelReal;

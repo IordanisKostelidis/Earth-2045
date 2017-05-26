@@ -28,9 +28,11 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
                   <Component id="modeLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="slotLabel" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="slotBox" max="32767" attributes="0"/>
                   <Component id="modeBox" max="32767" attributes="0"/>
                   <Component id="usernameField" pref="182" max="32767" attributes="0"/>
               </Group>
@@ -58,14 +60,20 @@
                           <Component id="modeBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="modeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="slotBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="slotLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="createGameButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cancel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,8 +125,26 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cancelMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="slotBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="a"/>
+            <StringItem index="1" value="b"/>
+            <StringItem index="2" value="c"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="slotLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Slot"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.game;
+package io.github.dmmn_games.earth_2045.forms;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

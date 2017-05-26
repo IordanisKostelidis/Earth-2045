@@ -18,28 +18,8 @@ import java.io.ObjectOutputStream;
  */
 public class Save {
 
-    public void run(String[] Arguments, GameController Game) throws Exception {
-        if(Arguments.length == 1) {
-            throw new Exception("You must define the save slot !");
-        } else {
-            switch(Arguments[1]) {
-                case "a": {
-                    saveProcess("a", Game);
-                    break;
-                }
-                case "b": {
-                    saveProcess("b", Game);
-                    break;
-                }
-                case "c": {
-                    saveProcess("c", Game);
-                    break;
-                }
-                default: {
-                    throw new Exception("This is not a valid save slot !");
-                }
-            }
-        }
+    public void run(String Slot, GameController Game) {
+        saveProcess(Slot, Game);
     }
     
     private void saveProcess(String NameOfFile, GameController CurrentGame) {
