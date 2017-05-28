@@ -92,7 +92,7 @@ public class User implements Serializable {
                 room = tempdoor.getNextRoom();
 
             } else {
-                if (inventory.findkey(tempdoor.getDoorID())) {
+                if (inventory.findKey(tempdoor.getDoorID())) {
                     tempdoor.unlockDoor();
 
                 } else {
@@ -180,10 +180,10 @@ public class User implements Serializable {
     }
 
     private String lookTools() {
-        List<ITool> temptools = room.getTools();
+        List<ITool> tempTools = room.getTools();
         String response = "";
-        for (int i = 0; i < temptools.size(); i++) {
-            response += temptools.get(i).getToolName();
+        for (int i = 0; i < tempTools.size(); i++) {
+            response += tempTools.get(i).getToolName();
 
         }
         return response;
@@ -191,10 +191,10 @@ public class User implements Serializable {
     }
 
     private String lookItem() {
-        List<IItem> tempitems = room.getItems();
+        List<IItem> tempItems = room.getItems();
         String response = "";
-        for (int i = 0; i < tempitems.size(); i++) {
-            response += tempitems.get(i).getItemName();
+        for (int i = 0; i < tempItems.size(); i++) {
+            response += tempItems.get(i).getItemName();
 
         }
         return response;
@@ -202,10 +202,10 @@ public class User implements Serializable {
     }
 
     private String lookBots() {
-        List<Bot> tempbots = room.getBots();
+        List<Bot> tempBots = room.getBots();
         String response = "";
-        for (int i = 0; i < tempbots.size(); i++) {
-            response += tempbots.get(i).getName();
+        for (int i = 0; i < tempBots.size(); i++) {
+            response += tempBots.get(i).getName();
 
         }
         return response;
@@ -213,10 +213,10 @@ public class User implements Serializable {
     }
 
     private String lookEnemy() {
-        List<Enemy> tempenemy = room.getEnemies();
+        List<Enemy> tempEnemy = room.getEnemies();
         String response = "";
-        for (int i = 0; i < tempenemy.size(); i++) {
-            response += tempenemy.get(i).getName();
+        for (int i = 0; i < tempEnemy.size(); i++) {
+            response += tempEnemy.get(i).getName();
 
         }
         return response;
@@ -224,10 +224,10 @@ public class User implements Serializable {
     }
 
     private String lookDoors() {
-        List<Door> tempdoors = room.getDoors();
+        List<Door> tempDoors = room.getDoors();
         String response = "";
-        for (int i = 0; i < tempdoors.size(); i++) {
-            response += tempdoors.get(i).getDoorName();
+        for (int i = 0; i < tempDoors.size(); i++) {
+            response += tempDoors.get(i).getDoorName();
 
         }
         return response;

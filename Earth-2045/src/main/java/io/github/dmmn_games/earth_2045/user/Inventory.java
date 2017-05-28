@@ -55,7 +55,7 @@ public class Inventory implements Serializable {
         }
     }
 
-    public boolean findkey(int doorid) {
+    public boolean findKey(int doorid) {
         for (int i = 0; i < this.tools.size(); i++) {
             if (tools.get(i).getToolValue() == doorid) {
                 return true;
