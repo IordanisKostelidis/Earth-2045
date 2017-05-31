@@ -26,6 +26,7 @@ public class Enemy implements Serializable {
         health = health - damage;
         if (health <= 0) {
             alive = false;
+            
         }
 
     }

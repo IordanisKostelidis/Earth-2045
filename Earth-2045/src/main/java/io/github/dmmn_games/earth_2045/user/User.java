@@ -101,6 +101,7 @@ public class User implements Serializable {
     public String pick(String toolName) {
         try {
             inventory.add(room.findItool(toolName));
+            room.removeITool(toolName);
         } catch (Exception ex) {
             return (ex.getMessage());
         }
@@ -261,6 +262,8 @@ public class User implements Serializable {
                 return "I hit the"+tempEnemy.getName()+"with"+inventory.findWeapondmg()+"Damage"+  "and enemy hit me with"+tempEnemy.getDamage();
 
             } else {
+                
+                room.removeEnemy(enemyName);
                 return "I kill the Enemy!!";
 
             }
