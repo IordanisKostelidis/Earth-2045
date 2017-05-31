@@ -154,7 +154,7 @@ public class BotConversation extends javax.swing.JFrame
     private void talkButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_talkButtonActionPerformed
     {//GEN-HEADEREND:event_talkButtonActionPerformed
         History = userText.getText();        
-        conversation.append("You: " + History + "\n\n");        
+        conversation.append(currentUser.getUsername()+ ": " + History + "\n\n");        
         userText.setText(""); 
         
         conversation.append(currentBot.talk(History, currentUser.getUsername()));
@@ -166,9 +166,9 @@ public class BotConversation extends javax.swing.JFrame
     {//GEN-HEADEREND:event_userTextActionPerformed
         
             History = userText.getText();        
-            conversation.append("You: " + History + "\n\n");        
+            conversation.append(currentUser.getUsername()+ ": " + History + "\n\n");        
             userText.setText(""); 
-            currentBot.talk(History,currentUser.getUsername());
+            conversation.append(currentBot.talk(History,currentUser.getUsername()));
             
        
                

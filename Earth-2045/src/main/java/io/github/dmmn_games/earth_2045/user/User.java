@@ -248,10 +248,10 @@ public class User implements Serializable {
         try {
             Enemy tempEnemy = room.findEnemy(enemyName);
 
-            tempEnemy.receiveDamage(inventory.findWeapondmg());
+            tempEnemy.receiveDamage(inventory.findWeaponDmg());
             if (tempEnemy.isAlive()) {
                 tempEnemy.shoot(this);
-                return "I hit the" + tempEnemy.getName() + "with" + inventory.findWeapondmg() + "Damage" + "and enemy hit me with" + tempEnemy.getDamage();
+                return "I hit the" + tempEnemy.getName() + "with" + inventory.findWeaponDmg() + "Damage" + "and enemy hit me with" + tempEnemy.getDamage();
 
             } else {
 
