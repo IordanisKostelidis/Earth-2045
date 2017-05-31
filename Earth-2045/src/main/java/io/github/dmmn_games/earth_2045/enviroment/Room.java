@@ -28,7 +28,7 @@ public class Room implements Serializable {
 
     private List<Bot> bots;
     private List<Enemy> enemies;
-    private Elevation elavation;
+    private Elevation elevation;
 
     public Room() {
         this.doors = new ArrayList<>();
@@ -38,7 +38,7 @@ public class Room implements Serializable {
         
         this.bots = new ArrayList<>();
         this.enemies = new ArrayList<>();
-        this.elavation = null;
+        this.elevation = null;
     }
 
 
@@ -157,7 +157,11 @@ public class Room implements Serializable {
     }
     
     public void setEvevation(Room previousRoom, Room nextRoom){
-        this.elavation=new Elevation(previousRoom, nextRoom);
+        this.elevation=new Elevation(previousRoom, nextRoom);
+    }
+    
+    public boolean isElavation(){
+        return this.elevation != null;
     }
 }
 
