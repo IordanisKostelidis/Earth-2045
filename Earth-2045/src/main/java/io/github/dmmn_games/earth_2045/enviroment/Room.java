@@ -6,6 +6,7 @@
 package io.github.dmmn_games.earth_2045.enviroment;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
+import io.github.dmmn_games.earth_2045.elevator.Elevation;
 import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.items.*;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
@@ -19,8 +20,6 @@ import java.util.*;
  * @author makis
  */
 public class Room implements Serializable {
-
-    boolean elavator;
     
     private List<Door> doors;
 
@@ -29,6 +28,7 @@ public class Room implements Serializable {
 
     private List<Bot> bots;
     private List<Enemy> enemies;
+    private Elevation elavation;
 
     public Room() {
         this.doors = new ArrayList<>();
@@ -38,16 +38,9 @@ public class Room implements Serializable {
         
         this.bots = new ArrayList<>();
         this.enemies = new ArrayList<>();
-        this.elavator = false;
+        this.elavation = null;
     }
 
-    public boolean isElavator() {
-        return elavator;
-    }
-
-    public void setElavator(boolean elavator) {
-        this.elavator = elavator;
-    }
 
     public List<Door> getDoors() {
         return doors;
@@ -163,6 +156,8 @@ public class Room implements Serializable {
         return "the enemy didn't find";
     }
     
-    
+    public void setEvevation(Room previousRoom, Room nextRoom){
+        this.elavation=new Elevation(previousRoom, nextRoom);
+    }
 }
 
