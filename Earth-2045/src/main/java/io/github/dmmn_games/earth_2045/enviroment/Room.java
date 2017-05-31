@@ -163,5 +163,9 @@ public class Room implements Serializable {
     public boolean isElavation(){
         return this.elevation != null;
     }
+    
+    public Enemy getRandomEnemy() {
+        return this.enemies.get(new Random().nextInt(this.enemies.size() + 0));
+    }
 }
 
