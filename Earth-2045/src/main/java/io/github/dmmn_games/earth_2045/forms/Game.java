@@ -63,7 +63,7 @@ public class Game extends JFrame {
 
         currentCommand.setText("man story");
         execCommand();
-        
+
     }
 
     public Game(GameController loadedGame, String loadedSlot) {
@@ -220,8 +220,14 @@ public class Game extends JFrame {
 
         if (Response.equals("CLEAR")) {
             commandLogger.setText("");
+        } else if (Response.contains("TALK")) {
+            BotConversation botConversation = new BotConversation(
+                    gameControler.getUser(),
+                    Response.substring(4)
+            );
         } else {
             new CommandUI(commandLogger).addLine(Response);
+
         }
         currentCommand.setText("");
 
