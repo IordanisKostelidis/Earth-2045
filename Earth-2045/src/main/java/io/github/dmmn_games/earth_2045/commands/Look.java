@@ -13,25 +13,25 @@ import io.github.dmmn_games.earth_2045.user.User;
  */
 public class Look implements ICommand {
 
-    private final String Command;
+    private final String command;
 
     public Look() {
-        this.Command = "look";
+        this.command = "look";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
 
     @Override
-    public String run(String[] Arguments, User user) {
+    public String run(String[] commandArguments, User user) {
 
-        if (Arguments.length == 1) {
+        if (commandArguments.length == 1) {
             return "Look where ?";
         } else {
                         
-            return user.look(Arguments[1]);
+            return user.look(commandArguments[1]);
         }
     }
 }

@@ -7,8 +7,6 @@ package io.github.dmmn_games.earth_2045.forms;
 
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -16,21 +14,20 @@ import java.util.logging.Logger;
  */
 public class NewGame extends javax.swing.JFrame {
 
-    private UIConfig UIConfig;
+    private UIConfig uiConfig;
 
     /**
      * Creates new form NewGame
-     * @param menuFrm
      */
     public NewGame() {
         initComponents();
 
         // Apply UI Settings
-        UIConfig = new UIConfig(this.getWidth(), this.getHeight());
+        uiConfig = new UIConfig(this.getWidth(), this.getHeight());
         try {
-            UIConfig.initUI(this);
-        } catch (MalformedURLException ex) {
-            
+            uiConfig.initUI(this);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
     }
 

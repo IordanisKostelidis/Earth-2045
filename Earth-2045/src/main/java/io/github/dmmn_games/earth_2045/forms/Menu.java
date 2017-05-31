@@ -8,8 +8,6 @@ package io.github.dmmn_games.earth_2045.forms;
 import io.github.dmmn_games.earth_2045.commands.Exit;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -18,28 +16,28 @@ import java.util.logging.Logger;
 public class Menu extends javax.swing.JFrame {
 
     private UIConfig UIConfig;
-    
+
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
-        
+
         // Apply UI Settings
         UIConfig = new UIConfig();
         try {
             UIConfig.initUI(this);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
-        
+
         String[] listData = new String[3];
         listData[0] = "New Game";
         listData[1] = "Load Game";
         listData[2] = "Exit";
-        
+
         menuList.setListData(listData);
-        
+
     }
 
     /**
@@ -84,31 +82,31 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_menuListKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             menuListMouseClicked(null);
         }
     }//GEN-LAST:event_menuListKeyPressed
 
     private void menuListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuListMouseClicked
-        switch(menuList.getSelectedValue()) {
-                case "New Game": {
-                    this.setVisible(false);
-                    NewGame NewGame = new NewGame();
-                    NewGame.setVisible(true);
-                    break;
-                }
-                case "Load Game": {
-                    this.setVisible(false);
-                    LoadGame LoadGame = new LoadGame();
-                    LoadGame.setVisible(true);
-                    break;
-                }
-                case "Exit": {
-                    Exit exit = new Exit();
-                    exit.run(null, null);
-                    break;
-                }
+        switch (menuList.getSelectedValue()) {
+            case "New Game": {
+                this.setVisible(false);
+                NewGame NewGame = new NewGame();
+                NewGame.setVisible(true);
+                break;
             }
+            case "Load Game": {
+                this.setVisible(false);
+                LoadGame LoadGame = new LoadGame();
+                LoadGame.setVisible(true);
+                break;
+            }
+            case "Exit": {
+                Exit exit = new Exit();
+                exit.run(null, null);
+                break;
+            }
+        }
     }//GEN-LAST:event_menuListMouseClicked
 
     /**

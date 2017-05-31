@@ -17,73 +17,64 @@ import java.util.List;
  */
 public class CommandsController implements Serializable {
 
-    private final List<ICommand> Commands;
-    private String[] listCommands;
+    private final List<ICommand> commands;
 
     public CommandsController() {
-        Commands = new ArrayList<>();
+        commands = new ArrayList<>();
         this.initCommands();
     }
 
     private void initCommands() {
         // General Commands
-        Commands.add(new Clear());
-        Commands.add(new Info());
-        Commands.add(new Help());
-        Commands.add(new Man());
-        Commands.add(new Exit());
-        Commands.add(new Copyright());
+        commands.add(new Clear());
+        commands.add(new Info());
+        commands.add(new Help());
+        commands.add(new Man());
+        commands.add(new Exit());
+        commands.add(new Copyright());
 
         // User Info
-        Commands.add(new Status());
-        Commands.add(new WhoAmI());
-        Commands.add(new WhereAmI());
+        commands.add(new Status());
+        commands.add(new WhoAmI());
+        commands.add(new WhereAmI());
 
         // User Actions
-        Commands.add(new Go());
-        Commands.add(new Look());
-        Commands.add(new Pick());
-        Commands.add(new Talk());
-        Commands.add(new Take());
-        Commands.add(new Shoot());
+        commands.add(new Go());
+        commands.add(new Look());
+        commands.add(new Pick());
+        commands.add(new Talk());
+        commands.add(new Take());
+        commands.add(new Shoot());
 
         // Cloned Commands
-        Commands.add(new About());
-        Commands.add(new Cls());
-        Commands.add(new Pickup());
-        Commands.add(new Quit());
-        Commands.add(new WhereIAm());
-        Commands.add(new WhoIAm());
-        Commands.add(new Speak());
+        commands.add(new About());
+        commands.add(new Cls());
+        commands.add(new Pickup());
+        commands.add(new Quit());
+        commands.add(new WhereIAm());
+        commands.add(new WhoIAm());
+        commands.add(new Speak());
 
     }
 
-    private String[] separateCommand(String Command) {
-        return Command.
+    private String[] separateCommands(String command) {
+        return command.
                 toLowerCase().
                 replaceAll("^\\s+|\\s+$", "").
                 trim().replaceAll(" +", " ").
                 split(" ");
     }
 
-    public String runCommand(String command, GameController Game) {
+    public String runCommand(String command, GameController game) {
 
-        String Response = "";
-
-        listCommands = separateCommand(command);
+        String[] listCommands = separateCommands(command);
 
         boolean commandFound = false;
-        for (int i = 0; i < Commands.size(); i++) {
-            if (listCommands[0].equals(Commands.get(i).getCommand())) {
-                commandFound = true;
-                Response = Commands.get(i).run(listCommands, Game.getUser());
+        for (int i = 0; i < commands.size(); i++) {
+            if (listCommands[0].equals(commands.get(i).getCommand())) {
+                return commands.get(i).run(listCommands, game.getUser());
             }
         }
-
-        if (!commandFound) {
-            Response = "Command not found !";
-        }
-        
-        return Response;
+        return "Command not found !";
     }
 }

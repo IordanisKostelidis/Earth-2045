@@ -13,19 +13,19 @@ import io.github.dmmn_games.earth_2045.user.User;
  */
 public class Take implements ICommand {
 
-    private final String Command;
+    private final String command;
 
     public Take() {
-        this.Command = "take";
+        this.command = "take";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
 
     @Override
-    public String run(String[] Arguments, User user) {
+    public String run(String[] commandArguments, User user) {
 
         // TODO : Create Take
 

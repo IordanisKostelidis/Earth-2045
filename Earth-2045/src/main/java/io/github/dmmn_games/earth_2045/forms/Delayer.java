@@ -12,7 +12,7 @@ import java.util.TimerTask;
  * @author iordkost
  */
 public class Delayer extends TimerTask {
-    
+
     Menu menu;
     Splash splash;
 
@@ -26,7 +26,5 @@ public class Delayer extends TimerTask {
         menu.setVisible(true);
         splash.setVisible(false);
     }
-    
-    
 
 }

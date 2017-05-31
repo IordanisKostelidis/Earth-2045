@@ -13,19 +13,19 @@ import io.github.dmmn_games.earth_2045.user.User;
  */
 public class WhoAmI implements ICommand {
 
-    private final String Command;
+    private final String command;
 
     public WhoAmI() {
-        this.Command = "whoami";
+        this.command = "whoami";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
 
     @Override
-    public String run(String[] Arguments, User user) {
+    public String run(String[] commandArguments, User user) {
         return "You are a user, and your name is " + user.getUsername();
     }
 }
