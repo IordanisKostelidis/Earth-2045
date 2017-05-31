@@ -9,7 +9,7 @@ package io.github.dmmn_games.earth_2045.global;
  *
  * @author iordkost
  */
-public class SuperString {
+public class SuperString implements java.io.Serializable{
 
     String[] content;
 
