@@ -39,29 +39,27 @@ public class GameController implements java.io.Serializable {
         this.time = time;
         this.nextTrigger = time - 30;
         
-        floors.addFloor(new Floor());
-        floors.addFloor(new Floor());
-        floors.addFloor(new Floor());
-        floors.addFloor(new Floor());
-        floors.addFloor(new Floor());
+        this.addFloor(new Floor());
+        this.addFloor(new Floor());
+        this.addFloor(new Floor());
+        this.addFloor(new Floor());
+        
         
         // Add rooms on flr1
         floors.get(1).addRoom(new Room());
         floors.get(1).addRoom(new Room());
         floors.get(1).addRoom(new Room());
         floors.get(1).addRoom(new Room());
-
+       
         // Add content for the floor1
-        flr1.getRoom(0).addDoor(new Door("door0to1", 100, NORTH, flr1.getRoom(1), false));
-        flr1.getRoom(0).addDoor(new Door("door0to3", 1, WEST, flr1.getRoom(3), true));
-        flr1.getRoom(1).addDoor(new Door("door1to2", 1, WEST, flr1.getRoom(2), true));
-        flr1.getRoom(3).addTool(new Key("keyforDoor0to1", 100));
-        flr1.getRoom(1).addEnemy(new Enemy(true, "reverse", 5));
+        floors.get(1).getRoom(0).addDoor(new Door("door0to1", 100, NORTH, floors.get(1).getRoom(1), false));
+        floors.get(1).getRoom(0).addDoor(new Door("door0to3", 1, WEST, floors.get(1).getRoom(3), true));
+        floors.get(1).getRoom(1).addDoor(new Door("door1to2", 1, WEST, floors.get(1).getRoom(2), true));
+        floors.get(1).getRoom(3).addTool(new Key("keyforDoor0to1", 100));
+        floors.get(1) .getRoom(1).addEnemy(new Enemy(true, "reverse", 5));
 
         this.User = new User(Username);
-        this.User.setFloor(flr1);
-        this.User.setRoom(flr1.getRoom(1));
-
+        this.User.setRoom(floors.get(1).getRoom(0));
     }
 
     public int getTime() {
