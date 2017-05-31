@@ -5,6 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.forms;
 
+import io.github.dmmn_games.earth_2045.game.GameController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
@@ -22,16 +23,20 @@ public class TimeLimiter implements Serializable, ActionListener {
     private final JLabel remainingLabel;
     private final JTextField commandField;
     private final JButton submitCommandButton;
+    private final GameController gameController;
 
     public TimeLimiter(JLabel remainingLabel,
             int remainingSeconds,
             JTextField commandField,
-            JButton submitCommandButton
+            JButton submitCommandButton,
+            GameController game
     ) {
+
         this.remainingLabel = remainingLabel;
         this.remainingSeconds = remainingSeconds;
         this.commandField = commandField;
         this.submitCommandButton = submitCommandButton;
+        this.gameController = game;
     }
 
     @Override
@@ -42,6 +47,10 @@ public class TimeLimiter implements Serializable, ActionListener {
             this.submitCommandButton.setEnabled(false);
         } else {
             remainingSeconds--;
+
+            this.gameController.setTime(remainingSeconds);
+            this.gameController.timeTrigger();
+
             int hours = remainingSeconds / 3600;
             int minutes = (remainingSeconds % 3600) / 60;
             int seconds = this.remainingSeconds % 60;

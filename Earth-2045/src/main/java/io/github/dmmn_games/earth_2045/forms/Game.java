@@ -5,6 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.forms;
 
+import com.google.gson.Gson;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.music.Music;
@@ -54,13 +55,15 @@ public class Game extends JFrame {
                 secsRemLabelReal,
                 time,
                 currentCommand,
-                submitCommand
+                submitCommand,
+                gameControler
         );
         gameLimiter = new Timer(1000, timeLimiter);
         gameLimiter.start();
 
         currentCommand.setText("man story");
         execCommand();
+        
     }
 
     public Game(GameController loadedGame, String loadedSlot) {
@@ -73,7 +76,7 @@ public class Game extends JFrame {
                 secsRemLabelReal,
                 loadedGame.getTime(),
                 currentCommand,
-                submitCommand
+                submitCommand, gameControler
         );
         gameLimiter = new Timer(1000, timeLimiter);
         gameLimiter.start();

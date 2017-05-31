@@ -12,6 +12,7 @@ import static io.github.dmmn_games.earth_2045.game.Location.*;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.*;
 import io.github.dmmn_games.earth_2045.user.User;
+import java.util.Random;
 
 /**
  *
@@ -28,8 +29,9 @@ public class GameController implements java.io.Serializable {
     private Floor flr2;
     private Floor flr3;
     private Floor flr4;
-    
+
     private int time;
+    private int nextTrigger;
 
     public GameController() {
         CommandsController = new CommandsController();
@@ -37,7 +39,8 @@ public class GameController implements java.io.Serializable {
 
     public void initWorld(String Username, int time) {
         this.time = time;
-        
+        this.nextTrigger = time - 30;
+
         // Create floors
         flrGround = new Floor();
         flr0 = new Floor();
@@ -59,12 +62,12 @@ public class GameController implements java.io.Serializable {
         flr1.addRoom(new Room());
         flr1.addRoom(new Room());
         flr1.addRoom(new Room());
-        
+
         // Add content for the floor1
         flr1.getRoom(0).addDoor(new Door("door0to1", 100, NORTH, flr1.getRoom(1), false));
         flr1.getRoom(0).addDoor(new Door("door0to3", 1, WEST, flr1.getRoom(3), true));
         flr1.getRoom(1).addDoor(new Door("door1to2", 1, WEST, flr1.getRoom(2), true));
-        flr1.getRoom(3).addTool(new Key("keyforDoor0to1",100));
+        flr1.getRoom(3).addTool(new Key("keyforDoor0to1", 100));
         flr1.getRoom(1).addEnemy(new Enemy(true, "reverse", 5));
 
         this.User = new User(Username);
@@ -80,8 +83,6 @@ public class GameController implements java.io.Serializable {
     public void setTime(int time) {
         this.time = time;
     }
-    
-    
 
     public CommandsController getCommandsController() {
         return CommandsController;
@@ -98,4 +99,17 @@ public class GameController implements java.io.Serializable {
     public void setUser(User User) {
         this.User = User;
     }
+
+    public void timeTrigger() {
+        if (this.time == this.nextTrigger) {
+            this.nextTrigger -= 30;
+
+            Random random = new Random();
+
+            int n = random.nextInt(floors.size()) + 0;
+            
+            floors.get(n).moveEnemies();
+        }
+    }
+
 }
