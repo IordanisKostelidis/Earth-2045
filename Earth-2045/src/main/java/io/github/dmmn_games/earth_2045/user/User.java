@@ -206,7 +206,7 @@ public class User implements Serializable {
         List<Enemy> tempEnemy = room.getEnemies();
         String response = "";
         for (int i = 0; i < tempEnemy.size(); i++) {
-            response +="I found a enemy with name"+ tempEnemy.get(i).getName()+"write shot and try to kill him!! \n";
+            response +="I found a enemy with Name "+ tempEnemy.get(i).getName()+" Write shoot and try to kill him!! \n";
 
         }
         return response;
@@ -217,7 +217,7 @@ public class User implements Serializable {
         List<Door> tempDoors = room.getDoors();
         String response = "";
         for (int i = 0; i < tempDoors.size(); i++) {
-            response +="i Found the door"+ tempDoors.get(i).getGeoloc()+"\n";
+            response +="i Found the Door "+ tempDoors.get(i).getGeoloc()+"\n";
 
         }
         return response;
@@ -284,7 +284,7 @@ public class User implements Serializable {
     }
     public String status(){
     String response="";
-    response="Name: "+this.username+"\n Health"+this.health+"\n -----Inventory------";
+    response="Name: "+this.username+"\nHealth: "+this.health+"\n-----Inventory------";
     String[] toolNames=this.inventory.getToolName();
     for(int i=0;i<toolNames.length;i++){
     
