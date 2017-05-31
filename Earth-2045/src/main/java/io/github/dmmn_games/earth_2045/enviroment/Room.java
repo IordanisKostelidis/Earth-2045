@@ -89,7 +89,7 @@ public class Room implements Serializable {
             }
             
         }
-        throw new Exception("the door not found");
+        throw new Exception("I hit on the wall, i am not a ghost !");
     }
     
     public ITool findItool(String ITool) throws Exception{

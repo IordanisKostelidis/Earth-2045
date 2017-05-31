@@ -7,7 +7,6 @@ package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.ElevatorDirection;
-import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.items.IItem;
@@ -16,8 +15,6 @@ import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -76,22 +73,20 @@ public class User implements Serializable {
             Door tempdoor = room.findDoor(loctogo);
             if (tempdoor.isIsOpen()) {
                 room = tempdoor.getNextRoom();
+                return ("Go success");
 
+            } else if (inventory.findKey(tempdoor.getDoorID())) {
+                tempdoor.unlockDoor();
+                room = tempdoor.getNextRoom();
             } else {
-                if (inventory.findKey(tempdoor.getDoorID())) {
-                    tempdoor.unlockDoor();
-
-                } else {
-                    return ("Door is Locked and you dont have the key to open it");
-
-                }
+                return "Door is locked, and i don't have the key !";
 
             }
         } catch (Exception ex) {
             return (ex.getMessage());
         }
-
-        return ("Go success");
+        
+        return "";
 
     }
 
@@ -226,6 +221,7 @@ public class User implements Serializable {
 
             if (direction == ElevatorDirection.UP) {
                 for (int i = 0; i < loop; i++) {
+
                     if (room.getElevation().getNextRoom() != null) {
                         room = room.getElevation().getNextRoom();
                     }
@@ -283,12 +279,10 @@ public class User implements Serializable {
     }
 
     public String status() {
-        String response = "";
-        response = "Name: " + this.username + "\nHealth: " + this.health + "\n-----Inventory------";
+        String response = "Name: " + this.username + "\nHealth: " + this.health + "\n-----Inventory------";
         String[] toolNames = this.inventory.getToolName();
-        for (int i = 0; i < toolNames.length; i++) {
-
-            response += "\n" + toolNames[i];
+        for (String toolName : toolNames) {
+            response += "\n" + toolName;
         }
 
         return response;
@@ -299,6 +293,5 @@ public class User implements Serializable {
         return room.findBot(botName);
 
     }
-    
 
 }

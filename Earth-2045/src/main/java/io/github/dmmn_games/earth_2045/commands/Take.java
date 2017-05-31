@@ -5,6 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
+import io.github.dmmn_games.earth_2045.enviroment.ElevatorDirection;
 import io.github.dmmn_games.earth_2045.user.User;
 
 /**
@@ -27,8 +28,17 @@ public class Take implements ICommand {
     @Override
     public String run(String[] commandArguments, User user) {
 
-        // TODO : Create Take
+        if(commandArguments.length == 1) {
+            return "Take what ?";
+        } else {
+            String Elevator = commandArguments[1];
+            ElevatorDirection Direction = ElevatorDirection.valueOf(
+                    commandArguments[2].toUpperCase()
+            );
+            int Loop = Integer.parseInt(commandArguments[3]);
+            
+            return user.take(Elevator, Direction, Loop);
+        }
 
-        return "";
     }
 }

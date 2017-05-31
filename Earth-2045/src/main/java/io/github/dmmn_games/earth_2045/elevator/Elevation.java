@@ -14,8 +14,8 @@ import java.io.Serializable;
  */
 public class Elevation implements Serializable {
     
-    private Room previousRoom; 
-    private Room nextRoom; 
+    private final Room previousRoom; 
+    private final Room nextRoom; 
 
     public Elevation(Room previousRoom, Room nextRoom) {
         this.previousRoom = previousRoom;
