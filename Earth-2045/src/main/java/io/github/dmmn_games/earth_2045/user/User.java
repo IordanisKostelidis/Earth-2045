@@ -6,11 +6,9 @@
 package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
-import io.github.dmmn_games.earth_2045.elevator.Elevator;
 import io.github.dmmn_games.earth_2045.enviroment.ElevatorDirection;
 import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.enviroment.Room;
-import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.items.IItem;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
@@ -96,7 +94,7 @@ public class User implements Serializable {
                     tempdoor.unlockDoor();
 
                 } else {
-                    return ("Door is Locked and yu dont have the key to open it");
+                    return ("Door is Locked and you dont have the key to open it");
 
                 }
 
