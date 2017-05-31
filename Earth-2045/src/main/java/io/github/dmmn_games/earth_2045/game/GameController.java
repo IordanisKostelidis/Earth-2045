@@ -8,8 +8,9 @@ package io.github.dmmn_games.earth_2045.game;
 import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.*;
-import static io.github.dmmn_games.earth_2045.game.Location.WEST;
+import static io.github.dmmn_games.earth_2045.game.Location.*;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
+import io.github.dmmn_games.earth_2045.tools.*;
 import io.github.dmmn_games.earth_2045.user.User;
 
 /**
@@ -59,8 +60,11 @@ public class GameController implements java.io.Serializable {
         flr1.addRoom(new Room());
         flr1.addRoom(new Room());
         
-        // Add content on room 1 on flr1
-        flr1.getRoom(1).addDoor(new Door("aa", 1, WEST, flr1.getRoom(2), true));
+        // Add content for the floor1
+        flr1.getRoom(0).addDoor(new Door("door0to1", 100, NORTH, flr1.getRoom(1), false));
+        flr1.getRoom(0).addDoor(new Door("door0to3", 1, WEST, flr1.getRoom(3), true));
+        flr1.getRoom(1).addDoor(new Door("door1to2", 1, WEST, flr1.getRoom(2), true));
+        flr1.getRoom(3).addTool(new Key("keyforDoor0to1",100));
         flr1.getRoom(1).addEnemy(new Enemy(true, "reverse", 5));
 
         this.User = new User(Username);
