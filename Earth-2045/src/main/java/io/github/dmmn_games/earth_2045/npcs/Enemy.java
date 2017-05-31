@@ -41,5 +41,10 @@ public class Enemy implements Serializable {
     public String getName() {
         return name;
     }
+    
+    public int getDamage(){
+        
+        return 10;
+    }
 
 }
