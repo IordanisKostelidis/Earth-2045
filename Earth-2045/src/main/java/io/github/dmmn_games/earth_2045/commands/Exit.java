@@ -12,19 +12,19 @@ import io.github.dmmn_games.earth_2045.user.User;
  * @author iordkost
  */
 public class Exit implements ICommand {
-    private final String Command;
+    private final String command;
 
     public Exit() {
-        this.Command = "exit";
+        this.command = "exit";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
     
     @Override
-    public String run(String[] Arguments, User user) {
+    public String run(String[] commandArguments, User user) {
         System.exit(0);
         return "EXIT";
     }

@@ -6,9 +6,7 @@
 package io.github.dmmn_games.earth_2045.commands_clones;
 
 import io.github.dmmn_games.earth_2045.commands.*;
-import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.user.User;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -16,19 +14,19 @@ import javax.swing.JTextArea;
  */
 public class WhereIAm implements ICommand {
 
-    private final String Command;
+    private final String command;
 
     public WhereIAm() {
-        this.Command = "whereiam";
+        this.command = "whereiam";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
 
     @Override
-    public String run(String[] Arguments, User user) {
-        return new WhereAmI().run(Arguments, user);
+    public String run(String[] commandArguments, User user) {
+        return new WhereAmI().run(commandArguments, user);
     }
 }

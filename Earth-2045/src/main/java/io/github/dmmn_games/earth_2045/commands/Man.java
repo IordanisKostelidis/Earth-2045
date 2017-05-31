@@ -15,28 +15,28 @@ import io.github.dmmn_games.earth_2045.user.User;
  */
 public class Man implements ICommand {
 
-    private final String Command;
+    private final String command;
 
     public Man() {
-        this.Command = "man";
+        this.command = "man";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
 
     @Override
-    public String run(String[] Arguments, User user) {
-        if (Arguments.length == 1) {
+    public String run(String[] commandArguments, User user) {
+        if (commandArguments.length == 1) {
             return "You must define the command you want !";
         } else {
             return new TXTReader(
                             new CurrentPath().getDir()
                             + "/Data/Docs/"
-                            + Arguments[1]
+                            + commandArguments[1]
                             + "/"
-                            + Arguments[1]
+                            + commandArguments[1]
                             + ".dat",
                             "This is invalid command !"
                     ).getReadedFile();

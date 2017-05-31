@@ -13,24 +13,24 @@ import io.github.dmmn_games.earth_2045.user.User;
  */
 public class Shoot implements ICommand {
 
-    private final String Command;
+    private final String command;
 
     public Shoot() {
-        this.Command = "shoot";
+        this.command = "shoot";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
 
     @Override
-    public String run(String[] Arguments, User user) {
+    public String run(String[] commandArguments, User user) {
 
-        if (Arguments.length == 1) {
+        if (commandArguments.length == 1) {
             return "Shoot who ???";
         } else {
-            return user.shoot(Arguments[1]);
+            return user.shoot(commandArguments[1]);
         }
 
     }

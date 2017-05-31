@@ -14,8 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Timer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -31,15 +29,15 @@ public class Splash extends javax.swing.JFrame {
         /* important Statement */
         setUndecorated(true);
         setBackground(new Color(1.0f, 1.0f, 1.0f, 0.0f));
-        
+
         initComponents();
 
         // Apply UI Settings
         UIConfig UIConfig = new UIConfig();
         try {
             UIConfig.initUI(this);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
 
         try {
@@ -53,8 +51,8 @@ public class Splash extends javax.swing.JFrame {
                     g.drawImage(backgroundImage2, 0, 0, null);
                 }
             });
-        } catch (IOException e) {
-            System.err.println("Splash icon not found");
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
         }
 
         Timer cur = new Timer();

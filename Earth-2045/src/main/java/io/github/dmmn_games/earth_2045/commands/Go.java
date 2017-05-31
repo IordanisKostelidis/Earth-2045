@@ -14,28 +14,28 @@ import io.github.dmmn_games.earth_2045.user.User;
  */
 public class Go implements ICommand {
 
-    private final String Command;
+    private final String command;
 
     public Go() {
-        this.Command = "go";
+        this.command = "go";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
 
     @Override
-    public String run(String[] Arguments, User user) {
+    public String run(String[] commandArguments, User user) {
 
-        if (Arguments.length == 1) {
+        if (commandArguments.length == 1) {
             return "Go where ?";
         } else {
-            if (Arguments[1].toUpperCase().equals(Location.NORTH.name())
-                    || Arguments[1].toUpperCase().equals(Location.SOUTH.name())
-                    || Arguments[1].toUpperCase().equals(Location.EAST.name())
-                    || Arguments[1].toUpperCase().equals(Location.WEST.name())) {
-                return user.go(Location.valueOf(Arguments[1].toUpperCase()));
+            if (commandArguments[1].toUpperCase().equals(Location.NORTH.name())
+                    || commandArguments[1].toUpperCase().equals(Location.SOUTH.name())
+                    || commandArguments[1].toUpperCase().equals(Location.EAST.name())
+                    || commandArguments[1].toUpperCase().equals(Location.WEST.name())) {
+                return user.go(Location.valueOf(commandArguments[1].toUpperCase()));
             } else {
                 return "You can't go there !";
             }

@@ -9,78 +9,74 @@ import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.music.Music;
 import io.github.dmmn_games.earth_2045.saveload.Save;
-import io.github.dmmn_games.earth_2045.user.User;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
  * @author iordkost
  */
-public class Game extends javax.swing.JFrame {
+public class Game extends JFrame {
 
-    private UIConfig UIConfig;
-    private GameController GameController;
-    private Music BGMusic;
+    private final GameController gameControler;
+
+    private UIConfig uiConfig;
+    private Music music;
     private List<String> commandHistory;
-    private int HistoryIndex;
-    private String SaveSlot;
-    
-    TimeLimiter timeLmtr;
-    private Timer GameTimer;
+    private int historyIndex;
+    private String currentSlot;
+
+    private TimeLimiter timeLimiter;
+    private Timer gameLimiter;
 
     /**
      * Creates new form Game
      */
     public Game() {
         initGame();
-        GameController = new GameController();
+        gameControler = new GameController();
 
     }
 
-    public Game(String Username, int Time, String SaveSlot) {
+    public Game(String username, int time, String saveSlot) {
         initGame();
 
-        this.GameController = new GameController();
-        this.GameController.initWorld(Username, Time);
+        gameControler = new GameController();
+        gameControler.initWorld(username, time);
 
-        this.SaveSlot = SaveSlot;
-        
-        timeLmtr = new TimeLimiter(
+        currentSlot = saveSlot;
+
+        timeLimiter = new TimeLimiter(
                 secsRemLabelReal,
-                Time,
+                time,
                 currentCommand,
                 submitCommand
         );
-        GameTimer = new Timer(1000, timeLmtr);
-        GameTimer.start();
+        gameLimiter = new Timer(1000, timeLimiter);
+        gameLimiter.start();
 
         currentCommand.setText("man story");
         execCommand();
     }
 
-    public Game(GameController LoadedGame, String SaveSlot) {
+    public Game(GameController loadedGame, String loadedSlot) {
         initGame();
-        
 
-        this.GameController = LoadedGame;
-        this.SaveSlot = SaveSlot;
-        
-        timeLmtr = new TimeLimiter(
+        gameControler = loadedGame;
+        currentSlot = loadedSlot;
+
+        timeLimiter = new TimeLimiter(
                 secsRemLabelReal,
-                LoadedGame.getTime(),
+                loadedGame.getTime(),
                 currentCommand,
                 submitCommand
         );
-        GameTimer = new Timer(1000, timeLmtr);
-        GameTimer.start();
+        gameLimiter = new Timer(1000, timeLimiter);
+        gameLimiter.start();
     }
 
     private void initGame() {
@@ -89,23 +85,24 @@ public class Game extends javax.swing.JFrame {
         initComponents();
 
         // Apply UI Settings
-        UIConfig = new UIConfig();
+        uiConfig = new UIConfig();
+
         try {
-            UIConfig.initUI(this);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            uiConfig.initUI(this);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
 
         // Init CommandUI Logger
         initHistory();
 
         // Play Music
-        BGMusic = new Music();
-        BGMusic.Play();
+        music = new Music();
+        music.Play();
 
         // Init Command History
         this.commandHistory = new ArrayList<>();
-        this.HistoryIndex = 0;
+        this.historyIndex = 0;
 
     }
 
@@ -211,11 +208,11 @@ public class Game extends javax.swing.JFrame {
     private void execCommand() {
 
         commandHistory.add(currentCommand.getText());
-        HistoryIndex = commandHistory.size() - 1;
+        historyIndex = commandHistory.size() - 1;
 
-        String Response = GameController.getCommandsController().runCommand(
+        String Response = gameControler.getCommandsController().runCommand(
                 currentCommand.getText(),
-                GameController
+                gameControler
         );
 
         if (Response.equals("CLEAR")) {
@@ -237,19 +234,19 @@ public class Game extends javax.swing.JFrame {
                 execCommand();
                 break;
             case KeyEvent.VK_UP:
-                currentCommand.setText(commandHistory.get(HistoryIndex));
-                if (HistoryIndex == 0) {
-                    HistoryIndex = commandHistory.size() - 1;
+                currentCommand.setText(commandHistory.get(historyIndex));
+                if (historyIndex == 0) {
+                    historyIndex = commandHistory.size() - 1;
                 } else {
-                    HistoryIndex--;
+                    historyIndex--;
                 }
                 break;
             case KeyEvent.VK_DOWN:
-                currentCommand.setText(commandHistory.get(HistoryIndex));
-                if (HistoryIndex < commandHistory.size() - 1) {
-                    HistoryIndex++;
+                currentCommand.setText(commandHistory.get(historyIndex));
+                if (historyIndex < commandHistory.size() - 1) {
+                    historyIndex++;
                 } else {
-                    HistoryIndex = 0;
+                    historyIndex = 0;
                 }
                 break;
             default:
@@ -262,8 +259,8 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        GameController.setTime(timeLmtr.getSeconds());
-        new Save().run(SaveSlot, GameController);
+        gameControler.setTime(timeLimiter.getSeconds());
+        new Save().run(currentSlot, gameControler);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     /**

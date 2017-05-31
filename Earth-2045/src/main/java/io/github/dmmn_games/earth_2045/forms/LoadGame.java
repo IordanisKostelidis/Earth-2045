@@ -9,8 +9,6 @@ import io.github.dmmn_games.earth_2045.saveload.Load;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -18,43 +16,42 @@ import java.util.logging.Logger;
  */
 public class LoadGame extends javax.swing.JFrame {
 
-    private UIConfig UIConfig;
-    private final GameController[] Slots;
+    private UIConfig uiConfig;
+    private final GameController[] slots;
+
     /**
      * Creates new form LoadGame
      */
     public LoadGame() {
         initComponents();
-                
+
         // Apply UI Settings
-        UIConfig = new UIConfig();
+        uiConfig = new UIConfig();
         try {
-            UIConfig.initUI(this);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            uiConfig.initUI(this);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
-        
-        Slots = new GameController[3];
-        
-        Slots[0] = new Load().loadProcess("a");
-        Slots[1] = new Load().loadProcess("b");
-        Slots[2] = new Load().loadProcess("c");
-        
-        
+
+        slots = new GameController[3];
+
+        slots[0] = new Load().loadProcess("a");
+        slots[1] = new Load().loadProcess("b");
+        slots[2] = new Load().loadProcess("c");
+
         String[] loadListItems = new String[3];
-        
-        for(int i=0;i<loadListItems.length;i++) {
-            if("Empty".equals(Slots[i].getUser().getUsername())) {
+
+        for (int i = 0; i < loadListItems.length; i++) {
+            if ("Empty".equals(slots[i].getUser().getUsername())) {
                 loadListItems[i] = "Empty Slot";
             } else {
-                loadListItems[i] = "Username: " + Slots[i].getUser().getUsername() + " ";
+                loadListItems[i] = "Username: " + slots[i].getUser().getUsername() + " ";
             }
         }
-        
-        loadList.setListData(loadListItems);
-        
-    }
 
+        loadList.setListData(loadListItems);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,17 +111,17 @@ public class LoadGame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadListMouseClicked
-        if("Empty".equals(Slots[loadList.getSelectedIndex()].getUser().getUsername())) {
+        if ("Empty".equals(slots[loadList.getSelectedIndex()].getUser().getUsername())) {
             //
         } else {
-            Game loadGame = new Game(Slots[loadList.getSelectedIndex()],loadList.getSelectedValue());
+            Game loadGame = new Game(slots[loadList.getSelectedIndex()], loadList.getSelectedValue());
             loadGame.setVisible(true);
             this.setVisible(false);
         }
     }//GEN-LAST:event_loadListMouseClicked
 
     private void loadListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loadListKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             loadListMouseClicked(null);
         }
     }//GEN-LAST:event_loadListKeyPressed
@@ -166,7 +163,7 @@ public class LoadGame extends javax.swing.JFrame {
             new LoadGame().setVisible(true);
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

@@ -6,14 +6,15 @@
 package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.user.User;
+import java.io.Serializable;
 
 /**
  *
  * @author iordkost
  */
-public interface ICommand extends java.io.Serializable {
+public interface ICommand extends Serializable {
 
     String getCommand();
-    String run(String[] Arguments, User user);
+    String run(String[] commandArguments, User user);
     
 }

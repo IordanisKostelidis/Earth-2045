@@ -18,42 +18,42 @@ import javax.swing.JTextField;
  */
 public class TimeLimiter implements Serializable, ActionListener {
 
-    private int Seconds;
-    private final JLabel Msg;
-    private final JTextField Command;
-    private final JButton SubmitCommand;
+    private int remainingSeconds;
+    private final JLabel remainingLabel;
+    private final JTextField commandField;
+    private final JButton submitCommandButton;
 
-    public TimeLimiter(JLabel Msg,
-            int Seconds,
-            JTextField Command,
-            JButton SubmitCommand
+    public TimeLimiter(JLabel remainingLabel,
+            int remainingSeconds,
+            JTextField commandField,
+            JButton submitCommandButton
     ) {
-        this.Msg = Msg;
-        this.Seconds = Seconds;
-        this.Command = Command;
-        this.SubmitCommand = SubmitCommand;
+        this.remainingLabel = remainingLabel;
+        this.remainingSeconds = remainingSeconds;
+        this.commandField = commandField;
+        this.submitCommandButton = submitCommandButton;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (Seconds == 0) {
-            this.Command.setText("Game Over !!!");
-            this.Command.setEditable(false);
-            this.SubmitCommand.setEnabled(false);
+        if (remainingSeconds == 0) {
+            this.commandField.setText("Game Over !!!");
+            this.commandField.setEditable(false);
+            this.submitCommandButton.setEnabled(false);
         } else {
-            Seconds--;
-            int hours = Seconds / 3600;
-            int minutes = (Seconds % 3600) / 60;
-            int seconds = Seconds % 60;
+            remainingSeconds--;
+            int hours = remainingSeconds / 3600;
+            int minutes = (remainingSeconds % 3600) / 60;
+            int seconds = this.remainingSeconds % 60;
 
             String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
 
-            Msg.setText(timeString);
+            remainingLabel.setText(timeString);
         }
     }
 
     public int getSeconds() {
-        return this.Seconds;
+        return this.remainingSeconds;
     }
 
 }

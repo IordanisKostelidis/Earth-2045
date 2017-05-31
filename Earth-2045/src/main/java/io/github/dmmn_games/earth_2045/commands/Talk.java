@@ -14,25 +14,25 @@ import io.github.dmmn_games.earth_2045.user.User;
  */
 public class Talk implements ICommand {
 
-    private final String Command;
+    private final String command;
 
     public Talk() {
-        this.Command = "talk";
+        this.command = "talk";
     }
 
     @Override
     public String getCommand() {
-        return this.Command;
+        return this.command;
     }
 
     @Override
-    public String run(String[] Arguments, User user) {
+    public String run(String[] commandArguments, User user) {
 
-        if (Arguments.length == 1) {
+        if (commandArguments.length == 1) {
             return "Talk to who ?";
         } else {
-            String Msg = new SuperString(Arguments).GetString(2);
-            return user.talk(Arguments[1], Msg);
+            String Msg = new SuperString(commandArguments).GetString(2);
+            return user.talk(commandArguments[1], Msg);
         }
         
     }
