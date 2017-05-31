@@ -13,7 +13,9 @@ import io.github.dmmn_games.earth_2045.saveload.Save;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 
@@ -225,6 +227,8 @@ public class Game extends JFrame {
                     gameControler.getUser(),
                     Response.substring(4)
             );
+            botConversation.setVisible(true);
+            
         } else {
             new CommandUI(commandLogger).addLine(Response);
 

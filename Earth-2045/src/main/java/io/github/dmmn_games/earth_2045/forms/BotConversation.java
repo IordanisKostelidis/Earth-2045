@@ -10,19 +10,21 @@ package io.github.dmmn_games.earth_2045.forms;
  *
  * @author elgreko
  */
-
+import io.github.dmmn_games.earth_2045.user.User;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
+import io.github.dmmn_games.earth_2045.user.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class BotConversation extends javax.swing.JFrame
 {
-    boolean key; //TODO make bot give key
+    
     String previousHistory;
     String History;
-    String botQuestion [] = {"Who are you? Are you here to save us?",
-                                 "I'm gonna give you the key to open the last floor\nbut first you have to solve a riddle to prove that you are the chosen one",
-                                 "What walks on 4 legs when its morning,on 2 legs at noon\nand on 3 legs in the evening?",
-                                 "gratz"};
+    Bot currentBot;
+    User currentUser;
+    
 
     /**
      * Creates new form Frame
@@ -30,10 +32,28 @@ public class BotConversation extends javax.swing.JFrame
     public BotConversation()
     {
         
-        Bot bot = new Bot();
+        
         initComponents();
         
     }
+
+    public BotConversation(User currentUser, String currentBot)
+    {
+        initComponents();
+        this.currentUser = currentUser;
+        try
+        {
+            this.currentBot = currentUser.findBot(currentBot) ;
+        } catch (Exception ex)
+        {
+            System.err.println(ex.getMessage());
+        }
+        
+    }
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,7 +71,7 @@ public class BotConversation extends javax.swing.JFrame
         conversation = new javax.swing.JTextArea();
         exitButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowOpened(java.awt.event.WindowEvent evt)
@@ -135,8 +155,9 @@ public class BotConversation extends javax.swing.JFrame
     {//GEN-HEADEREND:event_talkButtonActionPerformed
         History = userText.getText();        
         conversation.append("You: " + History + "\n\n");        
-        userText.setText("");             
-                
+        userText.setText(""); 
+        
+        conversation.append(currentBot.talk(History, currentUser.getUsername()));
         userText.requestFocus();
         
     }//GEN-LAST:event_talkButtonActionPerformed
@@ -146,7 +167,8 @@ public class BotConversation extends javax.swing.JFrame
         
             History = userText.getText();        
             conversation.append("You: " + History + "\n\n");        
-            userText.setText("");               
+            userText.setText(""); 
+            currentBot.talk(History,currentUser.getUsername());
             
        
                
@@ -156,7 +178,7 @@ public class BotConversation extends javax.swing.JFrame
     {//GEN-HEADEREND:event_formWindowOpened
         exitButton.setVisible(false);
         userText.requestFocus();
-        conversation.append("Who are you?");
+        conversation.append(currentBot.botQuestion[0]);
         
     }//GEN-LAST:event_formWindowOpened
 

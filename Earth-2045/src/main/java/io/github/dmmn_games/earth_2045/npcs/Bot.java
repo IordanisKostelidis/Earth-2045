@@ -6,7 +6,10 @@ import java.io.Serializable;
 public class Bot implements  Serializable {
 
     String name;
-    
+    public String botQuestion [] = {"Who are you? Are you here to save us?",
+                                    "I'm gonna give you the key to open the last floor\nbut first you have to solve a riddle to prove that you are the chosen one",
+                                    "What walks on 4 legs when its morning,on 2 legs at noon\nand on 3 legs in the evening?",
+                                    "gratz"};
     int position;
 
     public Bot()
@@ -39,13 +42,14 @@ public class Bot implements  Serializable {
         String botmsg = "";
 
         if(msg.contains("hello")) {
-            return "Hello " + username;
+            botmsg =  "Hello " + username;
         } else if (msg.contains("you are ai") || msg.contains("what are you")) {
-            return "No, i am a stupid static bot !";
+            botmsg = "No, i am a stupid static bot !";
         }else {
-            return "What do you want " + username + "?";
+            botmsg =  "What do you want " + username + "?";
         }
 
+         return botmsg;
 
     }
 

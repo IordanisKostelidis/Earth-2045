@@ -9,6 +9,7 @@ import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.*;
 import static io.github.dmmn_games.earth_2045.game.Location.*;
+import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.*;
 import io.github.dmmn_games.earth_2045.user.User;
@@ -71,7 +72,7 @@ public class GameController implements java.io.Serializable {
         floors.get(1).getRoom(1).addEnemy(new Enemy(true, "reverse", 5));
         floors.get(1).getRoom(2).addEnemy(new Enemy(true, "reverse", 5));
         floors.get(1).getRoom(3).addEnemy(new Enemy(true, "reverse", 5));
-
+        floors.get(1).getRoom(0).addBot(new Bot("josearmando",0));
 
         floors.get(1).getRoom(2).setEvevation(null, null);
         floors.get(2).getRoom(2).setEvevation(null, null);
