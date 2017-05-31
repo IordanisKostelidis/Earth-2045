@@ -8,6 +8,7 @@ package io.github.dmmn_games.earth_2045.enviroment;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import java.io.Serializable;
+import static java.lang.Math.abs;
 import java.util.*;
 
 /**
@@ -64,20 +65,27 @@ public class Floor implements Serializable {
         throw new Exception("there are no Elevator to this Floor");
     }
 
-    public void moveEnemies() {
+    public void moveEnemies() throws Exception {
         Random random = new Random();
 
-        int randomRoom = random.nextInt(this.rooms.size()) + 0;
-        
-        Enemy tmpEnemy = rooms.get(randomRoom).getRandomEnemy();
-        
-        rooms.get(randomRoom).removeEnemy(tmpEnemy.getName());
-        
-        int randomNextRoom = random.nextInt(this.rooms.size()) + 0;
-        while(randomRoom == randomNextRoom) {
-            randomNextRoom = random.nextInt(this.rooms.size()) + 0;
+        if (rooms.isEmpty()) {
+            throw new Exception("Floor is empty !");
+        } else {
+            int randomRoom = (int) (Math.random() * rooms.size() + 0);
+
+            Enemy tmpEnemy = rooms.get(randomRoom).getRandomEnemy();
+
+            rooms.get(randomRoom).removeEnemy(tmpEnemy.getName());
+
+            int randomNextRoom = (int) (Math.random() * rooms.size() + 0);
+            while (randomRoom == randomNextRoom) {
+                randomNextRoom = (int) (Math.random() * rooms.size() + 0);
+            }
+
+            rooms.get(randomNextRoom).addEnemy(tmpEnemy);
+
+            throw new Exception("Enemy moved from " + randomRoom + " to " + randomNextRoom);
         }
-        
-        rooms.get(randomNextRoom).addEnemy(tmpEnemy);
+
     }
 }

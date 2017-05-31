@@ -87,7 +87,7 @@ public class Inventory implements Serializable {
     }
     public String[] getToolName(){
     String[] tempTools =new String[this.tools.size()];
-    for(int i=0;i<=tools.size();i++)
+    for(int i=0;i<tools.size();i++)
     {   
         tempTools[i]=this.tools.get(i).getToolName();
     

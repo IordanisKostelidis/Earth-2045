@@ -9,6 +9,8 @@ import io.github.dmmn_games.earth_2045.game.GameController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -49,7 +51,11 @@ public class TimeLimiter implements Serializable, ActionListener {
             remainingSeconds--;
 
             this.gameController.setTime(remainingSeconds);
-            this.gameController.timeTrigger();
+            try {
+                this.gameController.timeTrigger();
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
 
             int hours = remainingSeconds / 3600;
             int minutes = (remainingSeconds % 3600) / 60;

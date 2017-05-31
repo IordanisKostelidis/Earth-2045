@@ -18,7 +18,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.google.gson.Gson;
 
 /**
  *
@@ -32,7 +31,6 @@ public class User implements Serializable {
 
     private Inventory inventory;
 
-    private Floor floor;
     private Room room;
 
     public User(String username) {
@@ -43,14 +41,6 @@ public class User implements Serializable {
 
         this.inventory = new Inventory();
 
-    }
-
-    public Floor getFloor() {
-        return floor;
-    }
-
-    public void setFloor(Floor floor) {
-        this.floor = floor;
     }
 
     public Room getRoom() {
@@ -193,7 +183,7 @@ public class User implements Serializable {
         List<IItem> tempItems = room.getItems();
         String response = "";
         for (int i = 0; i < tempItems.size(); i++) {
-            response +="I found a "+ tempItems.get(i).getItemName()+"i can't pick up this Item!! /n";
+            response +="I found a "+ tempItems.get(i).getItemName()+"i can't pick up this Item!! \n";
             
 
         }
@@ -205,7 +195,7 @@ public class User implements Serializable {
         List<Bot> tempBots = room.getBots();
         String response = "";
         for (int i = 0; i < tempBots.size(); i++) {
-            response +="I find Bot"+tempBots.get(i).getName()+"and i can talk with him /n";
+            response +="I find Bot"+tempBots.get(i).getName()+"and i can talk with him \n";
 
         }
         return response;
@@ -216,7 +206,7 @@ public class User implements Serializable {
         List<Enemy> tempEnemy = room.getEnemies();
         String response = "";
         for (int i = 0; i < tempEnemy.size(); i++) {
-            response +="I found a enemy with name"+ tempEnemy.get(i).getName()+"write shot and try to kill him!! /n";
+            response +="I found a enemy with name"+ tempEnemy.get(i).getName()+"write shot and try to kill him!! \n";
 
         }
         return response;
@@ -227,7 +217,7 @@ public class User implements Serializable {
         List<Door> tempDoors = room.getDoors();
         String response = "";
         for (int i = 0; i < tempDoors.size(); i++) {
-            response +="i Found the door"+ tempDoors.get(i).getGeoloc()+"/n";
+            response +="i Found the door"+ tempDoors.get(i).getGeoloc()+"\n";
 
         }
         return response;
@@ -235,27 +225,21 @@ public class User implements Serializable {
     }
 
     public String take(String elevator, ElevatorDirection direction, int loop) {
-        if (room.isElavator()) {
+        if (room.isElavation()) {
 
             if (direction == ElevatorDirection.UP) {
                 for (int i = 0; i < loop; i++) {
-                    floor = floor.getNextfloor();
-                    try {
-                        room = floor.getElavatorRoom();
-                    } catch (Exception ex) {
-                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                   if(room.getElevation().getNextRoom() != null) {
+                       room = room.getElevation().getNextRoom();
+                   }
 
                 }
 
             } else {
                 for (int i = 0; i < loop; i++) {
-                    floor = floor.getPreviousfloor();
-                    try {
-                        room = floor.getElavatorRoom();
-                    } catch (Exception ex) {
-                        Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    if(room.getElevation().getPreviousRoom() != null) {
+                       room = room.getElevation().getPreviousRoom();
+                   }
 
                 }
 
@@ -300,12 +284,12 @@ public class User implements Serializable {
     }
     public String status(){
     String response="";
-    response="Name: "+this.username+"/n Health"+this.health+"/n -----Inventory------";
+    response="Name: "+this.username+"\n Health"+this.health+"\n -----Inventory------";
     String[] toolNames=this.inventory.getToolName();
     for(int i=0;i<toolNames.length;i++){
     
     
-    response+="/n"+toolNames[i];
+    response+="\n"+toolNames[i];
     }
     
     

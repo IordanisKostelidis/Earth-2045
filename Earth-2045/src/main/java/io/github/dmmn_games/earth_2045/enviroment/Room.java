@@ -156,6 +156,10 @@ public class Room implements Serializable {
         return "the enemy didn't find";
     }
     
+    public Elevation getElevation() {
+        return elevation;
+    }
+    
     public void setEvevation(Room previousRoom, Room nextRoom){
         this.elevation=new Elevation(previousRoom, nextRoom);
     }
@@ -164,8 +168,14 @@ public class Room implements Serializable {
         return this.elevation != null;
     }
     
-    public Enemy getRandomEnemy() {
-        return this.enemies.get(new Random().nextInt(this.enemies.size() + 0));
+    public Enemy getRandomEnemy() throws Exception {
+        if(enemies.isEmpty()) {
+            throw new Exception("We can't find enemy here !");
+        } else {
+            return this.enemies.get((int)(Math.random() * enemies.size() + 0));
+        }
     }
+    
+    
 }
 

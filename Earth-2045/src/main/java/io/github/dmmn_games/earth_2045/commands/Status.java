@@ -26,6 +26,6 @@ public class Status implements ICommand {
 
     @Override
     public String run(String[] commandArguments, User user) {
-        return "";
+        return user.status();
     }
 }
