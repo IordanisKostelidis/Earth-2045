@@ -7,6 +7,8 @@ package io.github.dmmn_games.earth_2045.commands;
 
 import io.github.dmmn_games.earth_2045.global.SuperString;
 import io.github.dmmn_games.earth_2045.user.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,9 +33,12 @@ public class Talk implements ICommand {
         if (commandArguments.length == 1) {
             return "Talk to who ?";
         } else {
-            String Msg = new SuperString(commandArguments).GetString(2);
-            return user.talk(commandArguments[1], Msg);
+            try {
+               return "TALK" + user.findBot(commandArguments[1]).getName();
+            } catch (Exception ex) {
+                return ex.getMessage();
+            }
         }
-        
+
     }
 }

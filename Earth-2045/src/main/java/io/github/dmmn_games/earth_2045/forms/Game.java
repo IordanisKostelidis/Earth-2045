@@ -13,7 +13,9 @@ import io.github.dmmn_games.earth_2045.saveload.Save;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 
@@ -63,7 +65,7 @@ public class Game extends JFrame {
 
         currentCommand.setText("man story");
         execCommand();
-        
+
     }
 
     public Game(GameController loadedGame, String loadedSlot) {
@@ -220,8 +222,16 @@ public class Game extends JFrame {
 
         if (Response.equals("CLEAR")) {
             commandLogger.setText("");
+        } else if (Response.contains("TALK")) {
+            BotConversation botConversation = new BotConversation(
+                    gameControler.getUser(),
+                    Response.substring(4)
+            );
+            botConversation.setVisible(true);
+            
         } else {
             new CommandUI(commandLogger).addLine(Response);
+
         }
         currentCommand.setText("");
 

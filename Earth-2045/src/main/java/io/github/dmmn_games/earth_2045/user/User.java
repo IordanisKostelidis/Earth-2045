@@ -7,7 +7,6 @@ package io.github.dmmn_games.earth_2045.user;
 
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.ElevatorDirection;
-import io.github.dmmn_games.earth_2045.enviroment.Floor;
 import io.github.dmmn_games.earth_2045.enviroment.Room;
 import io.github.dmmn_games.earth_2045.game.Location;
 import io.github.dmmn_games.earth_2045.items.IItem;
@@ -16,8 +15,6 @@ import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.ITool;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -37,7 +34,6 @@ public class User implements Serializable {
         this.username = username;
         this.health = 100;
         this.alive = true;
-       
 
         this.inventory = new Inventory();
 
@@ -50,8 +46,6 @@ public class User implements Serializable {
     public void setRoom(Room room) {
         this.room = room;
     }
-    
-    
 
     public String getUsername() {
         return username;
@@ -79,28 +73,27 @@ public class User implements Serializable {
             Door tempdoor = room.findDoor(loctogo);
             if (tempdoor.isIsOpen()) {
                 room = tempdoor.getNextRoom();
+                return ("Go success");
 
+            } else if (inventory.findKey(tempdoor.getDoorID())) {
+                tempdoor.unlockDoor();
+                room = tempdoor.getNextRoom();
             } else {
-                if (inventory.findKey(tempdoor.getDoorID())) {
-                    tempdoor.unlockDoor();
-
-                } else {
-                    return ("Door is Locked and you dont have the key to open it");
-
-                }
+                return "Door is locked, and i don't have the key !";
 
             }
         } catch (Exception ex) {
             return (ex.getMessage());
         }
-
-        return ("Go success");
+        
+        return "";
 
     }
 
     public String pick(String toolName) {
         try {
             inventory.add(room.findItool(toolName));
+            room.removeITool(toolName);
         } catch (Exception ex) {
             return (ex.getMessage());
         }
@@ -172,7 +165,7 @@ public class User implements Serializable {
         List<ITool> tempTools = room.getTools();
         String response = "";
         for (int i = 0; i < tempTools.size(); i++) {
-            response +="I find a "+ tempTools.get(i).getToolName()+"and i can pick up \n";
+            response += "I find a " + tempTools.get(i).getToolName() + "and i can pick up \n";
 
         }
         return response;
@@ -183,8 +176,7 @@ public class User implements Serializable {
         List<IItem> tempItems = room.getItems();
         String response = "";
         for (int i = 0; i < tempItems.size(); i++) {
-            response +="I found a "+ tempItems.get(i).getItemName()+"i can't pick up this Item!! \n";
-            
+            response += "I found a " + tempItems.get(i).getItemName() + "i can't pick up this Item!! \n";
 
         }
         return response;
@@ -195,7 +187,7 @@ public class User implements Serializable {
         List<Bot> tempBots = room.getBots();
         String response = "";
         for (int i = 0; i < tempBots.size(); i++) {
-            response +="I find Bot"+tempBots.get(i).getName()+"and i can talk with him \n";
+            response += "I find Bot" + tempBots.get(i).getName() + "and i can talk with him \n";
 
         }
         return response;
@@ -206,7 +198,7 @@ public class User implements Serializable {
         List<Enemy> tempEnemy = room.getEnemies();
         String response = "";
         for (int i = 0; i < tempEnemy.size(); i++) {
-            response +="I found a enemy with name"+ tempEnemy.get(i).getName()+"write shot and try to kill him!! \n";
+            response += "I found a enemy with Name " + tempEnemy.get(i).getName() + " Write shoot and try to kill him!! \n";
 
         }
         return response;
@@ -217,7 +209,7 @@ public class User implements Serializable {
         List<Door> tempDoors = room.getDoors();
         String response = "";
         for (int i = 0; i < tempDoors.size(); i++) {
-            response +="i Found the door"+ tempDoors.get(i).getGeoloc()+"\n";
+            response += "i Found the Door " + tempDoors.get(i).getGeoloc() + "\n";
 
         }
         return response;
@@ -229,17 +221,18 @@ public class User implements Serializable {
 
             if (direction == ElevatorDirection.UP) {
                 for (int i = 0; i < loop; i++) {
-                   if(room.getElevation().getNextRoom() != null) {
-                       room = room.getElevation().getNextRoom();
-                   }
+
+                    if (room.getElevation().getNextRoom() != null) {
+                        room = room.getElevation().getNextRoom();
+                    }
 
                 }
 
             } else {
                 for (int i = 0; i < loop; i++) {
-                    if(room.getElevation().getPreviousRoom() != null) {
-                       room = room.getElevation().getPreviousRoom();
-                   }
+                    if (room.getElevation().getPreviousRoom() != null) {
+                        room = room.getElevation().getPreviousRoom();
+                    }
 
                 }
 
@@ -254,13 +247,15 @@ public class User implements Serializable {
 
         try {
             Enemy tempEnemy = room.findEnemy(enemyName);
-            
-            tempEnemy.receiveDamage(inventory.findWeapondmg());
+
+            tempEnemy.receiveDamage(inventory.findWeaponDmg());
             if (tempEnemy.isAlive()) {
                 tempEnemy.shoot(this);
-                return "I hit the"+tempEnemy.getName()+"with"+inventory.findWeapondmg()+"Damage"+  "and enemy hit me with"+tempEnemy.getDamage();
+                return "I hit the" + tempEnemy.getName() + "with" + inventory.findWeaponDmg() + "Damage" + "and enemy hit me with" + tempEnemy.getDamage();
 
             } else {
+
+                room.removeEnemy(enemyName);
                 return "I kill the Enemy!!";
 
             }
@@ -282,17 +277,21 @@ public class User implements Serializable {
     public boolean isAlive() {
         return alive;
     }
-    public String status(){
-    String response="";
-    response="Name: "+this.username+"\n Health"+this.health+"\n -----Inventory------";
-    String[] toolNames=this.inventory.getToolName();
-    for(int i=0;i<toolNames.length;i++){
-    
-    
-    response+="\n"+toolNames[i];
+
+    public String status() {
+        String response = "Name: " + this.username + "\nHealth: " + this.health + "\n-----Inventory------";
+        String[] toolNames = this.inventory.getToolName();
+        for (String toolName : toolNames) {
+            response += "\n" + toolName;
+        }
+
+        return response;
     }
-    
-    
-   return response; }
+
+    public Bot findBot(String botName) throws Exception {
+
+        return room.findBot(botName);
+
+    }
 
 }

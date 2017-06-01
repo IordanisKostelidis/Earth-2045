@@ -55,9 +55,9 @@ public class Inventory implements Serializable {
         }
     }
 
-    public boolean findKey(int doorid) {
+    public boolean findKey(int doorId) {
         for (int i = 0; i < this.tools.size(); i++) {
-            if (tools.get(i).getToolValue() == doorid) {
+            if (tools.get(i).getToolValue() == doorId) {
                 return true;
             }
 
@@ -66,13 +66,13 @@ public class Inventory implements Serializable {
         return false;
     }
 
-    public int findWeapondmg() {
+    public int findWeaponDmg() {
         Weapon tmpWpn = null;
 
         // Search all tools and find the weapon
-        for (ITool temptool : tools) {
-            if (temptool.getClass() == Weapon.class) {
-                tmpWpn = (Weapon) temptool;
+        for (ITool tempTool : tools) {
+            if (tempTool.getClass() == Weapon.class) {
+                tmpWpn = (Weapon) tempTool;
                 break;
             }
         }

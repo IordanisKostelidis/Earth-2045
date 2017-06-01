@@ -9,6 +9,7 @@ import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.*;
 import static io.github.dmmn_games.earth_2045.game.Location.*;
+import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.tools.*;
 import io.github.dmmn_games.earth_2045.user.User;
@@ -47,44 +48,61 @@ public class GameController implements java.io.Serializable {
         this.addFloor(new Floor());
         this.addFloor(new Floor());
 
-        // Add rooms on flr[1]
-        floors.get(1).addRoom(new Room());
-        floors.get(1).addRoom(new Room());
-        floors.get(1).addRoom(new Room());
-        floors.get(1).addRoom(new Room());
-
-        // Add rooms on flr[2]
-        floors.get(2).addRoom(new Room());
-        floors.get(2).addRoom(new Room());
-        floors.get(2).addRoom(new Room());
-        floors.get(2).addRoom(new Room());
+        initRooms();
 
         // Add content for the floor1
-        floors.get(1).getRoom(0).addDoor(new Door("door0to1", 100, NORTH, floors.get(1).getRoom(1), false));
-        floors.get(1).getRoom(0).addDoor(new Door("door0to3", 1, WEST, floors.get(1).getRoom(3), true));
-        floors.get(1).getRoom(1).addDoor(new Door("door1to2", 1, WEST, floors.get(1).getRoom(2), true));
-        floors.get(1).getRoom(3).addDoor(new Door("door3to0", 11, EAST, floors.get(1).getRoom(0), true));
-        
+        floors.get(1).getRoom(0).addDoor(
+                new Door("door0to1",
+                        1,
+                        NORTH,
+                        floors.get(1).getRoom(1),
+                        true
+                )
+        );
+
+        floors.get(1).getRoom(1).addDoor(
+                new Door("door1to2",
+                        2,
+                        WEST,
+                        floors.get(1).getRoom(2),
+                        true
+                )
+        );
+
         floors.get(1).getRoom(3).addTool(new Key("masterkey", 100));
 
         floors.get(1).getRoom(0).addEnemy(new Enemy(true, "reverse", 5));
         floors.get(1).getRoom(1).addEnemy(new Enemy(true, "reverse", 5));
         floors.get(1).getRoom(2).addEnemy(new Enemy(true, "reverse", 5));
         floors.get(1).getRoom(3).addEnemy(new Enemy(true, "reverse", 5));
-
-
-        floors.get(1).getRoom(2).setEvevation(null, null);
-        floors.get(2).getRoom(2).setEvevation(null, null);
+        floors.get(1).getRoom(0).addBot(new Bot("josearmando", 0));
 
         try {
-            floors.get(1).getRoom(2).setEvevation(null, floors.get(2).getElavatorRoom());
-            floors.get(1).getRoom(2).setEvevation(floors.get(1).getElavatorRoom(), null);
+            initElevation();
         } catch (Exception ex) {
-            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
 
         this.User = new User(Username);
         this.User.setRoom(floors.get(1).getRoom(0));
+    }
+
+    private void initRooms() {
+        floors.forEach((floor) -> {
+            floor.addRoom(new Room());
+            floor.addRoom(new Room());
+            floor.addRoom(new Room());
+            floor.addRoom(new Room());
+        });
+    }
+
+    private void initElevation() throws Exception {
+        floors.forEach((floor) -> {
+            floor.getRoom(2).setEvevation(null, null);
+        });
+
+        floors.get(1).getRoom(2).setEvevation(null, floors.get(2).getElavatorRoom());
+
     }
 
     public int getTime() {
