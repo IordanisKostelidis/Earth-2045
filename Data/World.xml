@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    
+    <floors>
+        <floor name="underground"></floor>
+        <floor name="ground"></floor>
+    </floors>
+    
+    <rooms>
+        <room floor="1" name="room0"></room>
+	<room floor="1" name="room1"></room>
+	<room floor="1" name="room2"></room>
+	<room floor="1" name="room3"></room>
+    </rooms>
+    
+    <doors>
+        <door name="door0to1" floor="1" fromRoom="0" toRoom="0" pos="NORTH" id="0" open="true" ></door>
+	<door name="door1to2" floor="1" fromRoom="1" toRoom="1" pos="WEST" id="1" open="false" ></door>
+    </doors>
+
+    <user floor="1" room="0"></user>
+    
+</root>
+

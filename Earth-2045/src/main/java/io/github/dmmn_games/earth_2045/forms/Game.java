@@ -5,17 +5,13 @@
  */
 package io.github.dmmn_games.earth_2045.forms;
 
-import com.google.gson.Gson;
 import io.github.dmmn_games.earth_2045.game.CommandUI;
 import io.github.dmmn_games.earth_2045.game.GameController;
 import io.github.dmmn_games.earth_2045.music.Music;
 import io.github.dmmn_games.earth_2045.saveload.Save;
 import java.awt.event.KeyEvent;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 

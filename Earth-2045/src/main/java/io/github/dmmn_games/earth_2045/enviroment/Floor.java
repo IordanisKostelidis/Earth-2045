@@ -15,16 +15,21 @@ import java.util.*;
  */
 public class Floor implements Serializable {
     private String name;
+
+ 
+
     private List<Room> rooms;
 
     public Floor(String name) {
         this.name = name;
         rooms = new ArrayList<>();
+
     }
     
 
     public Floor(Floor previousfloor, Floor nextfloor) {
         this.rooms = new ArrayList<>();
+
     }
 
     public Room getRoom(int index) {

@@ -48,9 +48,9 @@ public class GameController implements java.io.Serializable {
     public void initWorld(String Username, int time) {
         this.time = time;
         this.nextTrigger = time - 2;
-        
+
         this.User = new User(Username);
-        
+
         try {
 
             initFloors();
