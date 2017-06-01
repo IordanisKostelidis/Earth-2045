@@ -1,6 +1,8 @@
 package io.github.dmmn_games.earth_2045.npcs;
 
+import io.github.dmmn_games.earth_2045.forms.BotConversation;
 import io.github.dmmn_games.earth_2045.tools.ITool;
+import io.github.dmmn_games.earth_2045.tools.Weapon;
 import java.io.Serializable;
 
 public class Bot implements  Serializable {

@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.dmmn_games.earth_2045.elevator;
+package io.github.dmmn_games.earth_2045.enviroment;
 
-import io.github.dmmn_games.earth_2045.enviroment.Room;
 import java.io.Serializable;
 
 /**
  *
  * @author iordkost
  */
-public class Elevation implements Serializable {
+public class Elevator implements Serializable {
     
     private final Room previousRoom; 
     private final Room nextRoom; 
 
-    public Elevation(Room previousRoom, Room nextRoom) {
+    public Elevator(Room previousRoom, Room nextRoom) {
         this.previousRoom = previousRoom;
         this.nextRoom = nextRoom;
     }

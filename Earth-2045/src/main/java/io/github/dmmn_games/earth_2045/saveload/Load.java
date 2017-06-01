@@ -17,13 +17,13 @@ import java.io.ObjectInputStream;
  */
 public class Load {
 
-    public GameController loadProcess(String NameOfFile) {
+    public GameController loadProcess(String nameOfFile) {
         GameController x = new GameController();
         x.initWorld("Empty", 0);
 
         try {
             FileInputStream myGame = new FileInputStream(
-                    new CurrentPath().getDir() + "/Data/Save/" + NameOfFile + ".sav"
+                    new CurrentPath().getDir() + "/Data/Save/" + nameOfFile + ".sav"
             );
             ObjectInputStream reader = new ObjectInputStream(myGame);
             x = (GameController) reader.readObject();

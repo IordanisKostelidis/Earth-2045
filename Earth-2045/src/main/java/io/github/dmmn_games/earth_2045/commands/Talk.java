@@ -5,10 +5,7 @@
  */
 package io.github.dmmn_games.earth_2045.commands;
 
-import io.github.dmmn_games.earth_2045.global.SuperString;
 import io.github.dmmn_games.earth_2045.user.User;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

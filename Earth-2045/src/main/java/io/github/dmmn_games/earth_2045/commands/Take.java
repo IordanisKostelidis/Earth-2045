@@ -30,6 +30,8 @@ public class Take implements ICommand {
 
         if(commandArguments.length == 1) {
             return "Take what ?";
+        } else if (commandArguments.length < 4) {
+            return "You must give elevator [DIRECTION] [FLOOR NUMS]";
         } else {
             String Elevator = commandArguments[1];
             ElevatorDirection Direction = ElevatorDirection.valueOf(

@@ -43,8 +43,8 @@ and open the template in the editor.
         <door id="6" location="WEST" floor="1" fromRoom="1" toRoom="2" open="true"></door>
 
 	<door id="7" location="NORTH" floor="2" fromRoom="0" toRoom="1" open="true"></door>
-	<door id="7" location="SOUTH" floor="2" fromRoom="2" toRoom="3" open="false"></door>
-	<door id="7" location="EAST" floor="2" fromRoom="3" toRoom="0" open="true"></door>
+	<door id="8" location="SOUTH" floor="2" fromRoom="2" toRoom="3" open="false"></door>
+	<door id="9" location="EAST" floor="2" fromRoom="3" toRoom="0" open="true"></door>
 
         
     </doors>
@@ -58,8 +58,8 @@ and open the template in the editor.
     </items>
 
     <bots>
-	<bot name="bob" floor="1" room="2" question="Who created this game ?" answer="dmmn" item="weapon"></bot>
-	<bot name="liza" floor="0" room="0" question="What walks on 4 legs when its morning,on 2 legs at noon and on 3 legs in the evening?" answer="human" item="key"></bot> 
+	<bot name="bob" floor="1" room="2" question="Who created this game ?" answer="dmmn" tool="weapon" toolvalue="50"></bot>
+	<bot name="liza" floor="0" room="0" question="What walks on 4 legs when its morning,on 2 legs at noon and on 3 legs in the evening?" answer="human" tool="key" toolValue="8"></bot> 
     </bots>
     
     <enemies>

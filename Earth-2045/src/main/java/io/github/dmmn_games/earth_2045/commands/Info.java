@@ -26,7 +26,8 @@ public class Info implements ICommand {
 
     @Override
     public String run(String[] commandArguments, User user) {
-        return "";
+        return new io.github.dmmn_games.earth_2045.global.Info().getName() + "\n"
+                + new io.github.dmmn_games.earth_2045.global.Info().getVersion();
     }
 
 }

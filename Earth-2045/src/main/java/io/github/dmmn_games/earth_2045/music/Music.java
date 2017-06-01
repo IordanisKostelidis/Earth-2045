@@ -9,8 +9,6 @@ import io.github.dmmn_games.earth_2045.global.CurrentPath;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -29,7 +27,7 @@ public class Music implements Serializable {
         // Do Nothing
     }
 
-    public void Play() {
+    public void play() {
         try {
             clip = AudioSystem.getClip();
             
@@ -47,7 +45,7 @@ public class Music implements Serializable {
         }
     }
     
-    public void Pause() {
+    public void pause() {
         clip.stop();
     }
 }

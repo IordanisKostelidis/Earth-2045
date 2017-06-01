@@ -58,8 +58,6 @@ public class User implements Serializable {
     public void setHealth(int health) {
         this.health = health;
     }
-    
-    
 
     public Inventory getInventory() {
         return inventory;
@@ -104,7 +102,7 @@ public class User implements Serializable {
     public String talk(String bot, String message) {
         try {
             Bot tempBot = room.findBot(bot);
-            return tempBot.talk(message, this.username);
+            return tempBot.talk(message);
         } catch (Exception ex) {
             return ex.getMessage();
         }
@@ -210,7 +208,7 @@ public class User implements Serializable {
         List<Door> tempDoors = room.getDoors();
         String response = "";
         for (int i = 0; i < tempDoors.size(); i++) {
-            response += "I found a door " + tempDoors.get(i).getGeoloc() + " !\n";
+            response += "I found a door " + tempDoors.get(i).getGeoLoc() + " !\n";
 
         }
         return response;
@@ -238,12 +236,12 @@ public class User implements Serializable {
                 }
 
             }
-            
+
             return "I took the elevator and I went " + direction.name() + "!";
 
         }
         return "I can not find an elevator here !";
-        
+
     }
 
     public String shoot(String enemyName) {
@@ -272,6 +270,7 @@ public class User implements Serializable {
         this.health -= damage;
         if (health <= 0) {
             alive = false;
+            System.exit(0);
         }
 
     }

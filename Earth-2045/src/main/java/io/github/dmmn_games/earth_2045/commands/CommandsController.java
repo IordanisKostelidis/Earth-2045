@@ -29,7 +29,6 @@ public class CommandsController implements Serializable {
         commands.add(new Clear());
         commands.add(new Info());
         commands.add(new Help());
-        commands.add(new Man());
         commands.add(new Exit());
         commands.add(new Copyright());
 
@@ -49,6 +48,7 @@ public class CommandsController implements Serializable {
         // Cloned Commands
         commands.add(new About());
         commands.add(new Cls());
+        commands.add(new Kill());
         commands.add(new Pickup());
         commands.add(new Quit());
         commands.add(new WhereIAm());
@@ -69,7 +69,6 @@ public class CommandsController implements Serializable {
 
         String[] listCommands = separateCommands(command);
 
-        boolean commandFound = false;
         for (int i = 0; i < commands.size(); i++) {
             if (listCommands[0].equals(commands.get(i).getCommand())) {
                 return commands.get(i).run(listCommands, game.getUser());

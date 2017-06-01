@@ -10,8 +10,7 @@ import io.github.dmmn_games.earth_2045.music.Music;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.security.CodeSource;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 /**
  *
@@ -19,16 +18,16 @@ import java.util.logging.Logger;
  */
 public class CurrentPath {
 
-    private String Dir;
+    private String dir;
 
     public CurrentPath() {
         
-        Dir = "";
+        dir = "";
         
         CodeSource codeSource = Menu.class.getProtectionDomain().getCodeSource();
         try {
             File jarFile = new File(codeSource.getLocation().toURI().getPath());
-            Dir = jarFile.getParentFile().getPath();
+            dir = jarFile.getParentFile().getPath();
         } catch (URISyntaxException ex) {
             Logger.getLogger(Music.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -36,6 +35,6 @@ public class CurrentPath {
     }
 
     public String getDir() {
-        return Dir;
+        return dir;
     }
 }

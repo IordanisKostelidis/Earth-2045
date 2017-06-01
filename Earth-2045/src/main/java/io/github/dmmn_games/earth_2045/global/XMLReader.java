@@ -15,25 +15,25 @@ import java.io.*;
  */
 public class XMLReader implements Serializable {
 
-    private final String XML;
+    private final String xml;
     private final Document docXML;
     
-    public XMLReader(String File) throws Exception {
+    public XMLReader(String file) throws Exception {
         
-        XML = new TXTReader(File, "Can't find XML !").getReadedFile();
+        xml = new TXTReader(file, "Can't find XML !").getReadedFile();
         
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         StringBuilder xmlStringBuilder = new StringBuilder();
-        xmlStringBuilder.append(XML);
+        xmlStringBuilder.append(xml);
         ByteArrayInputStream input = new ByteArrayInputStream(
                 xmlStringBuilder.toString().getBytes("UTF-8"));
         docXML = builder.parse(input);
     }
     
-    public NodeList getElementsByName(String Name) {
-        return docXML.getElementsByTagName(Name);
+    public NodeList getElementsByName(String name) {
+        return docXML.getElementsByTagName(name);
     }
 
 }

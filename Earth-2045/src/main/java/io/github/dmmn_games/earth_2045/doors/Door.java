@@ -16,19 +16,19 @@ import java.io.Serializable;
 public class Door implements Serializable {
 
     private final int doorID;
-    private final Location geoloc;
+    private final Location geoLoc;
     private final Room nextRoom;
     private boolean isOpen;
 
-    public Door(int doorID, Location geoloc, Room nextRoom, boolean isOpen) {
+    public Door(int doorID, Location getLoc, Room nextRoom, boolean isOpen) {
         this.doorID = doorID;
-        this.geoloc = geoloc;
+        this.geoLoc = getLoc;
         this.nextRoom = nextRoom;
         this.isOpen = isOpen;
     }
 
-    public Location getGeoloc() {
-        return geoloc;
+    public Location getGeoLoc() {
+        return geoLoc;
     }
 
 

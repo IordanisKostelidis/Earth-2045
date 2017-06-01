@@ -17,16 +17,16 @@ import java.util.logging.Logger;
  */
 public class TXTReader {
 
-    private final String File;
-    private String ReadedFile;
+    private final String file;
+    private String readedFile;
 
-    public TXTReader(String File, String Message) {
-        this.File = File;
+    public TXTReader(String file, String message) {
+        this.file = file;
         
-        ReadedFile = Message;
+        readedFile = message;
         
         try {
-            ReadedFile = new String(Files.readAllBytes(Paths.get(File)));
+            readedFile = new String(Files.readAllBytes(Paths.get(file)));
         } catch (IOException ex) {
             Logger.getLogger(TXTReader.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -34,6 +34,6 @@ public class TXTReader {
     }
 
     public String getReadedFile() {
-        return ReadedFile;
+        return readedFile;
     }
 }

@@ -99,7 +99,7 @@ public class Game extends JFrame {
 
         // Play Music
         music = new Music();
-        music.Play();
+        music.play();
 
         // Init Command History
         this.commandHistory = new ArrayList<>();

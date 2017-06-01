@@ -15,7 +15,7 @@ import java.net.MalformedURLException;
  */
 public class Menu extends javax.swing.JFrame {
 
-    private UIConfig UIConfig;
+    private UIConfig uiConfig;
 
     /**
      * Creates new form Menu
@@ -24,9 +24,9 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
 
         // Apply UI Settings
-        UIConfig = new UIConfig();
+        uiConfig = new UIConfig();
         try {
-            UIConfig.initUI(this);
+            uiConfig.initUI(this);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }

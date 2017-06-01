@@ -12,19 +12,19 @@ import javax.swing.JTextArea;
  * @author iordkost
  */
 public class CommandUI implements java.io.Serializable {
-    private final  JTextArea CurrentJTextArea;
+    private final  JTextArea currentJTextArea;
 
-    public CommandUI(JTextArea CurrentJTextArea) {
-        this.CurrentJTextArea = CurrentJTextArea;
+    public CommandUI(JTextArea currentJTextArea) {
+        this.currentJTextArea = currentJTextArea;
     }
     
-    public void addLine(String Line) {
-        this.CurrentJTextArea.setText(
-                this.CurrentJTextArea.getText() + Line + "\n"
+    public void addLine(String line) {
+        this.currentJTextArea.setText(
+                this.currentJTextArea.getText() + line + "\n"
         );
     }
     
     public void clear() {
-        this.CurrentJTextArea.setText("");
+        this.currentJTextArea.setText("");
     }
 }

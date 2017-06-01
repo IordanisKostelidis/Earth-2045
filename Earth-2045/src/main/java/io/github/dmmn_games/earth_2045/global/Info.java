@@ -10,44 +10,44 @@ package io.github.dmmn_games.earth_2045.global;
  * @author iordkost
  */
 public class Info {
-    private final String Name;
-    private final String Desc;
-    private final String Dev;
-    private final String Copyright;
-    private final String Website;
-    private final String Version;
+    private final String name;
+    private final String desc;
+    private final String dev;
+    private final String copyright;
+    private final String website;
+    private final String version;
     
     public Info() {
-        this.Name = "Earth 2045";
-        this.Desc = "Earth 2045 : The End Of Free-Will";
-        this.Dev = "DMMN Games";
-        this.Copyright = "© 2017";
-        this.Website = "https://DMMN-Games.GitHUB.IO";
-        this.Version = "0.5.1.2 Alpha";
+        this.name = "Earth 2045";
+        this.desc = "Earth 2045 : The End Of Free-Will";
+        this.dev = "DMMN Games";
+        this.copyright = "© 2017";
+        this.website = "https://DMMN-Games.GitHUB.IO";
+        this.version = "0.5.1.2 Alpha";
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getDesc() {
-        return Desc;
+        return desc;
     }
 
     public String getDev() {
-        return Dev;
+        return dev;
     }
 
     public String getCopyright() {
-        return Copyright;
+        return copyright;
     }
 
     public String getWebsite() {
-        return Website;
+        return website;
     }
 
     public String getVersion() {
-        return Version;
+        return version;
     }
 
     

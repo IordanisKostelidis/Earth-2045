@@ -18,25 +18,25 @@ import java.io.ObjectOutputStream;
  */
 public class Save {
 
-    public void run(String Slot, GameController Game) {
-        saveProcess(Slot, Game);
+    public void run(String slot, GameController game) {
+        saveProcess(slot, game);
     }
     
-    private void saveProcess(String NameOfFile, GameController CurrentGame) {
+    private void saveProcess(String nameOfFile, GameController currentGame) {
         try {
             // Serialize data object to a file
             ObjectOutputStream out = new ObjectOutputStream(
                     new FileOutputStream(
-                            new CurrentPath().getDir() + "/Data/Save/" + NameOfFile + ".sav"
+                            new CurrentPath().getDir() + "/Data/Save/" + nameOfFile + ".sav"
                     )
             );
-            out.writeObject(CurrentGame);
+            out.writeObject(currentGame);
             out.close();
 
             // Serialize data object to a byte array
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             out = new ObjectOutputStream(bos);
-            out.writeObject(CurrentGame);
+            out.writeObject(currentGame);
             out.close();
         } catch (IOException e) {
             System.err.println(e.getMessage());

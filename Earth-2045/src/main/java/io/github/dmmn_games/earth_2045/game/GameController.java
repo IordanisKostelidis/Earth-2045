@@ -9,15 +9,12 @@ import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.enviroment.*;
 import io.github.dmmn_games.earth_2045.global.CurrentPath;
 import io.github.dmmn_games.earth_2045.global.XMLReader;
-import io.github.dmmn_games.earth_2045.npcs.Bot;
-import io.github.dmmn_games.earth_2045.npcs.Enemy;
+import io.github.dmmn_games.earth_2045.npcs.*;
+import io.github.dmmn_games.earth_2045.tools.*;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import java.util.logging.*;
+import org.w3c.dom.*;
 
 /**
  *
@@ -25,31 +22,31 @@ import org.w3c.dom.NodeList;
  */
 public class GameController implements java.io.Serializable {
 
-    private CommandsController CommandsController;
-    private User User;
+    private CommandsController commandsController;
+    private User user;
     private final List<Floor> floors;
 
-    private XMLReader XML;
+    private XMLReader xml;
 
     private int time;
     private int nextTrigger;
 
     public GameController() {
-        CommandsController = new CommandsController();
+        commandsController = new CommandsController();
         floors = new ArrayList<>();
         try {
-            XML = new XMLReader(new CurrentPath().getDir() + "/Data/World.xml");
+            xml = new XMLReader(new CurrentPath().getDir() + "/Data/World.xml");
         } catch (Exception ex) {
             System.exit(0);
         }
 
     }
 
-    public void initWorld(String Username, int time) {
+    public void initWorld(String username, int time) {
         this.time = time;
         this.nextTrigger = time - 30;
 
-        this.User = new User(Username);
+        this.user = new User(username);
 
         try {
 
@@ -71,7 +68,7 @@ public class GameController implements java.io.Serializable {
 
     private void initFloors() throws Exception {
 
-        NodeList tmpList = XML.getElementsByName("floor");
+        NodeList tmpList = xml.getElementsByName("floor");
 
         for (int i = 0; i < tmpList.getLength(); i++) {
             Node nNode = tmpList.item(i);
@@ -92,7 +89,7 @@ public class GameController implements java.io.Serializable {
 
     private void initRooms() throws Exception {
 
-        NodeList tmpList = XML.getElementsByName("room");
+        NodeList tmpList = xml.getElementsByName("room");
 
         for (int i = 0; i < tmpList.getLength(); i++) {
             Node nNode = tmpList.item(i);
@@ -114,7 +111,7 @@ public class GameController implements java.io.Serializable {
 
     private void initDoors() throws Exception {
 
-        NodeList tmpList = XML.getElementsByName("door");
+        NodeList tmpList = xml.getElementsByName("door");
 
         for (int i = 0; i < tmpList.getLength(); i++) {
             Node nNode = tmpList.item(i);
@@ -149,7 +146,7 @@ public class GameController implements java.io.Serializable {
     }
 
     private void initUser() {
-        NodeList tmpList = XML.getElementsByName("user");
+        NodeList tmpList = xml.getElementsByName("user");
 
         for (int i = 0; i < tmpList.getLength(); i++) {
 
@@ -162,17 +159,17 @@ public class GameController implements java.io.Serializable {
                 int room = Integer.parseInt(eElement.getAttribute("room"));
                 int health = Integer.parseInt(eElement.getAttribute("health"));
 
-                this.User.setRoom(
+                this.user.setRoom(
                         this.floors.get(floor).getRoom(room)
                 );
                 
-                this.User.setHealth(health);
+                this.user.setHealth(health);
             }
         }
     }
 
     private void initBots() {
-        NodeList tmpList = XML.getElementsByName("bot");
+        NodeList tmpList = xml.getElementsByName("bot");
 
         for (int i = 0; i < tmpList.getLength(); i++) {
 
@@ -182,16 +179,40 @@ public class GameController implements java.io.Serializable {
                 Element eElement = (Element) nNode;
 
                 String name = eElement.getAttribute("name");
+                String question = eElement.getAttribute("question");
+                String answer = eElement.getAttribute("answer");
+                String tool = eElement.getAttribute("tool");
+                int toolValue = Integer.parseInt(eElement.getAttribute("toolValue"));
+                
+                ITool toolObj = null;
+                switch(tool) {
+                    case "weapon" : {
+                        toolObj = new Weapon("gun", toolValue);
+                        break;
+                    }
+                    case "key" : {
+                        toolObj = new Key("key", toolValue);
+                        break;
+                    }
+                }
+                
                 int floor = Integer.parseInt(eElement.getAttribute("floor"));
                 int room = Integer.parseInt(eElement.getAttribute("room"));
 
-                this.floors.get(floor).getRoom(room).addBot(new Bot(name, 0));
+                this.floors.get(floor).getRoom(room).addBot(
+                        new Bot(
+                                name,
+                                question,
+                                answer,
+                                toolObj
+                        )
+                );
             }
         }
     }
     
     private void initEnemies() {
-        NodeList tmpList = XML.getElementsByName("enemy");
+        NodeList tmpList = xml.getElementsByName("enemy");
 
         for (int i = 0; i < tmpList.getLength(); i++) {
 
@@ -242,19 +263,19 @@ public class GameController implements java.io.Serializable {
     }
 
     public CommandsController getCommandsController() {
-        return CommandsController;
+        return commandsController;
     }
 
-    public void setCommandsController(CommandsController CommandsController) {
-        this.CommandsController = CommandsController;
+    public void setCommandsController(CommandsController commandsController) {
+        this.commandsController = commandsController;
     }
 
     public User getUser() {
-        return User;
+        return user;
     }
 
-    public void setUser(User User) {
-        this.User = User;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void timeTrigger() throws Exception {
