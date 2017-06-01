@@ -212,12 +212,13 @@ public class BotConversation extends javax.swing.JFrame
             enableExitButton();
         }
         
+        else    {
         exitButton.setVisible(false);
         userText.requestFocus();
         conversation.append(currentBot.getName() + ": " + currentBot.getQuestion());
         currentBot.setFlowCheck(0);
         labelName.setText(currentBot.getName());
-        
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_exitButtonActionPerformed
