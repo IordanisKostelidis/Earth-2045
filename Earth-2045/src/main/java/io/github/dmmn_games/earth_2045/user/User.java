@@ -32,9 +32,9 @@ public class User implements Serializable {
 
     public User(String username) {
         this.username = username;
-        this.health = 100;
+        this.health = 1000;
         this.alive = true;
-
+        this.room = null;
         this.inventory = new Inventory();
 
     }
@@ -58,6 +58,8 @@ public class User implements Serializable {
     public void setHealth(int health) {
         this.health = health;
     }
+    
+    
 
     public Inventory getInventory() {
         return inventory;
@@ -73,20 +75,19 @@ public class User implements Serializable {
             Door tempdoor = room.findDoor(loctogo);
             if (tempdoor.isIsOpen()) {
                 room = tempdoor.getNextRoom();
-                return ("Go success");
+                return ("The door is unlocked, and i went " + loctogo.toString().toLowerCase() + "!\n");
 
             } else if (inventory.findKey(tempdoor.getDoorID())) {
                 tempdoor.unlockDoor();
                 room = tempdoor.getNextRoom();
+                return ("The door has locked, i unlocked it and i went " + loctogo.toString().toLowerCase() + "!\n");
             } else {
-                return "Door is locked, and i don't have the key !";
+                return "The door is locked and i don't have the key !\n";
 
             }
         } catch (Exception ex) {
             return (ex.getMessage());
         }
-        
-        return "";
 
     }
 
@@ -97,7 +98,7 @@ public class User implements Serializable {
         } catch (Exception ex) {
             return (ex.getMessage());
         }
-        return ("You pick" + toolName);
+        return ("I have find the " + toolName + " and i put in on my inventory !");
     }
 
     public String talk(String bot, String message) {
@@ -115,7 +116,7 @@ public class User implements Serializable {
             health = health - damage;
         } else {
             health = 0;
-            throw new Exception("I have died !!!");
+            throw new Exception("DEAD");
 
         }
     }
@@ -153,7 +154,7 @@ public class User implements Serializable {
                 break;
             }
             default: {
-                response += "unsupported Response";
+                response += "I can't look for " + selector + " !\n";
             }
 
         }
@@ -165,7 +166,7 @@ public class User implements Serializable {
         List<ITool> tempTools = room.getTools();
         String response = "";
         for (int i = 0; i < tempTools.size(); i++) {
-            response += "I find a " + tempTools.get(i).getToolName() + "and i can pick up \n";
+            response += "I find a " + tempTools.get(i).getToolName() + "and i can pick up !\n";
 
         }
         return response;
@@ -176,7 +177,7 @@ public class User implements Serializable {
         List<IItem> tempItems = room.getItems();
         String response = "";
         for (int i = 0; i < tempItems.size(); i++) {
-            response += "I found a " + tempItems.get(i).getItemName() + "i can't pick up this Item!! \n";
+            response += "I found a " + tempItems.get(i).getItemName() + " i can't pick up this Item!! \n";
 
         }
         return response;
@@ -187,7 +188,7 @@ public class User implements Serializable {
         List<Bot> tempBots = room.getBots();
         String response = "";
         for (int i = 0; i < tempBots.size(); i++) {
-            response += "I find Bot" + tempBots.get(i).getName() + "and i can talk with him \n";
+            response += "I find " + tempBots.get(i).getName() + " and i can talk with him \n";
 
         }
         return response;
@@ -198,7 +199,7 @@ public class User implements Serializable {
         List<Enemy> tempEnemy = room.getEnemies();
         String response = "";
         for (int i = 0; i < tempEnemy.size(); i++) {
-            response += "I found a enemy with Name " + tempEnemy.get(i).getName() + " Write shoot and try to kill him!! \n";
+            response += "I found enemy " + tempEnemy.get(i).getName() + " and i can kill him ! \n";
 
         }
         return response;
@@ -209,7 +210,7 @@ public class User implements Serializable {
         List<Door> tempDoors = room.getDoors();
         String response = "";
         for (int i = 0; i < tempDoors.size(); i++) {
-            response += "i Found the Door " + tempDoors.get(i).getGeoloc() + "\n";
+            response += "I found a door " + tempDoors.get(i).getGeoloc() + " !\n";
 
         }
         return response;
@@ -217,7 +218,7 @@ public class User implements Serializable {
     }
 
     public String take(String elevator, ElevatorDirection direction, int loop) {
-        if (room.isElavation()) {
+        if (room.isElevator()) {
 
             if (direction == ElevatorDirection.UP) {
                 for (int i = 0; i < loop; i++) {
@@ -237,10 +238,12 @@ public class User implements Serializable {
                 }
 
             }
+            
+            return "I took the elevator and I went " + direction.name() + "!";
 
         }
-
-        return "I changed Floor";
+        return "I can not find an elevator here !";
+        
     }
 
     public String shoot(String enemyName) {
@@ -251,12 +254,11 @@ public class User implements Serializable {
             tempEnemy.receiveDamage(inventory.findWeaponDmg());
             if (tempEnemy.isAlive()) {
                 tempEnemy.shoot(this);
-                return "I hit the" + tempEnemy.getName() + "with" + inventory.findWeaponDmg() + "Damage" + "and enemy hit me with" + tempEnemy.getDamage();
-
+                return "I shot the enemy and made him " + inventory.findWeaponDmg() + " damage and he shot me and made me " + tempEnemy.getDamage() + " damage.\n";
             } else {
 
                 room.removeEnemy(enemyName);
-                return "I kill the Enemy!!";
+                return "I shot the enemy and killed him !\n";
 
             }
 
@@ -279,7 +281,10 @@ public class User implements Serializable {
     }
 
     public String status() {
-        String response = "Name: " + this.username + "\nHealth: " + this.health + "\n-----Inventory------";
+        String response = "Name: " + this.username + "\n"
+                + "Room: " + this.room.getName() + "\n"
+                + "Health: " + this.health + "\n"
+                + "-----Inventory------";
         String[] toolNames = this.inventory.getToolName();
         for (String toolName : toolNames) {
             response += "\n" + toolName;

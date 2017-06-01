@@ -22,8 +22,8 @@ public class UIConfig {
     private final int posY;
 
     public UIConfig() {
-        this.width = 500;
-        this.height = 500;
+        this.width = 1024;
+        this.height = 640;
 
         posX = (java.awt.Toolkit.getDefaultToolkit().getScreenSize().width - this.width) / 2;
         posY = (java.awt.Toolkit.getDefaultToolkit().getScreenSize().height - this.height) / 2;

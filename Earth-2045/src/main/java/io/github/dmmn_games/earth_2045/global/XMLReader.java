@@ -13,7 +13,7 @@ import java.io.*;
  *
  * @author iordkost
  */
-public class XMLReader {
+public class XMLReader implements Serializable {
 
     private final String XML;
     private final Document docXML;

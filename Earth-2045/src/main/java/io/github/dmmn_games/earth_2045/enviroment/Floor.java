@@ -46,7 +46,7 @@ public class Floor implements Serializable {
 
     public Room getElavatorRoom() throws Exception {
         for (Room tempRoom : rooms) {
-            if (tempRoom.isElavation()) {
+            if (tempRoom.isElevator()) {
                 return tempRoom;
             }
         }

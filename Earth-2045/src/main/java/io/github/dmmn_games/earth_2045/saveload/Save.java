@@ -39,7 +39,7 @@ public class Save {
             out.writeObject(CurrentGame);
             out.close();
         } catch (IOException e) {
-            System.err.println("Can't create the save file !");
+            System.err.println(e.getMessage());
         }
     }
 }

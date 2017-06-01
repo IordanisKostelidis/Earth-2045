@@ -6,11 +6,11 @@
 package io.github.dmmn_games.earth_2045.game;
 
 import io.github.dmmn_games.earth_2045.commands.CommandsController;
-import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.*;
 import io.github.dmmn_games.earth_2045.global.CurrentPath;
 import io.github.dmmn_games.earth_2045.global.XMLReader;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
+import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import io.github.dmmn_games.earth_2045.user.User;
 import java.util.*;
 import java.util.logging.Level;
@@ -47,7 +47,7 @@ public class GameController implements java.io.Serializable {
 
     public void initWorld(String Username, int time) {
         this.time = time;
-        this.nextTrigger = time - 2;
+        this.nextTrigger = time - 30;
 
         this.User = new User(Username);
 
@@ -55,11 +55,14 @@ public class GameController implements java.io.Serializable {
 
             initFloors();
             initRooms();
+
+            initElevation();
             initDoors();
+
             initUser();
             initBots();
-            
-            this.User.setRoom(floors.get(1).getRoom(0));
+            initEnemies();
+
         } catch (Exception ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,8 +77,9 @@ public class GameController implements java.io.Serializable {
             Node nNode = tmpList.item(i);
 
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+
                 Element eElement = (Element) nNode;
-                
+
                 String name = eElement.getAttribute("name");
                 this.floors.add(
                         new Floor(
@@ -96,11 +100,13 @@ public class GameController implements java.io.Serializable {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
 
+                int floor = Integer.parseInt(eElement.getAttribute("floor"));
+                String name = eElement.getAttribute("name");
+                String elevator = eElement.getAttribute("elevator");
+
                 this.floors.get(
-                        Integer.parseInt(
-                                eElement.getAttribute("floor")
-                        )
-                ).addRoom(new Room());
+                        floor
+                ).addRoom(new Room(name, elevator.equals("true")));
 
             }
         }
@@ -123,12 +129,10 @@ public class GameController implements java.io.Serializable {
                         Integer.valueOf(
                                 eElement.getAttribute("fromRoom")
                         )
-                ).addDoor(new Door(
-                        eElement.getAttribute("name"),
-                        Integer.valueOf(
-                                eElement.getAttribute("id")
-                        ),
-                        Location.valueOf(eElement.getAttribute("pos")),
+                ).addDoor(Integer.valueOf(
+                        eElement.getAttribute("id")
+                ),
+                        Location.valueOf(eElement.getAttribute("location")),
                         this.floors.get(
                                 Integer.valueOf(
                                         eElement.getAttribute("floor")
@@ -137,7 +141,7 @@ public class GameController implements java.io.Serializable {
                                 Integer.valueOf(
                                         eElement.getAttribute("toRoom")
                                 )
-                        ), "true".equals(eElement.getAttribute("open")))
+                        ), "true".equals(eElement.getAttribute("open"))
                 );
 
             }
@@ -153,17 +157,20 @@ public class GameController implements java.io.Serializable {
 
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
-                
+
                 int floor = Integer.parseInt(eElement.getAttribute("floor"));
                 int room = Integer.parseInt(eElement.getAttribute("room"));
+                int health = Integer.parseInt(eElement.getAttribute("health"));
 
                 this.User.setRoom(
                         this.floors.get(floor).getRoom(room)
                 );
+                
+                this.User.setHealth(health);
             }
         }
     }
-    
+
     private void initBots() {
         NodeList tmpList = XML.getElementsByName("bot");
 
@@ -173,7 +180,7 @@ public class GameController implements java.io.Serializable {
 
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
-                
+
                 String name = eElement.getAttribute("name");
                 int floor = Integer.parseInt(eElement.getAttribute("floor"));
                 int room = Integer.parseInt(eElement.getAttribute("room"));
@@ -182,14 +189,48 @@ public class GameController implements java.io.Serializable {
             }
         }
     }
+    
+    private void initEnemies() {
+        NodeList tmpList = XML.getElementsByName("enemy");
+
+        for (int i = 0; i < tmpList.getLength(); i++) {
+
+            Node nNode = tmpList.item(i);
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+
+                String name = eElement.getAttribute("name");
+                int health = Integer.parseInt(eElement.getAttribute("health"));
+                int floor = Integer.parseInt(eElement.getAttribute("floor"));
+                int room = Integer.parseInt(eElement.getAttribute("room"));
+
+                this.floors.get(floor).getRoom(room).addEnemy(new Enemy(true, name, health));
+            }
+        }
+    }
 
     private void initElevation() throws Exception {
-        floors.forEach((floor) -> {
-            floor.getRoom(2).setEvevation(null, null);
-        });
-
-        floors.get(1).getRoom(2).setEvevation(null, floors.get(2).getElavatorRoom());
-
+        for (int i = 0; i < floors.size(); i++) {
+            if (i == 0) {
+                // Under
+                floors.get(i).getElavatorRoom().setEvevation(
+                        null,
+                        floors.get(i + 1).getElavatorRoom()
+                );
+            } else if (i == floors.size() - 1) {
+                // Top
+                floors.get(i).getElavatorRoom().setEvevation(
+                        floors.get(i - 1).getElavatorRoom(),
+                        null
+                );
+            } else {
+                floors.get(i).getElavatorRoom().setEvevation(
+                        floors.get(i - 1).getElavatorRoom(),
+                        floors.get(i + 1).getElavatorRoom()
+                );
+            }
+        }
     }
 
     public int getTime() {
@@ -218,7 +259,7 @@ public class GameController implements java.io.Serializable {
 
     public void timeTrigger() throws Exception {
         if (this.time == this.nextTrigger) {
-            this.nextTrigger -= 2;
+            this.nextTrigger -= 30;
 
             Random random = new Random();
 

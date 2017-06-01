@@ -15,14 +15,12 @@ import java.io.Serializable;
  */
 public class Door implements Serializable {
 
-    private final String doorName;
     private final int doorID;
     private final Location geoloc;
     private final Room nextRoom;
     private boolean isOpen;
 
-    public Door(String doorName, int doorID, Location geoloc, Room nextRoom, boolean isOpen) {
-        this.doorName = doorName;
+    public Door(int doorID, Location geoloc, Room nextRoom, boolean isOpen) {
         this.doorID = doorID;
         this.geoloc = geoloc;
         this.nextRoom = nextRoom;
@@ -38,9 +36,6 @@ public class Door implements Serializable {
         this.isOpen = isOpen;
     }
 
-    public String getDoorName() {
-        return doorName;
-    }
 
     public int getDoorID() {
         return doorID;

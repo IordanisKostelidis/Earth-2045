@@ -12,7 +12,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Timer;
 import javax.swing.JPanel;
 
@@ -33,7 +32,7 @@ public class Splash extends javax.swing.JFrame {
         initComponents();
 
         // Apply UI Settings
-        UIConfig UIConfig = new UIConfig();
+        UIConfig UIConfig = new UIConfig(600, 600);
         try {
             UIConfig.initUI(this);
         } catch (Exception ex) {
