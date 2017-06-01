@@ -5,10 +5,8 @@
  */
 package io.github.dmmn_games.earth_2045.enviroment;
 
-import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import java.io.Serializable;
-import static java.lang.Math.abs;
 import java.util.*;
 
 /**
