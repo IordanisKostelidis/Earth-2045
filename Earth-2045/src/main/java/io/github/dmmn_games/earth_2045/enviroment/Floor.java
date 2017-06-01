@@ -5,10 +5,8 @@
  */
 package io.github.dmmn_games.earth_2045.enviroment;
 
-import io.github.dmmn_games.earth_2045.npcs.Bot;
 import io.github.dmmn_games.earth_2045.npcs.Enemy;
 import java.io.Serializable;
-import static java.lang.Math.abs;
 import java.util.*;
 
 /**
@@ -16,32 +14,17 @@ import java.util.*;
  * @author makis
  */
 public class Floor implements Serializable {
-
-    private Floor previousfloor;
-    private Floor nextfloor;
+    private String name;
     private List<Room> rooms;
 
-    public Floor() {
+    public Floor(String name) {
+        this.name = name;
         rooms = new ArrayList<>();
     }
+    
 
     public Floor(Floor previousfloor, Floor nextfloor) {
-        this.previousfloor = previousfloor;
-        this.nextfloor = nextfloor;
         this.rooms = new ArrayList<>();
-    }
-
-    public void linkfloors(Floor previousfloor, Floor nextfloor) {
-        this.previousfloor = previousfloor;
-        this.nextfloor = nextfloor;
-    }
-
-    public Floor getPreviousfloor() {
-        return previousfloor;
-    }
-
-    public Floor getNextfloor() {
-        return nextfloor;
     }
 
     public Room getRoom(int index) {
