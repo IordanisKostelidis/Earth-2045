@@ -189,6 +189,8 @@ public class BotConversation extends javax.swing.JFrame
             currentBot.setChatFlag(true);
             enableExitButton();
         }
+        
+        
            
         
         
@@ -204,6 +206,12 @@ public class BotConversation extends javax.swing.JFrame
 
     private void formWindowOpened(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowOpened
     {//GEN-HEADEREND:event_formWindowOpened
+        if(currentBot.isChatFlag()){
+            
+            conversation.append(currentBot.getName()+ ": Go go son we will win !!!\n\n");
+            enableExitButton();
+        }
+        
         exitButton.setVisible(false);
         userText.requestFocus();
         conversation.append(currentBot.getName() + ": " + currentBot.getQuestion());
