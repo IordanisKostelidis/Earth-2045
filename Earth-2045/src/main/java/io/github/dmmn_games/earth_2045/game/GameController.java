@@ -8,15 +8,16 @@ package io.github.dmmn_games.earth_2045.game;
 import io.github.dmmn_games.earth_2045.commands.CommandsController;
 import io.github.dmmn_games.earth_2045.doors.Door;
 import io.github.dmmn_games.earth_2045.enviroment.*;
-import static io.github.dmmn_games.earth_2045.game.Location.*;
+import io.github.dmmn_games.earth_2045.global.CurrentPath;
+import io.github.dmmn_games.earth_2045.global.XMLReader;
 import io.github.dmmn_games.earth_2045.npcs.Bot;
-import io.github.dmmn_games.earth_2045.npcs.Enemy;
-import io.github.dmmn_games.earth_2045.tools.*;
 import io.github.dmmn_games.earth_2045.user.User;
-import static java.lang.Math.abs;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -26,7 +27,9 @@ public class GameController implements java.io.Serializable {
 
     private CommandsController CommandsController;
     private User User;
-    private List<Floor> floors;
+    private final List<Floor> floors;
+
+    private XMLReader XML;
 
     private int time;
     private int nextTrigger;
@@ -34,66 +37,150 @@ public class GameController implements java.io.Serializable {
     public GameController() {
         CommandsController = new CommandsController();
         floors = new ArrayList<>();
-    }
+        try {
+            XML = new XMLReader(new CurrentPath().getDir() + "/Data/World.xml");
+        } catch (Exception ex) {
+            System.exit(0);
+        }
 
-    public void addFloor(Floor newFloor) {
-        floors.add(newFloor);
     }
 
     public void initWorld(String Username, int time) {
         this.time = time;
         this.nextTrigger = time - 2;
-
-        this.addFloor(new Floor());
-        this.addFloor(new Floor());
-        this.addFloor(new Floor());
-
-        initRooms();
-
-        // Add content for the floor1
-        floors.get(1).getRoom(0).addDoor(
-                new Door("door0to1",
-                        1,
-                        NORTH,
-                        floors.get(1).getRoom(1),
-                        true
-                )
-        );
-
-        floors.get(1).getRoom(1).addDoor(
-                new Door("door1to2",
-                        2,
-                        WEST,
-                        floors.get(1).getRoom(2),
-                        true
-                )
-        );
-
-        floors.get(1).getRoom(3).addTool(new Key("masterkey", 100));
-
-        floors.get(1).getRoom(0).addEnemy(new Enemy(true, "reverse", 5));
-        floors.get(1).getRoom(1).addEnemy(new Enemy(true, "reverse", 5));
-        floors.get(1).getRoom(2).addEnemy(new Enemy(true, "reverse", 5));
-        floors.get(1).getRoom(3).addEnemy(new Enemy(true, "reverse", 5));
-        floors.get(1).getRoom(0).addBot(new Bot("josearmando", 0));
-
+        
+        this.User = new User(Username);
+        
         try {
-            initElevation();
+
+            initFloors();
+            initRooms();
+            initDoors();
+            initUser();
+            initBots();
+            
+            this.User.setRoom(floors.get(1).getRoom(0));
         } catch (Exception ex) {
-            System.err.println(ex.getMessage());
+            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        this.User = new User(Username);
-        this.User.setRoom(floors.get(1).getRoom(0));
     }
 
-    private void initRooms() {
-        floors.forEach((floor) -> {
-            floor.addRoom(new Room());
-            floor.addRoom(new Room());
-            floor.addRoom(new Room());
-            floor.addRoom(new Room());
-        });
+    private void initFloors() throws Exception {
+
+        NodeList tmpList = XML.getElementsByName("floor");
+
+        for (int i = 0; i < tmpList.getLength(); i++) {
+            Node nNode = tmpList.item(i);
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                
+                String name = eElement.getAttribute("name");
+                this.floors.add(
+                        new Floor(
+                                name
+                        )
+                );
+            }
+        }
+    }
+
+    private void initRooms() throws Exception {
+
+        NodeList tmpList = XML.getElementsByName("room");
+
+        for (int i = 0; i < tmpList.getLength(); i++) {
+            Node nNode = tmpList.item(i);
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+
+                this.floors.get(
+                        Integer.parseInt(
+                                eElement.getAttribute("floor")
+                        )
+                ).addRoom(new Room());
+
+            }
+        }
+    }
+
+    private void initDoors() throws Exception {
+
+        NodeList tmpList = XML.getElementsByName("door");
+
+        for (int i = 0; i < tmpList.getLength(); i++) {
+            Node nNode = tmpList.item(i);
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                this.floors.get(
+                        Integer.parseInt(
+                                eElement.getAttribute("floor")
+                        )
+                ).getRoom(
+                        Integer.valueOf(
+                                eElement.getAttribute("fromRoom")
+                        )
+                ).addDoor(new Door(
+                        eElement.getAttribute("name"),
+                        Integer.valueOf(
+                                eElement.getAttribute("id")
+                        ),
+                        Location.valueOf(eElement.getAttribute("pos")),
+                        this.floors.get(
+                                Integer.valueOf(
+                                        eElement.getAttribute("floor")
+                                )
+                        ).getRoom(
+                                Integer.valueOf(
+                                        eElement.getAttribute("toRoom")
+                                )
+                        ), "true".equals(eElement.getAttribute("open")))
+                );
+
+            }
+        }
+    }
+
+    private void initUser() {
+        NodeList tmpList = XML.getElementsByName("user");
+
+        for (int i = 0; i < tmpList.getLength(); i++) {
+
+            Node nNode = tmpList.item(i);
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                
+                int floor = Integer.parseInt(eElement.getAttribute("floor"));
+                int room = Integer.parseInt(eElement.getAttribute("room"));
+
+                this.User.setRoom(
+                        this.floors.get(floor).getRoom(room)
+                );
+            }
+        }
+    }
+    
+    private void initBots() {
+        NodeList tmpList = XML.getElementsByName("bot");
+
+        for (int i = 0; i < tmpList.getLength(); i++) {
+
+            Node nNode = tmpList.item(i);
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                
+                String name = eElement.getAttribute("name");
+                int floor = Integer.parseInt(eElement.getAttribute("floor"));
+                int room = Integer.parseInt(eElement.getAttribute("room"));
+
+                this.floors.get(floor).getRoom(room).addBot(new Bot(name, 0));
+            }
+        }
     }
 
     private void initElevation() throws Exception {
