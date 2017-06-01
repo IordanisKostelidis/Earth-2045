@@ -17,31 +17,11 @@ import java.util.*;
  */
 public class Floor implements Serializable {
 
-    private Floor previousfloor;
-    private Floor nextfloor;
+ 
     private List<Room> rooms;
 
     public Floor() {
         rooms = new ArrayList<>();
-    }
-
-    public Floor(Floor previousfloor, Floor nextfloor) {
-        this.previousfloor = previousfloor;
-        this.nextfloor = nextfloor;
-        this.rooms = new ArrayList<>();
-    }
-
-    public void linkfloors(Floor previousfloor, Floor nextfloor) {
-        this.previousfloor = previousfloor;
-        this.nextfloor = nextfloor;
-    }
-
-    public Floor getPreviousfloor() {
-        return previousfloor;
-    }
-
-    public Floor getNextfloor() {
-        return nextfloor;
     }
 
     public Room getRoom(int index) {
