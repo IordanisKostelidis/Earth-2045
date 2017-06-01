@@ -1,23 +1,28 @@
 package io.github.dmmn_games.earth_2045.npcs;
 
 import io.github.dmmn_games.earth_2045.forms.BotConversation;
+import io.github.dmmn_games.earth_2045.tools.ITool;
 import io.github.dmmn_games.earth_2045.tools.Weapon;
 import java.io.Serializable;
 
 public class Bot implements  Serializable {
 
     String name;
-    public String botQuestion [] = {"Who are you? Are you here to save us?\n\n",
-                                    "I'm gonna give you the key to open the last floor\nbut first you have to solve a riddle to prove that you are the chosen one\n\nWhat walks on 4 legs when its morning,on 2 legs at noon\nand on 3 legs in the evening?\n\n",
-                                    "Congratulations. Take this weapon to fight them\nNow go... we are running out of time",
-                                    "Answer the question correctly please.\n\n"}; //Bot talking phrases.
+    String question;
+    String answer;
+    String succesAnswer = "Congrats take this Tool it will help you";
+    String failAnswer = "Wrong answer";
     
-    public String userAnswer [] [] = {{"yes","ofc","i am here","im here","of course","y"},
-                                      {"human","man","the human","the man"}};
-                        
+    
+    ITool tool;
+    
+    
+    
+    boolean chatFlag;
+    
     private int flowCheck;                               
     int position;
-    Weapon weapon;
+    
     
 
     public Bot()
@@ -27,22 +32,39 @@ public class Bot implements  Serializable {
     
     
 
-    public Bot(String a, int pos) {
+    public Bot(String a, int pos,String question ,String answer) {
         this.name = a;
         this.position = pos;
-        //TODO this.weapon = weapon;
+        this.question = question;
+        this.answer = answer;
+        
+//TODO this.weapon = weapon;
 
     }
 
-    public String[] getBotQuestion()
+    public String getSuccesAnswer()
     {
-        return botQuestion;
+        return succesAnswer;
     }
 
-    public void setBotQuestion(String[] botQuestion)
+    public void setSuccesAnswer(String succesAnswer)
     {
-        this.botQuestion = botQuestion;
+        this.succesAnswer = succesAnswer;
     }
+
+    public String getFailAnswer()
+    {
+        return failAnswer;
+    }
+
+    public void setFailAnswer(String failAnswer)
+    {
+        this.failAnswer = failAnswer;
+    }
+
+    
+    
+    
 
     public int getFlowCheck()
     {
@@ -71,7 +93,56 @@ public class Bot implements  Serializable {
         return position;
     }
 
-    public String talk(String msg, String username) {
+    public String getQuestion()
+    {
+        return question;
+    }
+
+    public void setQuestion(String question)
+    {
+        this.question = question;
+    }
+
+    public String getAnswer()
+    {
+        return answer;
+    }
+
+    public void setAnswer(String answer)
+    {
+        this.answer = answer;
+    }
+
+    public ITool getTool()
+    {
+        return tool;
+    }
+
+    public void setTool(ITool tool)
+    {
+        this.tool = tool;
+    }
+
+    
+    
+    public String talk(String s){
+        
+        
+        if (s.matches(answer)){
+            return succesAnswer;
+        }
+        
+        else{
+            return failAnswer;
+        }
+        
+        
+        
+        
+        
+    }
+    
+    /*public String talk(String msg, String username) {
         String botmsg = "";
 
         if(userAnswerCheck(msg,flowCheck) && flowCheck == 0) {
@@ -93,12 +164,12 @@ public class Bot implements  Serializable {
 
          return botmsg;
 
-    }
+    }*/
     
-    public boolean userAnswerCheck(String s,int a){
+    /*public boolean userAnswerCheck(String s,int a){
         
         int i;
-        for(i = 0; i < userAnswer[0].length; i++){
+        for(i = 0; i < userAnswer[flowCheck].length; i++){
             
             if(s.matches(userAnswer[a][i])){
                 return true;
@@ -110,9 +181,8 @@ public class Bot implements  Serializable {
         
         return false;
         
-    }
-    
-    
+    }*/
+
 
     
 
