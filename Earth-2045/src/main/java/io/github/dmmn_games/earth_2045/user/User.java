@@ -99,10 +99,9 @@ public class User implements Serializable {
         return ("I have find the " + toolName + " and i put in on my inventory !");
     }
 
-    public String talk(String bot, String message) {
+    public String talk(Bot bot, String message) {
         try {
-            Bot tempBot = room.findBot(bot);
-            return tempBot.talk(message);
+           return bot.talk(message);
         } catch (Exception ex) {
             return ex.getMessage();
         }

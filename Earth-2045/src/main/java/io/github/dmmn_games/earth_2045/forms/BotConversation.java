@@ -168,23 +168,7 @@ public class BotConversation extends javax.swing.JFrame
     
     private void talkButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_talkButtonActionPerformed
     {//GEN-HEADEREND:event_talkButtonActionPerformed
-        History = userText.getText();        
-        conversation.append(currentUser.getUsername()+ ": " + History + "\n\n");        
-        userText.setText(""); 
-        String botAnswer = currentBot.talk(History);
-        conversation.append(currentBot.getName()+ ": " + botAnswer + "\n\n");
-        
-
-
-
-        //String botTalk = currentBot.talk(History, currentUser.getUsername());
-        //conversation.append(currentBot.getName()+ ": " +botTalk);
-        /*if(botTalk.equals(currentBot.botQuestion[3])){
-            enableExitButton();
-        }*/
-            
-        userText.requestFocus();
-        
+        userTextActionPerformed(evt);
     }//GEN-LAST:event_talkButtonActionPerformed
 
     private void userTextActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_userTextActionPerformed
@@ -192,11 +176,17 @@ public class BotConversation extends javax.swing.JFrame
         
         History = userText.getText();        
         conversation.append(currentUser.getUsername()+ ": " + History + "\n\n");        
-        userText.setText(""); 
-        String botAnswer = currentBot.talk(History);
+        userText.setText("");
+        
+        
+        
+        String botAnswer = currentUser.talk(currentBot, History);
         conversation.append(currentBot.getName()+ ": " + botAnswer + "\n\n");
         
         if(botAnswer.matches(currentBot.getSuccesAnswer())){
+            currentUser.getInventory().add(currentBot.getTool());
+            currentBot.removeTool();
+            currentBot.setChatFlag(true);
             enableExitButton();
         }
            
@@ -204,11 +194,7 @@ public class BotConversation extends javax.swing.JFrame
         
 
 
-        //String botTalk = currentBot.talk(History, currentUser.getUsername());
-        //conversation.append(currentBot.getName()+ ": " +botTalk);
-        /*if(botTalk.matches(currentBot.botQuestion[2])){
-            enableExitButton();
-        }*/
+        
             
         userText.requestFocus();
             
