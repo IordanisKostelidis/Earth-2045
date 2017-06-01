@@ -21,7 +21,7 @@ public class Bot implements  Serializable {
     boolean chatFlag;
     
     private int flowCheck;                               
-    int position;
+    
     
     
 
@@ -32,13 +32,13 @@ public class Bot implements  Serializable {
     
     
 
-    public Bot(String a, int pos,String question ,String answer) {
+    public Bot(String a,String question ,String answer,ITool tool) {
         this.name = a;
-        this.position = pos;
+        
         this.question = question;
         this.answer = answer;
         
-//TODO this.weapon = weapon;
+        this.tool = tool;
 
     }
 
