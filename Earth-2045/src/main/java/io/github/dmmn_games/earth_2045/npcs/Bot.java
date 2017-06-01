@@ -8,11 +8,17 @@ public class Bot implements  Serializable {
 
     String name;
     public String botQuestion [] = {"Who are you? Are you here to save us?\n\n",
-                                    "I'm gonna give you the key to open the last floor\nbut first you have to solve a riddle to prove that you are the chosen one\n\n",
-                                    "What walks on 4 legs when its morning,on 2 legs at noon\nand on 3 legs in the evening?\n\n",
-                                    "gratz"};
+                                    "I'm gonna give you the key to open the last floor\nbut first you have to solve a riddle to prove that you are the chosen one\n\nWhat walks on 4 legs when its morning,on 2 legs at noon\nand on 3 legs in the evening?\n\n",
+                                    "Congratulations. Take this weapon to fight them\nNow go... we are running out of time",
+                                    "Answer the question mate.\n\n"}; //Bot talking phrases.
+    
+    public String userAnswer [] [] = {{"yes","ofc","i am here","im here","of course","y"},
+                                      {"human","man","the human","the man"}};
+                        
+    private int flowCheck;                               
     int position;
     Weapon weapon;
+    
 
     public Bot()
     {
@@ -27,6 +33,30 @@ public class Bot implements  Serializable {
 
     }
 
+    public String[] getBotQuestion()
+    {
+        return botQuestion;
+    }
+
+    public void setBotQuestion(String[] botQuestion)
+    {
+        this.botQuestion = botQuestion;
+    }
+
+    public int getFlowCheck()
+    {
+        return flowCheck;
+    }
+
+    public void setFlowCheck(int flowCheck)
+    {
+        this.flowCheck = flowCheck;
+    }
+
+    
+    
+    
+    
     public String getName() {
         return name;
 
@@ -43,13 +73,18 @@ public class Bot implements  Serializable {
     public String talk(String msg, String username) {
         String botmsg = "";
 
-        if(msg.contains("hello")) {
+        if(msg.contains(userAnswer[0][0]) && flowCheck == 0) {
             botmsg = getName() + ": " + botQuestion[1];
+            setFlowCheck(1);
+            
         } 
         
-        else if (msg.contains("you are ai") || msg.contains("what are you")) {
+        else if (msg.contains(userAnswer[1][0]) && flowCheck == 1) {
             botmsg = getName() + ": " + botQuestion[2];
+            setFlowCheck(2);
         }
+        
+        
         
         else {
             botmsg = getName() + ": " + botQuestion[3];

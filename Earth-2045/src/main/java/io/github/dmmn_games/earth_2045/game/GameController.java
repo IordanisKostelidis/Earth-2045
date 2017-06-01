@@ -75,7 +75,7 @@ public class GameController implements java.io.Serializable {
         floors.get(1).getRoom(1).addEnemy(new Enemy(true, "reverse", 5));
         floors.get(1).getRoom(2).addEnemy(new Enemy(true, "reverse", 5));
         floors.get(1).getRoom(3).addEnemy(new Enemy(true, "reverse", 5));
-        floors.get(1).getRoom(0).addBot(new Bot("josearmando", 0));
+        floors.get(1).getRoom(0).addBot(new Bot("prisoner", 0));
 
         try {
             initElevation();

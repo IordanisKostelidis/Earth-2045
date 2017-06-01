@@ -49,6 +49,8 @@ public class BotConversation extends javax.swing.JFrame
             System.err.println(ex.getMessage());
         }
         
+        
+        
     }
     
     
@@ -70,6 +72,7 @@ public class BotConversation extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         conversation = new javax.swing.JTextArea();
         exitButton = new javax.swing.JButton();
+        labelName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter()
@@ -110,6 +113,10 @@ public class BotConversation extends javax.swing.JFrame
             }
         });
 
+        labelName.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        labelName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelName.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,11 +134,16 @@ public class BotConversation extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(talkButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(0, 30, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelName, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(exitButton)
@@ -165,10 +177,10 @@ public class BotConversation extends javax.swing.JFrame
     private void userTextActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_userTextActionPerformed
     {//GEN-HEADEREND:event_userTextActionPerformed
         
-            History = userText.getText();        
-            conversation.append(currentUser.getUsername()+ ": " + History + "\n\n");        
-            userText.setText(""); 
-            conversation.append(currentBot.talk(History,currentUser.getUsername()));
+        History = userText.getText();        
+        conversation.append(currentUser.getUsername()+ ": " + History + "\n\n");        
+        userText.setText(""); 
+        conversation.append(currentBot.talk(History,currentUser.getUsername()));
             
        
                
@@ -178,7 +190,9 @@ public class BotConversation extends javax.swing.JFrame
     {//GEN-HEADEREND:event_formWindowOpened
         exitButton.setVisible(false);
         userText.requestFocus();
-        conversation.append(currentBot.botQuestion[0]);
+        conversation.append(currentBot.getName() + ": " + currentBot.botQuestion[0]);
+        currentBot.setFlowCheck(0);
+        labelName.setText(currentBot.getName());
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -262,6 +276,7 @@ public class BotConversation extends javax.swing.JFrame
     private javax.swing.JTextArea conversation;
     private javax.swing.JButton exitButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelName;
     private javax.swing.JButton talkButton;
     private javax.swing.JTextField userText;
     // End of variables declaration//GEN-END:variables
