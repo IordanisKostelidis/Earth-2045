@@ -182,7 +182,7 @@ public class GameController implements java.io.Serializable {
                 String question = eElement.getAttribute("question");
                 String answer = eElement.getAttribute("answer");
                 String tool = eElement.getAttribute("tool");
-                int toolValue = Integer.parseInt(eElement.getAttribute("toolValue"));
+                int toolValue = Integer.parseInt(eElement.getAttribute("value"));
                 
                 ITool toolObj = null;
                 switch(tool) {

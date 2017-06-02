@@ -58,8 +58,8 @@ and open the template in the editor.
     </items>
 
     <bots>
-	<bot name="bob" floor="1" room="2" question="Who created this game ?" answer="dmmn" tool="weapon" toolvalue="50"></bot>
-	<bot name="liza" floor="0" room="0" question="What walks on 4 legs when its morning,on 2 legs at noon and on 3 legs in the evening?" answer="human" tool="key" toolValue="8"></bot> 
+	<bot name="bob" floor="1" room="2" question="Who created this game ?" answer="dmmn" tool="weapon" value="50"></bot>
+	<bot name="liza" floor="0" room="0" question="What walks on 4 legs when its morning,on 2 legs at noon and on 3 legs in the evening?" answer="human" tool="key" value="8"></bot> 
     </bots>
     
     <enemies>

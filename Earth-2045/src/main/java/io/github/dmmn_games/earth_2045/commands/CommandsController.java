@@ -29,6 +29,7 @@ public class CommandsController implements Serializable {
         commands.add(new Clear());
         commands.add(new Info());
         commands.add(new Help());
+        commands.add(new Man());
         commands.add(new Exit());
         commands.add(new Copyright());
 
